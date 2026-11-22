@@ -1,0 +1,39 @@
+# === OS / IDE ===
+.DS_Store
+.vs/
+.vscode/settings.json
+.idea/
+*.xcworkspace
+*.xcodeproj
+
+# === Claude Code / CCGS local (from the CCGS template) ===
+.claude/settings.local.json
+CLAUDE.local.md
+project.local.yaml
+production/session-logs/
+production/session-state/
+.scratch/
+.claude/agent-memory/
+.claude/worktrees/
+docs/consistency-failures.md
+
+# === Unreal (generated) ===
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+Plugins/**/Binaries/
+Plugins/**/Intermediate/
+*.VC.db
+*.VC.opendb
+
+# === Secrets ===
+.env
+.env.*
+*.pem
+*.key
+credentials.json
+
+# === Test output ===
+/reports/
+/test-results/

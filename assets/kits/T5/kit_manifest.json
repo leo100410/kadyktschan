@@ -1,0 +1,763 @@
+{
+ "grid": {
+  "storey_height": 2.8,
+  "storey_height_source": "ANNAHME: typical Soviet panel storey; not documented for Kadykchan",
+  "axis": 3.0,
+  "axis_source": "ANNAHME: measured on Commons photo 6480312099 (axis:storey ~1.0-1.1, facade foreshortened), 2026-11-07",
+  "panel_thickness": 0.3,
+  "joint": 0.02,
+  "window": {
+   "width": 1.4,
+   "height": 1.45,
+   "sill": 0.85,
+   "frame_depth": 0.12,
+   "reveal": 0.12
+  },
+  "pile": {
+   "size": 0.4,
+   "crawl_height": 1.2,
+   "spacing_axes": 2
+  },
+  "plinth_band": 0.45,
+  "parapet": 0.6,
+  "depth": 12.0,
+  "depth_source": "ANNAHME: OSM footprint 24 m is implausible for a single panel slab; 12 m typical slab depth"
+ },
+ "parts": {
+  "SM_T5_WallPlate_A_Aged": {
+   "tris": 12,
+   "materials": [
+    "Facade"
+   ],
+   "bounds_m": [
+    [
+     0.01,
+     0,
+     0.01
+    ],
+    [
+     2.99,
+     0.3,
+     2.79
+    ]
+   ]
+  },
+  "SM_T5_WindowPlate_A_Aged": {
+   "tris": 48,
+   "materials": [
+    "Facade"
+   ],
+   "bounds_m": [
+    [
+     0.01,
+     0,
+     0.01
+    ],
+    [
+     2.99,
+     0.3,
+     2.79
+    ]
+   ]
+  },
+  "SM_T5_WindowFrame_A_Aged": {
+   "tris": 156,
+   "materials": [
+    "Wood",
+    "Metal"
+   ],
+   "bounds_m": [
+    [
+     0.77,
+     -0.06,
+     0.82
+    ],
+    [
+     2.23,
+     0.33,
+     2.3
+    ]
+   ]
+  },
+  "SM_T5_WindowGlass_A": {
+   "tris": 24,
+   "materials": [
+    "Glass"
+   ],
+   "bounds_m": [
+    [
+     0.8600000000000001,
+     0.145,
+     0.9099999999999999
+    ],
+    [
+     2.14,
+     0.309,
+     2.2399999999999998
+    ]
+   ]
+  },
+  "SM_T5_WindowGlassBroken_A": {
+   "tris": 36,
+   "materials": [
+    "Glass"
+   ],
+   "bounds_m": [
+    [
+     0.8600000000000001,
+     0.145,
+     0.9099999999999999
+    ],
+    [
+     2.14,
+     0.309,
+     2.2399999999999998
+    ]
+   ]
+  },
+  "SM_T5_WindowBoards_A_Aged": {
+   "tris": 60,
+   "materials": [
+    "Wood"
+   ],
+   "bounds_m": [
+    [
+     0.68,
+     -0.035,
+     0.7999999999999999
+    ],
+    [
+     2.3200000000000003,
+     -0.005,
+     2.38
+    ]
+   ]
+  },
+  "SM_Decal_Wall_Spall": {
+   "tris": 12,
+   "materials": [
+    "Spall"
+   ],
+   "bounds_m": [
+    [
+     0.01,
+     -0.006,
+     0.01
+    ],
+    [
+     2.99,
+     -0.004,
+     2.79
+    ]
+   ]
+  },
+  "SM_Decal_Window_Spall": {
+   "tris": 48,
+   "materials": [
+    "Spall"
+   ],
+   "bounds_m": [
+    [
+     0.01,
+     -0.006,
+     0.01
+    ],
+    [
+     2.99,
+     -0.004,
+     2.79
+    ]
+   ]
+  },
+  "SM_Decal_Wall_Crack": {
+   "tris": 12,
+   "materials": [
+    "Crack"
+   ],
+   "bounds_m": [
+    [
+     0.01,
+     -0.009000000000000001,
+     0.01
+    ],
+    [
+     2.99,
+     -0.007,
+     2.79
+    ]
+   ]
+  },
+  "SM_Decal_Window_Crack": {
+   "tris": 48,
+   "materials": [
+    "Crack"
+   ],
+   "bounds_m": [
+    [
+     0.01,
+     -0.009000000000000001,
+     0.01
+    ],
+    [
+     2.99,
+     -0.007,
+     2.79
+    ]
+   ]
+  },
+  "SM_Decal_RustSill": {
+   "tris": 12,
+   "materials": [
+    "Rust"
+   ],
+   "bounds_m": [
+    [
+     0.75,
+     -0.012,
+     -0.050000000000000044
+    ],
+    [
+     2.25,
+     -0.01,
+     0.82
+    ]
+   ]
+  },
+  "SM_T5_SashOpen": {
+   "tris": 48,
+   "materials": [
+    "Wood"
+   ],
+   "bounds_m": [
+    [
+     0,
+     0,
+     0.85
+    ],
+    [
+     0.7,
+     0.045,
+     2.3
+    ]
+   ]
+  },
+  "SM_T5_SashGlassShard": {
+   "tris": 12,
+   "materials": [
+    "Glass"
+   ],
+   "bounds_m": [
+    [
+     0.055,
+     0.02,
+     0.905
+    ],
+    [
+     0.6449999999999999,
+     0.024,
+     1.5025
+    ]
+   ]
+  },
+  "SM_T5_DoorAjar": {
+   "tris": 24,
+   "materials": [
+    "Wood",
+    "Metal"
+   ],
+   "bounds_m": [
+    [
+     0,
+     -0.06,
+     0.02
+    ],
+    [
+     1.2,
+     0.05,
+     2.18
+    ]
+   ]
+  },
+  "SM_T5_PipeSeg": {
+   "tris": 36,
+   "materials": [
+    "Metal"
+   ],
+   "bounds_m": [
+    [
+     -0.08,
+     -0.22,
+     0
+    ],
+    [
+     0.08,
+     0.0,
+     2.75
+    ]
+   ]
+  },
+  "SM_T5_PipeOutlet": {
+   "tris": 24,
+   "materials": [
+    "Metal"
+   ],
+   "bounds_m": [
+    [
+     -0.06,
+     -0.55,
+     0.18
+    ],
+    [
+     0.06,
+     -0.08,
+     0.9
+    ]
+   ]
+  },
+  "SM_T5_PipeHead": {
+   "tris": 12,
+   "materials": [
+    "Metal"
+   ],
+   "bounds_m": [
+    [
+     -0.15,
+     -0.32,
+     -0.35
+    ],
+    [
+     0.15,
+     -0.02,
+     0.0
+    ]
+   ]
+  },
+  "SM_T5_Antenna": {
+   "tris": 120,
+   "materials": [
+    "Metal"
+   ],
+   "bounds_m": [
+    [
+     -0.9,
+     -0.35,
+     0
+    ],
+    [
+     0.9,
+     0.35,
+     3.2
+    ]
+   ]
+  },
+  "SM_T5_AntennaFallen": {
+   "tris": 24,
+   "materials": [
+    "Metal"
+   ],
+   "bounds_m": [
+    [
+     0,
+     -0.8,
+     0.0
+    ],
+    [
+     3.0,
+     0.8,
+     0.07
+    ]
+   ]
+  },
+  "SM_T5_StovePipe": {
+   "tris": 36,
+   "materials": [
+    "Metal"
+   ],
+   "bounds_m": [
+    [
+     -0.22,
+     -0.22,
+     0.0
+    ],
+    [
+     0.22,
+     0.22,
+     2.32
+    ]
+   ]
+  },
+  "SM_T5_LoggiaGlazing": {
+   "tris": 84,
+   "materials": [
+    "Wood"
+   ],
+   "bounds_m": [
+    [
+     0.1,
+     -1.17,
+     1.0
+    ],
+    [
+     2.9,
+     -1.12,
+     2.6599999999999997
+    ]
+   ]
+  },
+  "SM_T5_LoggiaGlazingGlass": {
+   "tris": 24,
+   "materials": [
+    "Glass"
+   ],
+   "bounds_m": [
+    [
+     0.15,
+     -1.15,
+     1.05
+    ],
+    [
+     2.2,
+     -1.146,
+     2.5999999999999996
+    ]
+   ]
+  },
+  "SM_T5_LoggiaClutter": {
+   "tris": 60,
+   "materials": [
+    "Furniture",
+    "Wood",
+    "BlackPlastic"
+   ],
+   "bounds_m": [
+    [
+     0.1,
+     -0.9,
+     0.0
+    ],
+    [
+     2.9,
+     -0.1,
+     1.91
+    ]
+   ]
+  },
+  "SM_T5_Cable_16": {
+   "tris": 12,
+   "materials": [
+    "BlackPlastic"
+   ],
+   "bounds_m": [
+    [
+     -0.008,
+     -0.1,
+     -1.6
+    ],
+    [
+     0.008,
+     -0.084,
+     0
+    ]
+   ]
+  },
+  "SM_T5_Cable_32": {
+   "tris": 12,
+   "materials": [
+    "BlackPlastic"
+   ],
+   "bounds_m": [
+    [
+     -0.008,
+     -0.1,
+     -3.2
+    ],
+    [
+     0.008,
+     -0.084,
+     0
+    ]
+   ]
+  },
+  "SM_T5_Cable_48": {
+   "tris": 12,
+   "materials": [
+    "BlackPlastic"
+   ],
+   "bounds_m": [
+    [
+     -0.008,
+     -0.1,
+     -4.8
+    ],
+    [
+     0.008,
+     -0.084,
+     0
+    ]
+   ]
+  },
+  "SM_T5_CurtainRag_Red": {
+   "tris": 12,
+   "materials": [
+    "CurtainRed"
+   ],
+   "bounds_m": [
+    [
+     0.8500000000000001,
+     0.5700000000000001,
+     1.1
+    ],
+    [
+     1.25,
+     0.5820000000000001,
+     2.3499999999999996
+    ]
+   ]
+  },
+  "SM_T5_CurtainRag_Tulle": {
+   "tris": 12,
+   "materials": [
+    "Paper"
+   ],
+   "bounds_m": [
+    [
+     0.8500000000000001,
+     0.5700000000000001,
+     1.1
+    ],
+    [
+     1.25,
+     0.5820000000000001,
+     2.3499999999999996
+    ]
+   ]
+  },
+  "SM_T5_Entrance_A_Aged": {
+   "tris": 144,
+   "materials": [
+    "Facade",
+    "Wood",
+    "Concrete"
+   ],
+   "bounds_m": [
+    [
+     -0.25,
+     -2.6999999999999997,
+     -4.65
+    ],
+    [
+     3.25,
+     0.3,
+     2.79
+    ]
+   ]
+  },
+  "SM_T5_Entrance_Open_A_Aged": {
+   "tris": 132,
+   "materials": [
+    "Facade",
+    "Concrete"
+   ],
+   "bounds_m": [
+    [
+     -0.25,
+     -2.6999999999999997,
+     -4.65
+    ],
+    [
+     3.25,
+     0.3,
+     2.79
+    ]
+   ]
+  },
+  "SM_T5_PlinthBand_A_Aged": {
+   "tris": 12,
+   "materials": [
+    "Concrete"
+   ],
+   "bounds_m": [
+    [
+     0,
+     -0.02,
+     0
+    ],
+    [
+     3.0,
+     0.3,
+     0.45
+    ]
+   ]
+  },
+  "SM_T5_Skirt_A_Aged": {
+   "tris": 48,
+   "materials": [
+    "Concrete"
+   ],
+   "bounds_m": [
+    [
+     0,
+     0.02,
+     -3.0
+    ],
+    [
+     3.0,
+     0.2,
+     1.2
+    ]
+   ]
+  },
+  "SM_T5_Pile_A_Aged": {
+   "tris": 24,
+   "materials": [
+    "Concrete"
+   ],
+   "bounds_m": [
+    [
+     -0.05,
+     -0.05,
+     -3.0
+    ],
+    [
+     0.45,
+     0.45,
+     1.2
+    ]
+   ]
+  },
+  "SM_T5_RoofEdge_A_Aged": {
+   "tris": 24,
+   "materials": [
+    "Facade",
+    "Metal"
+   ],
+   "bounds_m": [
+    [
+     0,
+     -0.05,
+     0
+    ],
+    [
+     3.0,
+     0.35,
+     0.63
+    ]
+   ]
+  },
+  "SM_T5_Slab_A_Aged": {
+   "tris": 12,
+   "materials": [
+    "Concrete"
+   ],
+   "bounds_m": [
+    [
+     0,
+     0,
+     -0.22
+    ],
+    [
+     3.0,
+     3.0,
+     0
+    ]
+   ]
+  },
+  "SM_T5_Bay_A_Aged": {
+   "tris": 132,
+   "materials": [
+    "Facade",
+    "Wood"
+   ],
+   "bounds_m": [
+    [
+     0.1,
+     -0.75,
+     0.0
+    ],
+    [
+     2.9,
+     0.0,
+     2.8
+    ]
+   ]
+  },
+  "SM_T5_Loggia_A_Aged": {
+   "tris": 156,
+   "materials": [
+    "Facade",
+    "Wood",
+    "Concrete",
+    "Parapet"
+   ],
+   "bounds_m": [
+    [
+     0.0,
+     -1.2,
+     -0.12
+    ],
+    [
+     3.0,
+     0.3,
+     2.79
+    ]
+   ]
+  },
+  "SM_T5_SchoolWindow_A_Aged": {
+   "tris": 144,
+   "materials": [
+    "Facade",
+    "Fin",
+    "Wood"
+   ],
+   "bounds_m": [
+    [
+     0.0,
+     -0.35,
+     0.0
+    ],
+    [
+     2.99,
+     0.3,
+     2.8
+    ]
+   ]
+  },
+  "SM_T5_RoofVent_A_Aged": {
+   "tris": 24,
+   "materials": [
+    "Facade",
+    "Metal"
+   ],
+   "bounds_m": [
+    [
+     -0.05,
+     -0.05,
+     0
+    ],
+    [
+     0.95,
+     0.65,
+     1.36
+    ]
+   ]
+  },
+  "SM_T5_Corner_A_Aged": {
+   "tris": 24,
+   "materials": [
+    "Facade"
+   ],
+   "bounds_m": [
+    [
+     -0.04,
+     -0.04,
+     0
+    ],
+    [
+     0.3,
+     0.3,
+     2.8
+    ]
+   ]
+  }
+ }
+}

@@ -1,0 +1,4 @@
+imported 152 building meshes
+player start -> entrance of PLA_Lenina_8 at (-0.7 N, 260.5 E) yaw 146
+placed 76 buildings
+RESULT OK

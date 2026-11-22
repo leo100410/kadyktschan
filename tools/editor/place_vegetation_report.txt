@@ -1,0 +1,2 @@
+placed 149 vegetation cells (957561 quads)
+RESULT OK

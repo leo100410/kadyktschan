@@ -1,0 +1,5 @@
+A_Wind_Loop: 60.0 s
+A_Drips_Loop: 30.5 s
+A_Creaks_Loop: 46.0 s
+placed wind + 3 drip emitters
+RESULT OK

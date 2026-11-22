@@ -1,0 +1,363 @@
+{
+ "_comment": "ANNAHME: buildings visible on satellite imagery (Google Maps screenshot by the user, 2026-11-07, Airbus/Maxar) but missing in OSM. Imagery used as reference only (not traced into the game, not shipped). Positions read off a 1 m/px overlay aligned to the OSM blockout (accuracy ~5 m); lengths/widths from roof outlines; storeys guessed from shadow length and neighbours. Area names from Google labels: Profilaktoriy, Znamenityy Dvor. Shifted 8 m west after measuring: the imagery sits ~8 m east of the OSM footprints, and the world is built on OSM. Refined 2026-11-07 from the user's zoomed Google (3.02 px/m) and Apple Maps screenshots: Profilaktoriy courtyard building, Znamenityy Dvor west wing, two small hip-roof houses, 19 foundations of demolished wooden houses. Zoom-measured entries shifted +7 m east to match the OSM footprints visible in the same screenshot. Six more from the user's Apple Maps window (15:25, 1.53 px/m, aligned on the OSM footprints): eastern winged complex, two small houses east of the main road, three in the north-west.",
+ "buildings": [
+  {
+   "id": "NE_Profilaktoriy_A",
+   "east_m": -58.6,
+   "north_m": 348.1,
+   "length_m": 94,
+   "width_m": 13,
+   "axis_deg_from_east": 90,
+   "levels": "5"
+  },
+  {
+   "id": "NE_Profilaktoriy_B",
+   "east_m": 31.4,
+   "north_m": 385.2,
+   "length_m": 35,
+   "width_m": 16,
+   "axis_deg_from_east": 0,
+   "levels": "2"
+  },
+  {
+   "id": "NE_Row_1",
+   "east_m": 118.5,
+   "north_m": 307.4,
+   "length_m": 46,
+   "width_m": 15,
+   "axis_deg_from_east": 90,
+   "levels": "2"
+  },
+  {
+   "id": "NE_Row_2",
+   "east_m": 148.3,
+   "north_m": 307.4,
+   "length_m": 46,
+   "width_m": 15,
+   "axis_deg_from_east": 90,
+   "levels": "2"
+  },
+  {
+   "id": "NE_Row_3",
+   "east_m": 178.1,
+   "north_m": 306.4,
+   "length_m": 46,
+   "width_m": 15,
+   "axis_deg_from_east": 90,
+   "levels": "2"
+  },
+  {
+   "id": "NE_Dvor_W",
+   "east_m": 245.0,
+   "north_m": 454.7,
+   "length_m": 66,
+   "width_m": 13,
+   "axis_deg_from_east": 90,
+   "levels": "5"
+  },
+  {
+   "id": "NE_Dvor_N",
+   "east_m": 279.1,
+   "north_m": 391.8,
+   "length_m": 66,
+   "width_m": 13,
+   "axis_deg_from_east": 0,
+   "levels": "5"
+  },
+  {
+   "id": "NE_Dvor_S",
+   "east_m": 280.8,
+   "north_m": 285.9,
+   "length_m": 70,
+   "width_m": 13,
+   "axis_deg_from_east": 0,
+   "levels": "5"
+  },
+  {
+   "id": "NE_Dvor_E1",
+   "east_m": 350,
+   "north_m": 441,
+   "length_m": 70,
+   "width_m": 13,
+   "axis_deg_from_east": 90,
+   "levels": "5"
+  },
+  {
+   "id": "NE_Dvor_E2",
+   "east_m": 352,
+   "north_m": 321,
+   "length_m": 100,
+   "width_m": 13,
+   "axis_deg_from_east": 90,
+   "levels": "5"
+  },
+  {
+   "id": "E_Diag_1",
+   "east_m": 454,
+   "north_m": 141,
+   "length_m": 82,
+   "width_m": 13,
+   "axis_deg_from_east": 121.6,
+   "levels": "5"
+  },
+  {
+   "id": "E_Diag_2",
+   "east_m": 493,
+   "north_m": 52,
+   "length_m": 124,
+   "width_m": 13,
+   "axis_deg_from_east": 124.5,
+   "levels": "5"
+  },
+  {
+   "id": "E_Diag_3",
+   "east_m": 504,
+   "north_m": 155,
+   "length_m": 106,
+   "width_m": 13,
+   "axis_deg_from_east": 119.5,
+   "levels": "5"
+  },
+  {
+   "id": "E_Diag_4",
+   "east_m": 562,
+   "north_m": 168,
+   "length_m": 75,
+   "width_m": 13,
+   "axis_deg_from_east": 120.3,
+   "levels": "5"
+  },
+  {
+   "id": "S_Block",
+   "east_m": 133,
+   "north_m": -24,
+   "length_m": 65,
+   "width_m": 13,
+   "axis_deg_from_east": 0,
+   "levels": "5"
+  },
+  {
+   "id": "NE_Profilaktoriy_Main",
+   "east_m": 35.7,
+   "north_m": 309.0,
+   "length_m": 53,
+   "width_m": 36,
+   "axis_deg_from_east": 0,
+   "levels": "2"
+  },
+  {
+   "id": "NE_Profilaktoriy_C",
+   "east_m": 2.6,
+   "north_m": 361.4,
+   "length_m": 31,
+   "width_m": 17,
+   "axis_deg_from_east": 90,
+   "levels": "2"
+  },
+  {
+   "id": "NE_Profilaktoriy_D",
+   "east_m": 79.4,
+   "north_m": 386.2,
+   "length_m": 28,
+   "width_m": 15,
+   "axis_deg_from_east": 0,
+   "levels": "2"
+  },
+  {
+   "id": "NE_Dvor_W2",
+   "east_m": 237.7,
+   "north_m": 353.7,
+   "length_m": 70,
+   "width_m": 16,
+   "axis_deg_from_east": 90,
+   "levels": "5"
+  },
+  {
+   "id": "N_House_1",
+   "east_m": 43.0,
+   "north_m": 520.3,
+   "length_m": 18,
+   "width_m": 15,
+   "axis_deg_from_east": 0,
+   "levels": "1"
+  },
+  {
+   "id": "N_House_2",
+   "east_m": 137.4,
+   "north_m": 540.2,
+   "length_m": 18,
+   "width_m": 15,
+   "axis_deg_from_east": 0,
+   "levels": "1"
+  },
+  {
+   "id": "E_Complex_Main",
+   "east_m": 868.4,
+   "north_m": 181.8,
+   "length_m": 105,
+   "width_m": 14,
+   "axis_deg_from_east": 0,
+   "levels": "2"
+  },
+  {
+   "id": "E_Complex_WingW",
+   "east_m": 818.8,
+   "north_m": 189.4,
+   "length_m": 30,
+   "width_m": 14,
+   "axis_deg_from_east": 90,
+   "levels": "2"
+  },
+  {
+   "id": "E_Complex_WingE",
+   "east_m": 916.0,
+   "north_m": 189.4,
+   "length_m": 30,
+   "width_m": 14,
+   "axis_deg_from_east": 90,
+   "levels": "2"
+  },
+  {
+   "id": "E_Small_1",
+   "east_m": 417.7,
+   "north_m": 137.0,
+   "length_m": 26,
+   "width_m": 18,
+   "axis_deg_from_east": 90,
+   "levels": "2"
+  },
+  {
+   "id": "E_Small_2",
+   "east_m": 417.7,
+   "north_m": 84.6,
+   "length_m": 26,
+   "width_m": 18,
+   "axis_deg_from_east": 90,
+   "levels": "2"
+  },
+  {
+   "id": "NW_Diag",
+   "east_m": -403.5,
+   "north_m": 360.9,
+   "length_m": 52,
+   "width_m": 12,
+   "axis_deg_from_east": 37,
+   "levels": "2"
+  },
+  {
+   "id": "NW_Small",
+   "east_m": -134.9,
+   "north_m": 470.4,
+   "length_m": 28,
+   "width_m": 16,
+   "axis_deg_from_east": 90,
+   "levels": "2"
+  },
+  {
+   "id": "NW_Ruin",
+   "east_m": -65.3,
+   "north_m": 411.4,
+   "length_m": 38,
+   "width_m": 14,
+   "axis_deg_from_east": 0,
+   "levels": "1"
+  }
+ ],
+ "foundations": [
+  [
+   -100.0,
+   565.7,
+   15
+  ],
+  [
+   -52.0,
+   562.4,
+   15
+  ],
+  [
+   -86.8,
+   510.4,
+   38
+  ],
+  [
+   -25.5,
+   507.7,
+   15
+  ],
+  [
+   10.9,
+   514.3,
+   15
+  ],
+  [
+   90.4,
+   530.9,
+   15
+  ],
+  [
+   -15.6,
+   487.8,
+   15
+  ],
+  [
+   44.0,
+   487.8,
+   15
+  ],
+  [
+   80.4,
+   487.8,
+   15
+  ],
+  [
+   120.2,
+   487.8,
+   15
+  ],
+  [
+   179.8,
+   487.8,
+   15
+  ],
+  [
+   -9.0,
+   454.7,
+   15
+  ],
+  [
+   24.1,
+   454.7,
+   15
+  ],
+  [
+   53.9,
+   454.7,
+   15
+  ],
+  [
+   90.4,
+   454.7,
+   15
+  ],
+  [
+   123.5,
+   454.7,
+   15
+  ],
+  [
+   -9.0,
+   431.6,
+   15
+  ],
+  [
+   53.9,
+   431.6,
+   15
+  ],
+  [
+   116.8,
+   431.6,
+   15
+  ]
+ ]
+}

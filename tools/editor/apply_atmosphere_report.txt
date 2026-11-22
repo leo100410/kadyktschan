@@ -1,0 +1,7 @@
+skylight: intensity
+sun: atmosphere_sun_disk_color_scale, intensity, light_source_angle
+fog: directional_inscattering_luminance, fog_density, fog_height_falloff, fog_inscattering_luminance, fog_max_opacity, start_distance
+post: auto_exposure_bias, color_contrast, color_saturation, film_grain_intensity, vignette_intensity, white_temp
+atmosphere: mie_absorption_scale, mie_anisotropy, mie_scattering_scale, multi_scattering_factor, rayleigh_scattering_scale
+sky cycle: start_temperature_k=7000.0, end_temperature_k=7400.0
+RESULT OK

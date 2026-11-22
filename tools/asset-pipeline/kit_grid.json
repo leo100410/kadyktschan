@@ -1,0 +1,17 @@
+{
+  "_comment": "Single source of the modular grid (art bible 8.10). All values metres. ANNAHME until the type series is documented (dossier Frage 2).",
+  "T5": {
+    "storey_height": 2.8,
+    "storey_height_source": "ANNAHME: typical Soviet panel storey; not documented for Kadykchan",
+    "axis": 3.0,
+    "axis_source": "ANNAHME: measured on Commons photo 6480312099 (axis:storey ~1.0-1.1, facade foreshortened), 2026-11-07",
+    "panel_thickness": 0.3,
+    "joint": 0.02,
+    "window": {"width": 1.4, "height": 1.45, "sill": 0.85, "frame_depth": 0.12, "reveal": 0.12},
+    "pile": {"size": 0.4, "crawl_height": 1.2, "spacing_axes": 2},
+    "plinth_band": 0.45,
+    "parapet": 0.6,
+    "depth": 12.0,
+    "depth_source": "ANNAHME: OSM footprint 24 m is implausible for a single panel slab; 12 m typical slab depth"
+  }
+}

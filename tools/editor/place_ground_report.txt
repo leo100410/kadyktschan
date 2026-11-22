@@ -1,0 +1,5 @@
+Roads_Blockout <- assets/terrain/roads_kadykchan.obj (MI_Road, collision True)
+River_Kadykchan_Blockout <- assets/terrain/rivers_kadykchan.obj (MI_Ground_River, collision True)
+Paths_Footpaths <- assets/terrain/paths_kadykchan.obj (MI_Path, collision False)
+Terrain_Backdrop <- assets/terrain/terrain_backdrop_60km.obj (MI_Ground_Forest, collision False)
+RESULT OK

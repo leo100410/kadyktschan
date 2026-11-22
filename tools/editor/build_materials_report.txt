@@ -1,0 +1,7 @@
+textures: 30
+master material: 21 expressions
+material instances: ['Bark_Birch', 'Bark_Larch', 'BlackPlastic', 'Brick', 'Carpet', 'Concrete', 'CurtainRed', 'Enamel', 'Facade_Concrete', 'Facade_Lime', 'Facade_Mint', 'Facade_Ochre', 'Facade_Rose', 'Facade_Teal', 'FloorBoards', 'Furniture', 'Glass', 'Interior', 'Linoleum', 'Metal', 'Mint', 'Mural_Brown', 'Mural_Red', 'Paint_OilBlue', 'Paper', 'Radiator', 'Roof', 'Rose', 'Screen', 'Sofa', 'Stencil', 'Wallpaper_Green', 'Wallpaper_Rose', 'Wood', 'WoodGrey']
+ground material + 3 instances
+foliage material + 3 instances
+glass material + instance
+RESULT OK
