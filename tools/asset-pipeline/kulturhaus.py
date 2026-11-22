@@ -8,6 +8,8 @@ ceiling plaster. Built directly in building (Blender) coordinates by build_build
 """
 import math
 import random
+import furniture as fu
+from interiors import Section
 
 HALL_AXES, HALL_ROWS = 8, 5      # 24 m x 15 m (ANNAHME)
 STAGE_DEPTH = 5.0
@@ -51,6 +53,9 @@ def build_hall(acc, x0, x1, y0, y1, facade_y, z0, ceil, seed, door=None):
     inner_y1 = y1 - (0.3 if facade_y == y1 else 0.1)
     yc = (inner_y0 + inner_y1) / 2
     box = acc.box
+    from build_t5_kit import Part
+    props = Part("hall_furniture")
+    S = Section(props, ceil - z0, random.Random(seed + 1))
     # walls on the three interior sides (the facade side is the window wall), oil-paint panel + lime
     for (wx0, wx1, wy0, wy1) in ((x0 - 0.1, x0 + 0.1, y0, y1), (x1 - 0.1, x1 + 0.1, y0, y1)):
         box(wx0, wx1, wy0, wy1, z0, z0 + 1.5, "Paint_OilBlue")
@@ -80,8 +85,20 @@ def build_hall(acc, x0, x1, y0, y1, facade_y, z0, ceil, seed, door=None):
     box(sx - 0.25, sx, inner_y1 - portal_w, inner_y1, z0 + 0.9, ceil, "Lime")
     box(sx - 0.25, sx, inner_y0, inner_y1, z0 + 0.9 + 4.2, ceil, "Lime")
     box(sx - 0.3, sx - 0.25, inner_y0 + portal_w, inner_y1 - portal_w, z0 + 0.9 + 3.9, z0 + 0.9 + 4.2, "Carpet")
-    for cy in (inner_y0 + portal_w + 0.2, inner_y1 - portal_w - 1.0):  # torn curtain remnants
-        box(sx + 0.1, sx + 0.3, cy, cy + 0.8, z0 + 0.9 + rnd.uniform(1.0, 2.0), z0 + 0.9 + 4.1, "CurtainRed")
+    # Real folds, with uneven hems; geometry stays behind the proscenium and clear of the stage steps.
+    for cy in (inner_y0 + portal_w + 0.2, inner_y1 - portal_w - 1.0):
+        verts, faces = [], []
+        for i in range(25):
+            t = i / 24
+            x = sx + 0.14 + 0.045 * math.cos(t * 10 * math.pi)
+            bottom = 0.95 + 0.25 * (0.5 + 0.5 * math.sin(t * 7 * math.pi))
+            verts += [(x, cy + t * 0.8, bottom), (x + 0.008, cy + t * 0.8, bottom),
+                      (x + 0.008, cy + t * 0.8, 4.95), (x, cy + t * 0.8, 4.95)]
+            if i:
+                a = (i - 1) * 4
+                faces.extend([(a + j, a + 4 + j, a + 4 + (j + 1) % 4, a + (j + 1) % 4) for j in range(4)])
+        faces += [(0, 1, 2, 3), (99, 98, 97, 96)]
+        fu.surface(fu.Place(S, 0, 0), verts, faces, "CurtainRed")
     # folding seats, centre aisle; some missing, some knocked over
     rows_x = []
     x = x0 + 2.2
@@ -92,25 +109,47 @@ def build_hall(acc, x0, x1, y0, y1, facade_y, z0, ceil, seed, door=None):
     for rx in rows_x:
         y = inner_y0 + 0.8
         while y < inner_y1 - 0.8:
-            if abs(y + 0.25 - yc) > aisle:
+            if abs(y + 0.25 - yc) > aisle and (not door or not door[0] - 0.6 < rx < door[1] + 0.6):
                 r = rnd.random()
                 if r < 0.3:
                     pass                                                           # missing
                 elif r < 0.45:
-                    box(rx - 0.2, rx + 0.25, y, y + 0.48, z0, z0 + 0.06, "Furniture")  # knocked over, flat on the floor
+                    fu.cushion(fu.Place(S, rx - 0.2, y), 0, 0.45, 0, 0.48, 0.02, 0.07, "Furniture")
                 else:
-                    box(rx - 0.02, rx + 0.02, y + 0.05, y + 0.43, z0, z0 + 0.42, "Metal")       # frame
-                    box(rx - 0.2, rx + 0.22, y + 0.02, y + 0.46, z0 + 0.42, z0 + 0.46, "Furniture")  # seat
-                    box(rx - 0.24, rx - 0.2, y + 0.02, y + 0.46, z0 + 0.46, z0 + 0.88, "Furniture")  # back, away from the stage (+x)
+                    P = fu.Place(S, rx - 0.24, y + 0.46, 3)
+                    for u in (0.035, 0.405):
+                        P.cyl(u, 0.24, 0, 0.46, 0.018, "Metal")
+                        P.box(u - 0.025, u + 0.025, 0.06, 0.44, 0, 0.025, "Metal")
+                        P.box(u - 0.014, u + 0.014, 0.03, 0.058, 0.3, 0.82, "Metal")
+                    fu.cushion(P, 0, 0.44, 0, 0.06, 0.48, 0.88, "Furniture")
+                    if r > 0.9:  # an empty chair left with its hinged seat up
+                        fu.cushion(P, 0.02, 0.42, 0.07, 0.13, 0.43, 0.79)
+                    else:
+                        fu.cushion(P, 0.02, 0.42, 0.06, 0.46, 0.42, 0.49)
+                    P.hcyl_u(0.0, 0.44, 0.09, 0.43, 0.018, "Metal")
             y += 0.55
     # fallen ceiling plaster and a dropped chandelier ring
     for _ in range(260):
         px, py = rnd.uniform(x0 + 0.3, sx - 0.3), rnd.uniform(inner_y0 + 0.2, inner_y1 - 0.2)
         w, d = rnd.uniform(0.05, 0.6), rnd.uniform(0.05, 0.5)
-        box(px, px + w, py, py + d, z0, z0 + rnd.uniform(0.01, 0.06), "Lime")
+        # Keep the centre aisle free; small irregular fragments belong beside the seat rows.
+        if abs(py - yc) > 0.9 and (not door or abs(px - sum(door) / 2) > 1.0):
+            S.chunk(px, py, 0.016, w, d, rnd.uniform(0.01, 0.06), "Lime", tilt=0.15)
     cx = (x0 + sx) / 2
-    for k in range(8):
-        a0 = k / 8.0
-        box(cx + 0.9 * math.cos(a0 * 6.283) - 0.1, cx + 0.9 * math.cos(a0 * 6.283) + 0.1,
-            yc + 0.9 * math.sin(a0 * 6.283) - 0.1, yc + 0.9 * math.sin(a0 * 6.283) + 0.1, z0, z0 + 0.12, "Metal")
+    cy = inner_y0 + 1.4  # dropped chandelier beside the aisle
+    verts, faces = [], []
+    for i in range(48):
+        a = 2 * math.pi * i / 48
+        for j in range(8):
+            b = 2 * math.pi * j / 8
+            r = 0.7 + 0.022 * math.cos(b)
+            verts.append((cx + r * math.cos(a), cy + r * math.sin(a), 0.065 + 0.022 * math.sin(b)))
+            faces.append((i * 8 + j, ((i + 1) % 48) * 8 + j, ((i + 1) % 48) * 8 + (j + 1) % 8, i * 8 + (j + 1) % 8))
+    fu.surface(fu.Place(S, 0, 0), verts, faces, "Metal")
+    for i in range(8):
+        a = 2 * math.pi * i / 8
+        P = fu.Place(S, cx + 0.7 * math.cos(a), cy + 0.7 * math.sin(a))
+        P.cyl(0, 0, 0.07, 0.13, 0.025, "Metal")
+        P.cyl(0, 0, 0.13, 0.23, 0.07, "Enamel", r1=0.1)
+    acc.add(props, 0, 0, 0, z0, {})
     return {"back": (x0 + 1.2, yc, z0 + 1.7, 0.0), "stage": (x1 - 2.0, yc + 2.0, z0 + 0.9 + 1.7, 200.0)}

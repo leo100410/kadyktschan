@@ -17,6 +17,10 @@ RIBBONS = [("assets/terrain/roads_kadykchan.obj", "SM_Roads_Blockout", "Roads_Bl
            ("assets/terrain/paths_kadykchan.obj", "SM_Paths", "Paths_Footpaths", "MI_Path", False),
            # real Kolyma ranges on the horizon (tools/research/dem_ring_obj.py)
            ("assets/terrain/terrain_backdrop_60km.obj", "SM_Terrain_Backdrop", "Terrain_Backdrop", "MI_Ground_Forest", False)]
+if os.path.isfile(os.path.join(ROOT, "assets/terrain/tracks_kadykchan.obj")):
+    RIBBONS.append(("assets/terrain/tracks_kadykchan.obj", "SM_Tracks", "Tracks_Dirt", "MI_Path", False))
+if os.path.isfile(os.path.join(ROOT, "assets/terrain/verge_details.obj")):
+    RIBBONS.append(("assets/terrain/verge_details.obj", "SM_VergeDetails", "Ground_VergeDetails", "MI_VergeScan", False))
 
 log_lines = []
 def log(m):
@@ -62,16 +66,24 @@ def main():
             a = eas.spawn_actor_from_object(mesh, unreal.Vector(0, 0, 0), unreal.Rotator(roll=0.0, pitch=0.0, yaw=90.0))
             a.set_actor_label(label); a.set_folder_path("Terrain"); a.set_editor_property("is_spatially_loaded", False)
             log("placed " + label)
+        a.modify()
+        a.static_mesh_component.modify()
         if not collision:
             a.static_mesh_component.set_collision_enabled(unreal.CollisionEnabled.NO_COLLISION)
+        a.static_mesh_component.set_static_mesh(mesh)
+        a.static_mesh_component.set_material(0, mi)
+        assert a.static_mesh_component.get_material(0) == mi, "actor material assignment failed: " + label
+        if label in ("Roads_Blockout", "Paths_Footpaths", "Tracks_Dirt", "Ground_VergeDetails"):
+            a.static_mesh_component.set_cast_shadow(False)
         log("%s <- %s (%s, collision %s)" % (label, obj, mi_name, collision))
     unreal.EditorLoadingAndSavingUtils.save_dirty_packages(True, True)
 
-try:
-    main()
-    log("RESULT OK")
-except Exception:
-    log("RESULT FAILED\n" + traceback.format_exc())
-finally:
-    open(REPORT, "w", encoding="utf-8").write("\n".join(log_lines) + "\n")
-    unreal.SystemLibrary.quit_editor()
+if __name__ == "__main__":
+    try:
+        main()
+        log("RESULT OK")
+    except Exception:
+        log("RESULT FAILED\n" + traceback.format_exc())
+    finally:
+        open(REPORT, "w", encoding="utf-8").write("\n".join(log_lines) + "\n")
+        unreal.SystemLibrary.quit_editor()

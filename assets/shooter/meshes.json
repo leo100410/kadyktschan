@@ -1,0 +1,144 @@
+{
+ "SM_Obs_Slabs": {
+  "materials": [
+   "WoodGrey",
+   "Concrete",
+   "Lime"
+  ],
+  "quads": 144
+ },
+ "SM_Obs_ConcreteFence": {
+  "materials": [
+   "Concrete",
+   "Lime"
+  ],
+  "quads": 576
+ },
+ "SM_Obs_Truck": {
+  "materials": [
+   "Metal",
+   "BlackPlastic",
+   "WoodGrey"
+  ],
+  "quads": 176
+ },
+ "SM_Obs_Bus": {
+  "materials": [
+   "Lime",
+   "Metal",
+   "WoodGrey",
+   "BlackPlastic"
+  ],
+  "quads": 248
+ },
+ "SM_Obs_Barricade": {
+  "materials": [
+   "WoodGrey",
+   "Furniture",
+   "Metal",
+   "Wood",
+   "BlackPlastic"
+  ],
+  "quads": 170
+ },
+ "SM_Obs_CableDrums": {
+  "materials": [
+   "WoodGrey",
+   "Metal"
+  ],
+  "quads": 360
+ },
+ "SM_Obs_Scrap": {
+  "materials": [
+   "Metal"
+  ],
+  "quads": 116
+ },
+ "SM_Shooter_Bandage": {
+  "materials": [
+   "Paper",
+   "CurtainRed"
+  ],
+  "quads": 12
+ },
+ "SM_Shooter_Medkit": {
+  "materials": [
+   "Enamel",
+   "CurtainRed",
+   "Metal"
+  ],
+  "quads": 24
+ },
+ "SM_Shooter_Ammo": {
+  "materials": [
+   "Metal",
+   "BlackPlastic"
+  ],
+  "quads": 18
+ },
+ "SM_Shooter_Vest": {
+  "materials": [
+   "Sofa",
+   "BlackPlastic"
+  ],
+  "quads": 18
+ },
+ "SM_Shooter_Radio": {
+  "materials": [
+   "BlackPlastic",
+   "Metal"
+  ],
+  "quads": 20
+ },
+ "SM_Shooter_Documents": {
+  "materials": [
+   "Paper"
+  ],
+  "quads": 12
+ },
+ "SM_Shooter_Jammer": {
+  "materials": [
+   "Metal",
+   "CurtainRed"
+  ],
+  "quads": 28
+ },
+ "SM_Shooter_Workbench": {
+  "materials": [
+   "Metal",
+   "WoodGrey",
+   "BlackPlastic",
+   "Enamel"
+  ],
+  "quads": 126
+ },
+ "SM_Shooter_Rifle": {
+  "materials": [
+   "Metal",
+   "Furniture"
+  ],
+  "quads": 80
+ },
+ "SM_Shooter_TurretBase": {
+  "materials": [
+   "Metal",
+   "BlackPlastic"
+  ],
+  "quads": 62
+ },
+ "SM_Shooter_TurretHead": {
+  "materials": [
+   "Metal",
+   "BlackPlastic"
+  ],
+  "quads": 70
+ },
+ "SM_Shooter_Drone": {
+  "materials": [
+   "BlackPlastic",
+   "Metal",
+   "Enamel"
+  ],
+  "quads": 194
+ }
+}

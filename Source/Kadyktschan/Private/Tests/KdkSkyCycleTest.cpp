@@ -77,4 +77,25 @@ bool FSkyCycleMonotonicTest::RunTest(const FString& Parameters)
 	return true;
 }
 
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FSkyCycleDuskTest, "Kadyktschan.SkyCycle.DuskDimsSunAndAmbient",
+	EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter)
+
+bool FSkyCycleDuskTest::RunTest(const FString& Parameters)
+{
+	const FKdkSkyCycleParams P = MakeParams();
+	const FKdkSkyState Day = EvaluateSkyCycle(P, 0.f, 0.f);
+	const FKdkSkyState Dusk = EvaluateSkyCycle(P, 0.f, 1.f);
+	const FKdkSkyState Half = EvaluateSkyCycle(P, 0.f, 0.5f);
+	TestEqual(TEXT("day keeps sunlight"), Day.SunIntensityScale, 1.f);
+	TestEqual(TEXT("day keeps ambient"), Day.SkyIntensityScale, 1.f);
+	TestTrue(TEXT("full dusk sun is below horizon"), Dusk.Elevation < 0.f);
+	TestTrue(TEXT("full dusk dims sun"), Dusk.SunIntensityScale < 0.05f);
+	TestTrue(TEXT("full dusk dims ambient"), Dusk.SkyIntensityScale < 0.05f);
+	TestTrue(TEXT("slider interpolates ambient"), Half.SkyIntensityScale > Dusk.SkyIntensityScale && Half.SkyIntensityScale < Day.SkyIntensityScale);
+	TestEqual(TEXT("dusk clamps below zero"), EvaluateSkyCycle(P, 0.f, -1.f).SkyIntensityScale, Day.SkyIntensityScale);
+	TestEqual(TEXT("dusk clamps above one"), EvaluateSkyCycle(P, 0.f, 2.f).SkyIntensityScale, Dusk.SkyIntensityScale);
+	TestEqual(TEXT("turning dusk off restores daytime"), EvaluateSkyCycle(P, 0.f, 0.f).Elevation, Day.Elevation);
+	return true;
+}
+
 #endif

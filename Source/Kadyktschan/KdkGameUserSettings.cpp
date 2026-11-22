@@ -38,3 +38,16 @@ void UKdkGameUserSettings::ApplyNonResolutionSettings()
 	SetCVar(TEXT("r.Lumen.HardwareRayTracing"), bHardwareRayTracing ? 1 : 0);
 	SetCVar(TEXT("r.Nanite"), bNanite ? 1 : 0);
 }
+
+void UKdkGameUserSettings::SaveSettings()
+{
+	if (!TemporaryQualityOverride.IsSet())
+	{
+		Super::SaveSettings();
+		return;
+	}
+	const Scalability::FQualityLevels Lowered = Scalability::GetQualityLevels();
+	Scalability::SetQualityLevels(TemporaryQualityOverride.GetValue(), true);
+	Super::SaveSettings();
+	Scalability::SetQualityLevels(Lowered, true);
+}

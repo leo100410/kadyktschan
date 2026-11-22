@@ -1,0 +1,186 @@
+<!-- PROTOTYPE - NOT FOR PRODUCTION -->
+<!-- Question: Macht es Spaß und fühlt es sich fair an, Fundstücke im Notizbuch zu einer These (Wer / Wo / Wann) zu verbinden, ohne zu raten? -->
+<!-- Date: 2026-11-07 -->
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notizbuch-Prototyp</title>
+<style>
+  body { margin: 0; background: #23221f; color: #2b2a26; font: 16px/1.5 Georgia, serif; }
+  .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 1100px; margin: 0 auto; padding: 16px; }
+  @media (max-width: 760px) { .wrap { grid-template-columns: 1fr; } }
+  h1 { color: #d8d2c4; font-size: 20px; max-width: 1100px; margin: 16px auto 0; padding: 0 16px; font-weight: normal; }
+  .room, .book { background: #e9e3d4; border-radius: 4px; padding: 16px; }
+  .book { background: #f1ecdf; background-image: repeating-linear-gradient(#f1ecdf 0 27px, #cfd7dd 27px 28px); }
+  .item { display: block; width: 100%; text-align: left; margin: 6px 0; padding: 8px 10px; background: #d6cfbe; border: 0; border-radius: 3px; font: inherit; cursor: pointer; }
+  .item.read { background: #cdd2c4; }
+  .item:disabled { opacity: .45; cursor: default; }
+  .doc { white-space: pre-wrap; background: #fbf8f0; padding: 12px; border-left: 3px solid #8a7f68; margin: 10px 0; }
+  .thesis { margin: 14px 0 24px; }
+  .thesis label { display: block; margin: 6px 0; }
+  select, button.go, textarea { font: inherit; padding: 4px 6px; }
+  .fb { min-height: 1.5em; font-style: italic; }
+  .ok { color: #3c5a2e; font-style: normal; }
+  .locked { color: #7a7364; }
+  pre#log { white-space: pre-wrap; font: 13px/1.4 monospace; background: #fbf8f0; padding: 10px; }
+  .hint { color: #6d6656; font-size: 14px; }
+</style>
+</head>
+<body>
+<h1>Wohnung 14, dritter Stock · Sommer 2011</h1>
+<div class="wrap">
+  <section class="room">
+    <h2>Fundstücke</h2>
+    <p class="hint">Klicke ein Fundstück an, um es zu untersuchen.</p>
+    <div id="items"></div>
+    <div id="doc"></div>
+  </section>
+  <section class="book">
+    <h2>Notizbuch</h2>
+    <div id="theses"></div>
+    <div id="end" hidden>
+      <h3>Warum bist du sicher?</h3>
+      <p class="hint">Schreib in ein, zwei Sätzen, welche Funde dich überzeugt haben.</p>
+      <textarea id="why" rows="4" style="width:100%"></textarea>
+      <p><button class="go" id="done">Fertig: Auswertung zeigen</button></p>
+      <pre id="log" hidden></pre>
+    </div>
+  </section>
+</div>
+<script>
+// PROTOTYPE - NOT FOR PRODUCTION. Family, names, flat and adit are FIKTION.
+const DOCS = [
+  { id: 'umschlag', t: 'Briefumschlag, Küchentisch', room: 1,
+    x: 'Stempel: Магадан, 12.03.2001\nAn: Горбунов П. С. [Gorbunow P. S.], Wohnung 14\nAbsender: Н. Кравец [N. Krawez], Магадан [Magadan]\n\nDer Umschlag ist leer.' },
+  { id: 'zettel', t: 'Zettel unter der Tür', room: 1,
+    x: 'Zuteilungsschein der Wohnungsverwaltung\nWohnung 15 · zugeteilt an Familie Сахаров [Sacharow]\nab 01.09.1984\n\n(Jemand hat ihn unter die falsche Tür geschoben.)' },
+  { id: 'zeichnung', t: 'Kinderzeichnung an der Wand', room: 1,
+    x: 'Ein Haus mit vielen Fenstern, drei Figuren davor.\nUnten in Kinderschrift: „Лида, 7 лет. Папа, мама и я.“ [Lida, 7 Jahre. Papa, Mama und ich.]\nAuf der Rückseite, Bleistift: „1990“' },
+  { id: 'heft', t: 'Mietheft im Schrank', room: 1,
+    x: 'Mietbuch Wohnung 14\nMieter: Горбунов Пётр Семёнович [Gorbunow Pjotr Semjonowitsch]\nErste Zahlung: Oktober 1979\nLetzte Zahlung: September 2003\n\nDazwischen fehlen keine Monate.' },
+  // the second room opens once thesis 1 is right
+  { id: 'brief', t: 'Brief im Nachttisch (nicht abgeschickt)', room: 2,
+    x: 'Liebe Nadja,\ndieses Jahr fahren wir noch nicht. Lida macht im Frühjahr die Schule fertig, dann kommen wir nächsten Herbst, mit dem Bus wie alle.\nPetja sagt, er bleibt, solange im Kesselhaus noch jemand die Kessel braucht. Er war seit dem Stollen nicht mehr er selbst.\n\nWalja, 20. September 2002' },
+  { id: 'schicht', t: 'Seite aus einem Schichtbuch', room: 2,
+    x: 'Stollen 3 (Nordhang) · Schichtbuch\n…\n14.11.2001  Горбунов П. С. [Gorbunow]  Frühschicht\n15.11.2001  Stollen geschlossen. Mannschaft entlassen.\n\nDie folgenden Seiten sind herausgerissen.' },
+  { id: 'kalender', t: 'Wandkalender, Oktober 2003', room: 2,
+    x: 'Freitag, 10. Oktober, rot eingekreist:\n„Bus 7:00 — Лида, Валя. Koffer!“ [Lida, Walja]\n\nDie Blätter nach Oktober 2003 wurden nicht mehr abgerissen.' },
+  { id: 'foto', t: 'Foto, hinter dem Spiegel', room: 2,
+    x: 'Ein Mann in Wattejacke vor einem Ziegelschornstein, Schnee bis zu den Knien.\nRückseite: „Петя, котельная. Зима 2003/04.“\n[Petja, Kesselhaus. Winter 2003/04.]' },
+  { id: 'band', t: 'Tonband-Abschrift (Funkamateur)', room: 2,
+    x: 'Notiz zum Band Nr. 41, Telefonzentrale:\n„…Kesselhaus meldet sich wieder. Der vom Stollen hält Kessel 2 allein am Laufen. Die Busse sind schon vor dem Schnee weg. Ich weiß nicht, wie lange er das noch macht.“\n(undatiert)' },
+];
+
+const THESES = [
+  { id: 'T1', q: 'Wer wohnte in dieser Wohnung, und seit wann?', opens: 'Die Tür zum Schlafzimmer gibt nach. Drinnen liegen weitere Dinge.',
+    fields: [
+      { k: 'Wer', opts: ['Familie Gorbunow', 'Familie Sacharow', 'Familie Krawez', 'der Funkamateur'], a: 'Familie Gorbunow' },
+      { k: 'Seit wann', opts: ['1979', '1984', '1990', '2001'], a: '1979' },
+    ] },
+  { id: 'T2', q: 'Als die Familie die Stadt verließ: Wer blieb zurück, wo, und wann fuhren die anderen ab?', needs: 'T1',
+    opens: 'Auf dem Stadtplan erscheint ein neuer Ort: das Kesselhaus.',
+    fields: [
+      { k: 'Wer blieb', opts: ['Pjotr (Vater)', 'Walentina (Mutter)', 'Lida (Tochter)', 'Nachbar Sacharow', 'der Funkamateur'], a: 'Pjotr (Vater)' },
+      { k: 'Wo', opts: ['Kesselhaus', 'Stollen 3', 'Telefonzentrale', 'Wohnung 14', 'Magadan'], a: 'Kesselhaus' },
+      { k: 'Wann fuhren die anderen', opts: ['Herbst 2001', 'Herbst 2002', 'Herbst 2003', 'Frühjahr 2004', 'Sommer 2003'], a: 'Herbst 2003' },
+    ] },
+];
+
+// play log: what the hypothesis is measured with
+const start = Date.now();
+const log = { opened: [], attempts: {}, readBeforeFirstTry: {}, solvedAt: {} };
+const solved = new Set();
+const secs = () => Math.round((Date.now() - start) / 1000);
+
+function renderItems() {
+  const box = document.getElementById('items');
+  box.innerHTML = '';
+  for (const d of DOCS) {
+    if (d.room === 2 && !solved.has('T1')) continue;
+    const b = document.createElement('button');
+    b.className = 'item' + (log.opened.includes(d.id) ? ' read' : '');
+    b.textContent = d.t;
+    b.onclick = () => {
+      if (!log.opened.includes(d.id)) log.opened.push(d.id);
+      document.getElementById('doc').innerHTML = '';
+      const p = document.createElement('div');
+      p.className = 'doc';
+      p.textContent = d.x;
+      document.getElementById('doc').append(p);
+      renderItems();
+    };
+    box.append(b);
+  }
+  if (!solved.has('T1')) {
+    const p = document.createElement('p');
+    p.className = 'locked';
+    p.textContent = 'Die Schlafzimmertür klemmt.';
+    box.append(p);
+  }
+}
+
+function renderTheses() {
+  const box = document.getElementById('theses');
+  box.innerHTML = '';
+  for (const t of THESES) {
+    const div = document.createElement('div');
+    div.className = 'thesis';
+    if (t.needs && !solved.has(t.needs)) { div.innerHTML = '<p class="locked">Eine weitere Frage ist noch nicht aufgeschrieben.</p>'; box.append(div); continue; }
+    div.innerHTML = `<h3>${t.q}</h3>`;
+    const sels = t.fields.map(f => {
+      const l = document.createElement('label');
+      const s = document.createElement('select');
+      s.innerHTML = '<option value="">…</option>' + f.opts.map(o => `<option>${o}</option>`).join('');
+      if (solved.has(t.id)) { s.value = f.a; s.disabled = true; }
+      l.append(f.k + ': ', s);
+      div.append(l);
+      return s;
+    });
+    const fb = document.createElement('p');
+    fb.className = 'fb';
+    if (solved.has(t.id)) { fb.className = 'fb ok'; fb.textContent = t.opens; }
+    else {
+      const b = document.createElement('button');
+      b.className = 'go';
+      b.textContent = 'These prüfen';
+      b.onclick = () => {
+        if (sels.some(s => !s.value)) { fb.textContent = 'Es fehlt noch etwas.'; return; }
+        log.attempts[t.id] = (log.attempts[t.id] || 0) + 1;
+        if (!(t.id in log.readBeforeFirstTry)) log.readBeforeFirstTry[t.id] = log.opened.length;
+        const right = t.fields.filter((f, i) => sels[i].value === f.a).length;
+        if (right === t.fields.length) {
+          solved.add(t.id);
+          log.solvedAt[t.id] = secs();
+          renderItems(); renderTheses();
+          if (solved.size === THESES.length) document.getElementById('end').hidden = false;
+        } else {
+          // neutral feedback per concept: how many fields are right, not which
+          fb.textContent = right === 0 ? 'Nichts davon passt zusammen.' : `${right} von ${t.fields.length} passen. Etwas stimmt noch nicht.`;
+        }
+      };
+      div.append(b);
+    }
+    div.append(fb);
+    box.append(div);
+  }
+}
+
+document.getElementById('done').onclick = () => {
+  const out = document.getElementById('log');
+  out.hidden = false;
+  out.textContent = [
+    'AUSWERTUNG (bitte kopieren und an Claude geben)',
+    `Gesamtzeit: ${secs()} s`,
+    ...THESES.map(t => `${t.id}: ${log.attempts[t.id] || 0} Versuche, gelöst nach ${log.solvedAt[t.id]} s, ${log.readBeforeFirstTry[t.id]} Funde gelesen vor dem 1. Versuch`),
+    `Funde gelesen: ${log.opened.length} von ${DOCS.length}`,
+    `Begründung: ${document.getElementById('why').value || '(leer)'}`,
+  ].join('\n');
+};
+
+renderItems();
+renderTheses();
+</script>
+</body>
+</html>

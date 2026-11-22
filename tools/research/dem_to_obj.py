@@ -4,13 +4,12 @@ Usage: python -I dem_to_obj.py <out.obj> <half_extent_m> <step_m> <tile.tif>...
 Axes written: OBJ x = east, y = north, z = up (cm); the editor import script fixes orientation.
 """
 import math, sys
-import numpy as np
-import tifffile
 
 LAT0, LON0 = 63.085870, 147.050008  # origin, see design/research/phase-1-dossier.md
 R = 6371008.8
 
 def load(path):
+    import numpy as np, tifffile  # only needed for the DEM tiles; the OBJ fallback below runs on plain Python
     with tifffile.TiffFile(path) as t:
         page = t.pages[0]
         sx, sy, _ = page.tags["ModelPixelScaleTag"].value
@@ -21,6 +20,27 @@ tiles = []  # filled by main or by load_tiles()
 
 def load_tiles(paths):
     tiles[:] = [load(p) for p in paths]
+
+OBJ_GRID = []  # [x0 m, step m, n, absolute heights row-major by y] when built from a terrain OBJ instead of the tiles
+
+def load_obj(path):
+    """Read heights back from a terrain OBJ written by main() (when the DEM tiles are not at hand). Same surface the
+    game shows, so props sampled from it sit on the rendered ground."""
+    h0, zs, x0, x1 = 0.0, [], None, None
+    for line in open(path):
+        if line.startswith("# origin height"):
+            h0 = float(line.split()[3])
+        elif line.startswith("v "):
+            x, y, z = map(float, line.split()[1:4])
+            if x0 is None:
+                x0 = x
+            elif x1 is None:
+                x1 = x
+            zs.append(h0 + z / 100.0)
+    n = int(round(math.sqrt(len(zs))))
+    assert n * n == len(zs), "terrain OBJ is not a square grid"
+    OBJ_GRID[:] = [x0 / 100.0, (x1 - x0) / 100.0, n, zs]
+    return h0  # the origin height the OBJ was written with (heights in the world are relative to it)
 
 def height(lat, lon):
     for a, lon_tl, lat_tl, sx, sy in tiles:
@@ -42,6 +62,12 @@ def ground(x, y):
     15 m blocks reads several metres too high. A 3x3 minimum filter at pixel spacing strips them
     (it also lowers sharp ridges by a few metres, acceptable for the blockout).
     """
+    if OBJ_GRID:  # bilinear on the written grid (already filtered)
+        x0, step, n, zs = OBJ_GRID
+        c = min(max((x - x0) / step, 0.0), n - 1.001); r = min(max((y - x0) / step, 0.0), n - 1.001)
+        c0, r0 = int(c), int(r); fc, fr = c - c0, r - r0
+        z = lambda i, j: zs[(r0 + j) * n + c0 + i]
+        return (z(0, 0) * (1 - fc) + z(1, 0) * fc) * (1 - fr) + (z(0, 1) * (1 - fc) + z(1, 1) * fc) * fr
     return min(height(*latlon(x + i * FILTER_M, y + j * FILTER_M)) for i in (-1, 0, 1) for j in (-1, 0, 1))
 
 def latlon(x, y):  # local metres -> degrees (equirectangular, fine at town scale)

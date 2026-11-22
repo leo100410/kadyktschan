@@ -10,6 +10,7 @@
 class UInputComponent;
 class USkeletalMeshComponent;
 class UCameraComponent;
+class USpotLightComponent;
 class UInputAction;
 struct FInputActionValue;
 
@@ -30,6 +31,10 @@ class AKadyktschanCharacter : public ACharacter
 	/** First person camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components", meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* FirstPersonCameraComponent;
+
+	/** Flashlight (L): a spot on the camera, off at the start. Brightness and cone are tuned on the component. */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components", meta = (AllowPrivateAccess = "true"))
+	USpotLightComponent* Flashlight;
 
 protected:
 
@@ -88,8 +93,12 @@ protected:
 	void SetVerticalUp() { VerticalInput = 1.f; }
 	void SetVerticalDown() { VerticalInput = -1.f; }
 	void SetVerticalNone() { VerticalInput = 0.f; }
-	void BoostOn() { bBoost = true; ApplyFlySpeed(); }
-	void BoostOff() { bBoost = false; ApplyFlySpeed(); }
+	void BoostOn() { bBoost = true; ApplyFlySpeed(); ApplyWalkSpeed(); }
+	void BoostOff() { bBoost = false; ApplyFlySpeed(); ApplyWalkSpeed(); }
+	/** Shooter mode: slow body-camera walk, Shift sprints. Story mode keeps the template speed. */
+	void ApplyWalkSpeed();
+	void ToggleCrouch();
+	void QReleased() { SetVerticalNone(); }
 	void FlyFaster() { ChangeFlySpeed(1.25f); }
 	void FlySlower() { ChangeFlySpeed(0.8f); }
 	void ChangeFlySpeed(float Factor);
@@ -105,9 +114,53 @@ protected:
 	bool bFlying = false;
 	bool bBoost = false;
 	float VerticalInput = 0.f;
-	
+
+	// shooter mode (design/gdd/shooter-mode.md): the rifle in view and the body camera
+	UPROPERTY() TObjectPtr<class UStaticMeshComponent> Rifle;
+	UPROPERTY() TObjectPtr<class UPointLightComponent> MuzzleFlash;
+	bool bShooter = false;
+	bool bAiming = false;
+	bool bReloading = false;
+	float TargetFov = 90.f;
+	float StoryFov = 90.f;
+	float StoryWalkSpeed = 600.f;
+	float Aim = 0.f;         // 0 hip .. 1 down the sights
+	float ReloadPose = 0.f;
+	float Kick = 0.f;        // recoil, decays
+	float FlashLeft = 0.f;
+	FRotator LastView = FRotator::ZeroRotator;
+	FRotator Sway = FRotator::ZeroRotator;
+	void UpdateRifle(float DeltaSeconds);
+
+	// cover (Q, like RDR2): pressed against a wall or obstacle, sliding along it, popping up to aim over low cover
+	bool bInCover = false;
+	bool bLowCover = false;
+	FVector CoverNormal = FVector::ZeroVector;  // horizontal, pointing from the cover towards the player
+	FVector CoverTarget = FVector::ZeroVector;
+	float CoverSnap = 0.f;                      // seconds left of the slide into cover
+	float CoverTop = 0.f;                       // world height of the cover's top edge
+	FVector EyeOffset = FVector::ZeroVector;    // camera offset in cover (down behind it, up or sideways to peek)
+	FVector FirstPersonBase = FVector::ZeroVector;
+	bool HasCoverAt(const FVector& At, float Reach, FHitResult& OutHit) const;
+	void EnterCover();
+	void LeaveCover();
+	void UpdateCover(float DeltaSeconds);
 
 public:
+
+	/** Shooter mode on: rifle, wide body-camera angle Fov, sprint and crouch, no flight. Off restores the story view. */
+	void SetShooterMode(bool bOn, float Fov);
+	bool IsShooterMode() const { return bShooter; }
+	bool IsInCover() const { return bInCover; }
+	/** Q: in the shooter mode takes or leaves cover; in flight it still means "down". */
+	void QPressed();
+	void SetAiming(bool bOn, float Fov) { bAiming = bOn; TargetFov = Fov; }
+	void SetReloading(bool bOn) { bReloading = bOn; }
+	/** Muzzle flash and the rifle's kick for one shot. */
+	void ShotFx();
+
+	/** Switches the flashlight on or off (L). */
+	void ToggleFlashlight();
 
 	/** Returns the first person mesh **/
 	USkeletalMeshComponent* GetFirstPersonMesh() const { return FirstPersonMesh; }

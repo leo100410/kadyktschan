@@ -49,10 +49,12 @@ struct FKdkSkyState
 	float Azimuth = 0.f;
 	float Elevation = 0.f;
 	float TemperatureK = 0.f;
+	float SunIntensityScale = 1.f;
+	float SkyIntensityScale = 1.f;
 };
 
-/** Pure evaluation: T in 0..1 (clamped) with smoothstep easing, so the cycle starts and settles gently. */
-KADYKTSCHAN_API FKdkSkyState EvaluateSkyCycle(const FKdkSkyCycleParams& Params, float T);
+/** Pure evaluation: eased cycle T and clamped dusk amount; full dusk dims sunlight and ambient together. */
+KADYKTSCHAN_API FKdkSkyState EvaluateSkyCycle(const FKdkSkyCycleParams& Params, float T, float DuskAmount = 0.f);
 
 /** Designer-facing data asset holding the cycle parameters (coding standard: gameplay values are data-driven). */
 UCLASS(BlueprintType)
@@ -91,7 +93,10 @@ public:
 
 private:
 	float ElapsedSeconds = 0.f;
+	float TimeScale = 1.f;
 	/** Sun intensity from the level, captured on first apply (dusk mode scales it). */
 	float BaseIntensity = -1.f;
 	float BaseFog = -1.f;
+	float BaseSkyIntensity = -1.f;
+	FLinearColor BaseFogLuminance = FLinearColor(-1.f, 0.f, 0.f);
 };

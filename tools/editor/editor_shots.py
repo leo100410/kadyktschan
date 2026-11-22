@@ -10,7 +10,7 @@ import unreal
 ROOT = unreal.Paths.convert_relative_path_to_full(unreal.Paths.project_dir())
 # KDK_SHOT_DIR: write somewhere else (iteration shots that are not evidence)
 EVIDENCE = os.environ.get("KDK_SHOT_DIR") or os.path.join(ROOT, "production/qa/evidence")
-DATE = "2026-11-07"
+DATE = time.strftime("%Y-%m-%d")  # evidence files carry the day they were taken
 # (name, location cm, rotation) — project axes +X north, +Y east
 SHOTS = [
     ("town-overview", unreal.Vector(-60000, -40000, 35000), unreal.Rotator(roll=0.0, pitch=-28.0, yaw=35.0)),
@@ -57,6 +57,21 @@ if os.path.exists(_scatter):  # the club with its bust, and the boiler-house chi
     for _e, _n, _z, _yaw in _sc.get("chimneys", [])[:1]:
         SHOTS.append(("works-chimney", unreal.Vector((_n - 45) * 100, (_e - 30) * 100, (_z + 12) * 100),
                       unreal.Rotator(roll=0.0, pitch=8.0, yaw=33.7)))
+# Stollen 3 (tools/research/mine_site.py): the portal from down the track, and the cutting from above
+_adit = os.path.join(ROOT, "assets/mine/adit_site.json")
+if os.path.exists(_adit):
+    _a = json.load(open(_adit))
+    (_pe, _pn), (_ux, _uy), _f = _a["portal"], _a["uphill"], _a["floor_m"]
+    _yaw = math.degrees(math.atan2(_ux, _uy))
+    _at = lambda u, v, z: unreal.Vector((_pn + _uy * u + _ux * v) * 100, (_pe + _ux * u - _uy * v) * 100, z * 100)
+    SHOTS.append(("adit-portal", _at(-24, -3, _f + 2.5), unreal.Rotator(roll=0.0, pitch=-2.0, yaw=_yaw + 6)))
+    SHOTS.append(("adit-site", _at(-45, 25, _f + 18), unreal.Rotator(roll=0.0, pitch=-24.0, yaw=_yaw - 40)))
+if os.path.exists(_scatter):  # a panel-block ruin and a roadside hut (scatter_vegetation.py, 2026-11-08)
+    _sc = json.load(open(_scatter))
+    for _name, _key, _d in (("ruin", "ruins", 30), ("hut", "huts", 12)):
+        for _it in _sc.get(_key, [])[:1]:
+            SHOTS.append((_name, unreal.Vector((_it[1] - _d * 0.7) * 100, (_it[0] - _d * 0.7) * 100, (_it[2] + 4) * 100),
+                          unreal.Rotator(roll=0.0, pitch=-8.0, yaw=45.0)))
 # KDK_SHOT_ONLY: comma-separated shot names to take
 if os.environ.get("KDK_SHOT_ONLY"):
     SHOTS = [s for s in SHOTS if s[0] in os.environ["KDK_SHOT_ONLY"].split(",")]

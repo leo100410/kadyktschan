@@ -59,6 +59,9 @@ def import_textures():
         elif name.endswith("_ORM"):
             tex.set_editor_property("compression_settings", unreal.TextureCompressionSettings.TC_MASKS)
             tex.set_editor_property("srgb", False)
+        if name.startswith("T_Leaves") and name.endswith("_D"):
+            from foliage_materials import preserve_leaf_mips
+            preserve_leaf_mips(tex)
         unreal.EditorAssetLibrary.save_loaded_asset(tex)
     log("textures: %d" % len(files))
 
@@ -173,9 +176,9 @@ def build_instances(master):
         "Wallpaper_Green": make_mi(master, "MI_Int_WallpaperGreen", p["WallpaperGreen"], "Wallpaper_A"),
         "FloorBoards": make_mi(master, "MI_Int_FloorBoards", p["FloorBoards"], "Planks_A", -0.1),
         "Linoleum": make_mi(master, "MI_Int_Linoleum", p["Linoleum"], "Plaster_A", -0.3),
-        "Furniture": make_mi(master, "MI_Int_Furniture", p["FurnitureWood"], "PaintWood_A", -0.35),
+        "Furniture": make_mi(master, "MI_Int_Furniture", p["FurnitureWood"], "Veneer_A"),
         "Carpet": make_mi(master, "MI_Int_Carpet", p["CarpetRed"], "Carpet_A", 0.1),
-        "Sofa": make_mi(master, "MI_Int_Sofa", p["SofaGreen"], "Concrete_A", 0.05),
+        "Sofa": make_mi(master, "MI_Int_Sofa", p["SofaGreen"], "Fabric_A"),
         "Radiator": make_mi(master, "MI_Int_Radiator", p["Radiator"], "PaintWood_A", -0.2),
         "BlackPlastic": make_mi(master, "MI_Int_BlackPlastic", p["BlackPlastic"], "Plaster_A", -0.4),
         "Screen": make_mi(master, "MI_Int_Screen", "#1E2226", "Plaster_A", -0.8),
@@ -184,7 +187,7 @@ def build_instances(master):
         "Stencil": make_mi(master, "MI_T5_Stencil", p["Stencil"], "Plaster_A", 0.05, grime=0.5),
         "Mural_Red": make_mi(master, "MI_Mural_Red", p["PosterRed"], "Plaster_A", grime=FACADE_GRIME, fade=FACADE_FADE),
         "Mural_Brown": make_mi(master, "MI_Mural_Brown", p["Rust"], "Plaster_A", grime=FACADE_GRIME, fade=FACADE_FADE),
-        "CurtainRed": make_mi(master, "MI_Int_Curtain", "#6E2A28", "Concrete_A", 0.1),
+        "CurtainRed": make_mi(master, "MI_Int_Curtain", "#6E2A28", "Fabric_A"),
         "Roof": make_mi(master, "MI_Roof_Slate", p["Slate"], "Concrete_A", 0.0, grime=0.6),
         "Bark_Birch": make_mi(master, "MI_Bark_Birch", p["BirchBark"], "Concrete_A"),
         "Bark_Larch": make_mi(master, "MI_Bark_Larch", p["LarchBark"], "Concrete_A"),
@@ -278,8 +281,22 @@ def build_ground():
     connect(near_s, "", detail_amt, "Alpha")
     soft = node(unreal.MaterialExpressionLinearInterpolate, -300, -150, const_a=1.0)
     connect(mix, "", soft, "B"); connect(detail_amt, "", soft, "Alpha")
+    # taiga floor beyond the town (user photo 2026-11-08: the valley and hills are closed dark forest): blend to
+    # ColorForest from ~1 km out, ForestAmount 0 for roads and water
+    forest_c = node(unreal.MaterialExpressionVectorParameter, -800, -800, parameter_name="ColorForest", default_value=unreal.LinearColor(0.03, 0.045, 0.02, 1))
+    forest_amt = node(unreal.MaterialExpressionScalarParameter, -650, 1000, parameter_name="ForestAmount", default_value=0.0)
+    far = node(unreal.MaterialExpressionMultiply, -850, 950, const_b=1.0 / 70000.0)     # 700 m fade (cm)
+    connect(wlen, "", far, "A")
+    far_b = node(unreal.MaterialExpressionAdd, -750, 950, const_b=-1.4)                  # 0 inside 1 km, 1 beyond 1.7 km
+    connect(far, "", far_b, "A")
+    far_s = node(unreal.MaterialExpressionSaturate, -650, 950)
+    connect(far_b, "", far_s, "")
+    far_k = node(unreal.MaterialExpressionMultiply, -500, 950)
+    connect(far_s, "", far_k, "A"); connect(forest_amt, "", far_k, "B")
+    tinted = node(unreal.MaterialExpressionLinearInterpolate, -400, -600)
+    connect(lerp, "", tinted, "A"); connect(forest_c, "", tinted, "B"); connect(far_k, "", tinted, "Alpha")
     base = node(unreal.MaterialExpressionMultiply, -250, -350)
-    connect(lerp, "", base, "A"); connect(soft, "", base, "B")
+    connect(tinted, "", base, "A"); connect(soft, "", base, "B")
     rough = node(unreal.MaterialExpressionScalarParameter, -250, 0, parameter_name="Roughness", default_value=0.92)
     mel.connect_material_property(base, "", unreal.MaterialProperty.MP_BASE_COLOR)
     mel.connect_material_property(rough, "", unreal.MaterialProperty.MP_ROUGHNESS)
@@ -292,8 +309,11 @@ def build_ground():
     mel.connect_material_property(n_soft, "", unreal.MaterialProperty.MP_NORMAL)
     mel.recompile_material(mat)
     unreal.EditorAssetLibrary.save_loaded_asset(mat)
-    def mi(name, a, b, rough_v, tiling):
+    def mi(name, a, b, rough_v, tiling, forest=0.0):
         inst = get_or_create_mi(name, mat)
+        r, g, bl = srgb_to_linear(PALETTE["ForestDark"])
+        mel.set_material_instance_vector_parameter_value(inst, "ColorForest", unreal.LinearColor(r, g, bl, 1))
+        mel.set_material_instance_scalar_parameter_value(inst, "ForestAmount", forest)
         for pname, hexv in (("ColorA", a), ("ColorB", b)):
             r, g, bl = srgb_to_linear(PALETTE[hexv])
             mel.set_material_instance_vector_parameter_value(inst, pname, unreal.LinearColor(r, g, bl, 1))
@@ -301,10 +321,11 @@ def build_ground():
         mel.set_material_instance_scalar_parameter_value(inst, "DetailTiling", tiling)
         mel.update_material_instance(inst)
         unreal.EditorAssetLibrary.save_loaded_asset(inst)
-    mi("MI_Ground_Tundra", "TundraGreen", "TundraDry", 0.92, 4000.0)   # terrain UV 0..1 spans 8 km -> 2 m tiles
+    mi("MI_Ground_Tundra", "TundraGreen", "TundraDry", 0.92, 4000.0, forest=0.9)   # terrain UV 0..1 spans 8 km -> 2 m tiles
     mi("MI_Ground_Gravel", "Gravel", "GravelDark", 0.85, 1.0)          # ribbons carry a single UV: flat gravel
     mi("MI_Ground_River", "RiverWater", "RiverWater", 0.08, 1.0)
     mi("MI_Ground_Forest", "ForestDark", "ForestLight", 0.95, 4000.0)  # backdrop ring (UV 0..1 over 60 km)
+    mi("MI_Ground_Rock", "RockDark", "RockLight", 0.9, 1.0)             # adit walls, heap (build_mine.py UVs in m / 2)
     log("ground material + 3 instances")
 
 def build_foliage():
@@ -326,8 +347,20 @@ def build_foliage():
     col = node(unreal.MaterialExpressionVectorParameter, -800, -500, parameter_name="LeafColor", default_value=unreal.LinearColor(0.15, 0.24, 0.04, 1))
     d2 = node(unreal.MaterialExpressionMultiply, -500, -200, const_b=2.0)
     connect(t, "RGB", d2, "A")
+    # per-instance variation: some crowns yellower and lighter, some darker (user photo: mixed yellow-green thicket)
+    pir = node(unreal.MaterialExpressionPerInstanceRandom, -800, -650)
+    warm = node(unreal.MaterialExpressionMultiply, -650, -600, const_b=0.0)
+    warm_c = node(unreal.MaterialExpressionConstant3Vector, -800, -720, constant=unreal.LinearColor(1.35, 1.2, 0.55, 1))
+    connect(col, "", warm, "A"); connect(warm_c, "", warm, "B")
+    dark = node(unreal.MaterialExpressionMultiply, -650, -450, const_b=0.7)
+    connect(col, "", dark, "A")
+    var = node(unreal.MaterialExpressionLinearInterpolate, -500, -550)
+    connect(dark, "", var, "A"); connect(warm, "", var, "B"); connect(pir, "", var, "Alpha")
+    has_var = node(unreal.MaterialExpressionScalarParameter, -650, -350, parameter_name="Variation", default_value=0.0)
+    leaf = node(unreal.MaterialExpressionLinearInterpolate, -400, -450)
+    connect(col, "", leaf, "A"); connect(var, "", leaf, "B"); connect(has_var, "", leaf, "Alpha")
     base = node(unreal.MaterialExpressionMultiply, -250, -350)
-    connect(col, "", base, "A"); connect(d2, "", base, "B")
+    connect(leaf, "", base, "A"); connect(d2, "", base, "B")
     rough = node(unreal.MaterialExpressionScalarParameter, -250, 0, parameter_name="Roughness", default_value=0.75)
     mel.connect_material_property(base, "", unreal.MaterialProperty.MP_BASE_COLOR)
     mel.connect_material_property(rough, "", unreal.MaterialProperty.MP_ROUGHNESS)
@@ -345,6 +378,8 @@ def build_foliage():
         r, g, b = srgb_to_linear(PALETTE[color])
         mel.set_material_instance_vector_parameter_value(inst, "LeafColor", unreal.LinearColor(r, g, b, 1))
         mel.set_material_instance_texture_parameter_value(inst, "Card_D", unreal.load_asset(TEX_DIR + "/" + card))
+        if name.startswith("MI_Leaves"):
+            mel.set_material_instance_scalar_parameter_value(inst, "Variation", 0.6)
         mel.update_material_instance(inst)
         unreal.EditorAssetLibrary.save_loaded_asset(inst)
     log("foliage material + 3 instances")
@@ -386,12 +421,45 @@ def build_glass():
         unreal.EditorAssetLibrary.save_loaded_asset(inst)
     log("glass material + instance")
 
+def build_pictures():
+    """Story props with a real picture (tools/asset-pipeline/story_textures.swift): calendars, photos, letters. One
+    master, the image as base colour, matt paper; one instance per T_Pic_<Name>_D (slot Pic_<Name>)."""
+    path = MAT_DIR + "/M_Picture"
+    if unreal.EditorAssetLibrary.does_asset_exist(path):
+        unreal.EditorAssetLibrary.delete_asset(path)
+    mat = unreal.AssetToolsHelpers.get_asset_tools().create_asset("M_Picture", MAT_DIR, unreal.Material, unreal.MaterialFactoryNew())
+    mel = unreal.MaterialEditingLibrary
+    names = sorted(f[len("T_Pic_"):-len("_D.png")] for f in os.listdir(TEX_SRC) if f.startswith("T_Pic_") and f.endswith("_D.png"))
+    img = mel.create_material_expression(mat, unreal.MaterialExpressionTextureSampleParameter2D, -500, 0)
+    img.set_editor_property("parameter_name", "Image")
+    img.set_editor_property("texture", unreal.load_asset("%s/T_Pic_%s_D" % (TEX_DIR, names[0])))
+    rough = mel.create_material_expression(mat, unreal.MaterialExpressionConstant, -300, 250)
+    rough.set_editor_property("r", 0.85)
+    mel.connect_material_property(img, "RGB", unreal.MaterialProperty.MP_BASE_COLOR)
+    mel.connect_material_property(rough, "", unreal.MaterialProperty.MP_ROUGHNESS)
+    mel.recompile_material(mat)
+    unreal.EditorAssetLibrary.save_loaded_asset(mat)
+    for n in names:
+        mi = get_or_create_mi("MI_Pic_" + n, mat)
+        mel.set_material_instance_texture_parameter_value(mi, "Image", unreal.load_asset("%s/T_Pic_%s_D" % (TEX_DIR, n)))
+        mel.update_material_instance(mi)
+        unreal.EditorAssetLibrary.save_loaded_asset(mi)
+    log("pictures: %d" % len(names))
+
 try:
     import_textures()
+    build_pictures()
     build_instances(build_master())
     build_ground()
     build_foliage()
     build_glass()
+    import sys
+    sys.path.insert(0, os.path.join(ROOT, "tools/editor"))
+    import foliage_materials
+    foliage_materials.apply()
+    if os.path.isfile(os.path.join(ROOT, "assets/third-party/polyhaven/downloads.json")):
+        import scanned_surfaces
+        scanned_surfaces.apply()
     log("RESULT OK")
 except Exception:
     log("RESULT FAILED\n" + traceback.format_exc())

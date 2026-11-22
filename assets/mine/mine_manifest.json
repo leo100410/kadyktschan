@@ -1,0 +1,39 @@
+{
+ "mesh": "SM_Mine_Adit",
+ "north_m": 975.34,
+ "east_m": -681.57,
+ "quads": 5828,
+ "materials": [
+  "Concrete",
+  "Wood",
+  "Metal",
+  "Rock",
+  "WoodGrey",
+  "BlackPlastic",
+  "Pic_NoteMine",
+  "Lime",
+  "Enamel"
+ ],
+ "clues": {
+  "mine_gate": [
+   973.969,
+   -681.725,
+   10.4
+  ],
+  "mine_board": [
+   1006.888,
+   -709.935,
+   10.65
+  ],
+  "mine_vent": [
+   1005.503,
+   -705.052,
+   10.2
+  ],
+  "mine_note": [
+   1008.079,
+   -707.723,
+   9.56
+  ]
+ }
+}

@@ -1,0 +1,3 @@
+Backup: /Users/leolange/UnrealProjects/Kadyktschan/Saved/MapForestAssetBackups/20261110-082516-873887
+placed 0 vegetation cells (0 quads), 28 instanced layers (292188 instances)
+RESULT OK

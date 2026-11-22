@@ -20,10 +20,17 @@ import build_t5_kit as kit  # noqa: E402  (kit part geometry and Part helper)
 import interiors  # noqa: E402
 import murals  # noqa: E402
 import kulturhaus  # noqa: E402
+import story_rooms  # noqa: E402
+import residential  # noqa: E402
 
 # addresses with an enterable ground-floor section at the middle entrance: "flats" = stairwell + two flats
-# (PDF phase 3: ул. Ленина block), "shop" = магазин (briefing V10 B; building ANNAHME, pink ground floor)
-INTERIOR_SECTIONS = {"PLA_Lenina_8": "flats", "PLA_Shkolnaya_3": "shop"}
+# (PDF phase 3: ул. Ленина block), "shop" = магазин (briefing V10 B; building ANNAHME, pink ground floor);
+# story rooms (story_rooms.py, FIKTION): Gorbunov flat in an unaddressed block, the boiler house beside the chimney,
+# the telephone exchange on ул. Школьная (dossier: house unknown, Школьная 8 ANNAHME)
+INTERIOR_SECTIONS = {"PLA_Lenina_8": "lenina8", "PLA_Lenina_7": "lenina7", "PLA_Shkolnaya_3": "shop",
+                     "PLA_SAT_S_Block": "family", "PLA_OSM_170991713": "boiler", "PLA_Shkolnaya_8": "radio"}
+
+INTERIOR_SECTIONS.update({label: info[1] for label, info in residential.HOUSES.items()})
 
 G = kit.G
 AX, ST, T = G["axis"], G["storey_height"], G["panel_thickness"]
@@ -189,6 +196,7 @@ class Acc(kit.Part):
         c, s = math.cos(theta), math.sin(theta)
         base = len(self.verts)
         self.verts += [(px + x * c - y * s, py + x * s + y * c, pz + z) for x, y, z in part.verts]
+        self.smooth_faces.update(len(self.faces) + i for i in part.smooth_faces)
         for f, mi in zip(part.faces, part.face_mat):
             name = remap.get(part.mats[mi], part.mats[mi])
             if name not in self.mats:
@@ -264,18 +272,24 @@ def build_one(b, poly_world, parts):
         return gable, is_entrance
 
     # interior section at the middle entrance (ordered along the facade)
-    section_key, section_cells = None, set()
+    section_key, section_cells, stair_col, shaft = None, set(), set(), set()
+    furnished_floors = residential.HOUSES.get(b["label"], (1,))[0]
     if b["label"] in INTERIOR_SECTIONS:
         ent = sorted((e for e in edges if classify(e[0], e[2], e[3])[1]), key=lambda e: e[1][0] * e[2][0] + e[1][1] * e[2][1])
         if ent:
             section_key, (spx, spy), sd, sn = ent[len(ent) // 2]
             i_e, j_e, di, dj = section_key
             step = int(sd[0]) if sd[0] else int(sd[1])
+            cell_at = lambda c, depth_k: ((i_e + c * step, j_e - dj * depth_k) if di == 0 else (i_e - di * depth_k, j_e + c * step))
+            # the flats run through the whole block (interiors.DEEP) when every cell behind them exists
+            deep = b["label"] in residential.HOUSES or INTERIOR_SECTIONS[b["label"]] in story_rooms.DEEP_KINDS
+            assert not deep or all(cell_at(c, k) in cells for c in range(-2, 3) for k in range(interiors.DEEP)), b["label"] + ": block too shallow for the deep flats"
             for c in range(-2, 3):
-                for depth_k in range(2):
-                    ci = i_e + c * step if di == 0 else i_e - di * depth_k
-                    cj = j_e - dj * depth_k if di == 0 else j_e + c * step
-                    section_cells.add((ci, cj))
+                for depth_k in range(interiors.DEEP if deep else 2):
+                    section_cells.add(cell_at(c, depth_k))
+            if deep:  # stair column: shaft walls on the first floor, no slab over the back half (open stair shaft)
+                stair_col = {cell_at(0, k) for k in range(interiors.DEEP)}
+                shaft = {cell_at(0, k) for k in range(2, interiors.DEEP)}
 
     hall, corridor, hall_key = set(), set(), None
     if b["label"] in KULTURHAUS:
@@ -320,7 +334,7 @@ def build_one(b, poly_world, parts):
         cut = rnd.randint(max(0, lv - 3), lv - 1)  # storeys from `cut` upwards are gone in the corner
 
     def gone(i, j, s):
-        return (i, j) in collapse and s >= cut
+        return (i, j) in collapse and s >= cut and not ((i, j) in section_cells and s <= furnished_floors)
 
     ent_edges = []
     for key, (px, py), d, n in edges:
@@ -415,6 +429,8 @@ def build_one(b, poly_world, parts):
                         c, sn = math.cos(theta), math.sin(theta)
                         hx, hy = kit.WIN_OX, kit.WIN["reveal"] + 0.16
                         swing = math.radians(rnd.uniform(40, 110)) * (1 if rnd.random() < 0.7 else -1)
+                        if s < furnished_floors and (key[0], key[1]) in section_cells:
+                            swing = -abs(swing)  # never into a furnished room: the player walks along these windows
                         sash_xy = (px + hx * c - hy * sn, py + hx * sn + hy * c)
                         acc.add(parts["SM_T5_SashOpen"], theta + swing, sash_xy[0], sash_xy[1], z, {})
                         if rnd.random() < 0.5:
@@ -463,6 +479,8 @@ def build_one(b, poly_world, parts):
                 continue  # double-height hall
             if gone(i, j, min(s, lv - 1)) and s > 0:
                 continue  # collapsed corner
+            if 0 < s < furnished_floors and (i, j) in shaft:
+                continue  # stair shaft over the half landing (interiors.stairwell)
             z = Z0 + s * ST
             # pull the slab edge 3 cm in from the facade: flush with the panels' outer face it overlapped the panel
             # below by ~20 cm in the same plane and z-fought as a flickering band at every storey (user video 2026-11-07)
@@ -482,7 +500,8 @@ def build_one(b, poly_world, parts):
                 continue
             za, zb = Z0 + s * ST, Z0 + (s + 1) * ST - 0.22
             # the furnished section brings its own ground-floor walls
-            if s == 0 and ((i, j) in section_cells or (i - 1, j) in section_cells):
+            if (s < furnished_floors and ((i, j) in section_cells or (i - 1, j) in section_cells)) or \
+                    (s == 1 and ((i, j) in stair_col or (i - 1, j) in stair_col)):
                 party = False
             else:
                 party = True
@@ -490,8 +509,9 @@ def build_one(b, poly_world, parts):
                 party = False
             if party and i % 2 == 0 and (i - 1, j) in cells:
                 acc.box(x0 - 0.08, x0 + 0.08, y0 + 0.4, y0 + AX - 0.4, za, zb, "Interior")
-            spine_in_section = (s == 0 and ((i, j) in section_cells or (i, j - 1) in section_cells or (i, j) in corridor
-                                            or (i, j - 1) in corridor)) or (i, j) in hall or (i, j - 1) in hall
+            spine_in_section = (s < furnished_floors and ((i, j) in section_cells or (i, j - 1) in section_cells or (i, j) in corridor
+                                            or (i, j - 1) in corridor)) or (i, j) in hall or (i, j - 1) in hall or \
+                (s == 1 and ((i, j) in stair_col or (i, j - 1) in stair_col))
             if j == nv // 2 and (i, j - 1) in cells and nv >= 4 and not spine_in_section:
                 acc.box(x0 + 0.4, x0 + AX - 0.4, y0 + AX - 0.08, y0 + AX + 0.08, za, zb, "Interior")
     street = b["label"].split("_")[1] if b["label"].count("_") >= 2 else None
@@ -524,7 +544,7 @@ def build_one(b, poly_world, parts):
             add_mural(acc, murals.MURALS[GABLE_MURALS[b["label"]]], gx, gy, d, len(segs) * AX)
             mural_view = (gx, gy, d, n, len(segs) * AX)
 
-    cameras = []
+    cameras, section_frame, clues, room_lights = [], None, {}, []
 
     def to_world(x, y):  # Blender (x, y) -> (north, east): undo the v mirror, then the building rotation
         u, v = x, -y
@@ -564,7 +584,10 @@ def build_one(b, poly_world, parts):
     if section_key:
         sp = kit.Part("section")
         kind = INTERIOR_SECTIONS[b["label"]]
-        (interiors.shop if kind == "shop" else interiors.section)(sp, AX, ST, T, seed=8)
+        if b["label"] in residential.HOUSES:
+            built = residential.build(sp, b["label"], AX, ST, T, seed=8)
+        else:
+            built = {"shop": interiors.shop, "flats": interiors.section, **story_rooms.ROOMS}[kind](sp, AX, ST, T, seed=8)
         acc.add(sp, math.atan2(sd[1], sd[0]), spx, spy, Z0, {})
         if kind == "shop":  # shop sign over the entrance: board + red Cyrillic letters
             ex, ey = spx + sd[0] * 0.2, spy + sd[1] * 0.2
@@ -577,15 +600,28 @@ def build_one(b, poly_world, parts):
             x, y = spx + sd[0] * a + left[0] * bb, spy + sd[1] * a + left[1] * bb
             u, v = x, -y
             return cn + u * dX[0] + v * dY[0], ce + u * dX[1] + v * dY[1]
-        views = ((("flatA-room", (-3.6, 1.0), (-5.6, 2.6)), ("flatA-kitchen", (-0.5, 3.2), (-2.2, 0.4)),
+        views = story_rooms.VIEWS.get(kind) or ((("flatA-room", (-3.6, 1.0), (-5.6, 2.6)), ("flatA-kitchen", (-0.5, 3.2), (-2.2, 0.4)),
                   ("stairwell", (1.5, 0.7), (1.0, 5.0)), ("flatB-room", (8.4, 1.1), (6.1, 2.2))) if kind == "flats" else
                  (("shop", (1.5, 0.8), (-2.0, 4.6)), ("shop-counter", (7.5, 1.0), (0.0, 4.0))))
         prefix = b["label"].replace("PLA_", "").lower().replace("_", "") + "-"
-        for name, frm, to in views:
+        # section frame in world metres (north, east): origin, +1 m along the facade, +1 m inward (walk checks)
+        o, a1, i1 = world(0, 0), world(1, 0), world(0, 1)
+        section_frame = [list(map(lambda v: round(v, 3), o)), [round(a1[0] - o[0], 4), round(a1[1] - o[1], 4)],
+                         [round(i1[0] - o[0], 4), round(i1[1] - o[1], 4)]]
+        floor_z = b["ground_m"] - 0.1 + Z0   # ground-floor level in world metres (as the camera heights below)
+        for lx, ly, lz in getattr(built, "lights", []):
+            ln, le = world(lx, ly)
+            room_lights.append([round(ln,3), round(le,3), round(floor_z+lz,3)])
+        for name, (cx, cy, cz) in (getattr(built, "clues", None) or {}).items():
+            n_, e_ = world(cx, cy)
+            clues[name] = [round(n_, 3), round(e_, 3), round(floor_z + cz, 3)]
+        if kind == "homes": views = []
+        views = [(name, frm, to, 0) for name, frm, to in views] + getattr(built, "extra_views", [])
+        for name, frm, to, floor in views:
             n0, e0 = world(*frm)
             n1, e1 = world(*to)
             cameras.append({"name": prefix + name, "north_m": round(n0, 2), "east_m": round(e0, 2),
-                            "z_m": round(b["ground_m"] - 0.1 + Z0 + 1.6, 2), "yaw_deg": round(math.degrees(math.atan2(e1 - e0, n1 - n0)), 1)})
+                            "z_m": round(b["ground_m"] - 0.1 + Z0 + 1.6 + floor * ST, 2), "yaw_deg": round(math.degrees(math.atan2(e1 - e0, n1 - n0)), 1)})
     if lv <= 2 and len(local) <= 4 and not collapse and not hall and min(nu, nv) * AX <= 15.0:
         # older two-storey blocks: gable roof in corrugated asbestos-cement slate (photo 6480171585), ANNAHME
         add_gable_roof(acc, u0, -(v0 + nv * AX), u0 + nu * AX, -v0, top + PARAPET * 0.5, min(nu, nv) * AX)
@@ -629,7 +665,8 @@ def build_one(b, poly_world, parts):
     return ob, glass_ob, {"label": b["label"], "mesh": acc.name, "glass_mesh": glass.name if glass_ob else None, "folder": b["folder"], "north_m": cn, "east_m": ce,
                 "ground_m": b["ground_m"], "yaw_deg": math.degrees(yaw), "levels": lv, "cells": len(cells),
                 "scheme": [up, ground], "materials": acc.mats, "plants": plants, "tris": len(acc.faces) * 2,
-                "entrances": entrances, "cameras": cameras, "damage": damage, "decay": decay}
+                "entrances": entrances, "cameras": cameras, "damage": damage, "decay": decay,
+                "section_frame": section_frame, "clues": clues, "room_lights": room_lights, "furnished_floors": furnished_floors if section_key else 0}
 
 
 def paint_decay(ob, rnd):
@@ -679,9 +716,14 @@ def main():
                                      add_leaf_bones=False, bake_anim=False)
         manifest.append(info)
         print("BLD %-26s lv=%d cells=%3d tris=%6d scheme=%s" % (info["label"], info["levels"], info["cells"], info["tris"], info["scheme"]))
-    if not ONLY:
-        json.dump(manifest, open(os.path.join(OUT, "buildings_manifest.json"), "w"), ensure_ascii=False, indent=1)
-    print("BUILDINGS OK", len(manifest))
+    built_count = len(manifest)
+    path = os.path.join(OUT, "buildings_manifest.json")
+    if ONLY:
+        old = json.load(open(path))
+        updated = {b["label"]: b for b in manifest}
+        manifest = [updated.pop(b["label"], b) for b in old] + list(updated.values())
+    json.dump(manifest, open(path, "w"), ensure_ascii=False, indent=1)
+    print("BUILDINGS OK", built_count)
 
 
 main()

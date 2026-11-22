@@ -1,0 +1,86 @@
+[
+  {
+    "file": "gravel_road_diff_2k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/gravel_road/gravel_road_diff_2k.jpg",
+    "source": "https://polyhaven.com/a/gravel_road",
+    "license": "CC0-1.0",
+    "sha256": "6313bb65816f2890a247cb9a5bae003ddef98cf55099d5abaf543a88e0ab3180"
+  },
+  {
+    "file": "gravel_road_nor_dx_2k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/gravel_road/gravel_road_nor_dx_2k.jpg",
+    "source": "https://polyhaven.com/a/gravel_road",
+    "license": "CC0-1.0",
+    "sha256": "f174e09346c0ae37fc56994e593c6c32e3ee5d6a5e5b97a1f1edf2d8193d7236"
+  },
+  {
+    "file": "gravel_road_rough_2k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/gravel_road/gravel_road_rough_2k.jpg",
+    "source": "https://polyhaven.com/a/gravel_road",
+    "license": "CC0-1.0",
+    "sha256": "e03290bca670efb4bc0276a3e1198a2ea4fee27dac87d553b18f336068a461db"
+  },
+  {
+    "file": "forest_floor_diff_2k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/forest_floor/forest_floor_diff_2k.jpg",
+    "source": "https://polyhaven.com/a/forest_floor",
+    "license": "CC0-1.0",
+    "sha256": "308bc5f916dcc113bf276cbfdc411bed48b6a9ce5e3bc0c228faa3d54acf125d"
+  },
+  {
+    "file": "forest_floor_nor_dx_2k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/forest_floor/forest_floor_nor_dx_2k.jpg",
+    "source": "https://polyhaven.com/a/forest_floor",
+    "license": "CC0-1.0",
+    "sha256": "994b96e5bd17612d8aab9d9df2a84f685369f46da077bf8a142b19619ae92da4"
+  },
+  {
+    "file": "forest_floor_rough_2k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/forest_floor/forest_floor_rough_2k.jpg",
+    "source": "https://polyhaven.com/a/forest_floor",
+    "license": "CC0-1.0",
+    "sha256": "fcc6b3ed06b2b60912c626554f5738417f8ac129ddfae8e0610d47c82a899d7f"
+  },
+  {
+    "file": "wood_floor_diff_2k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/wood_floor/wood_floor_diff_2k.jpg",
+    "source": "https://polyhaven.com/a/wood_floor",
+    "license": "CC0-1.0",
+    "sha256": "7c3ff1164c8dd0758ef2c048e9a266d28174120de01052ec40e6ca486177345c"
+  },
+  {
+    "file": "wood_floor_nor_dx_2k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/wood_floor/wood_floor_nor_dx_2k.jpg",
+    "source": "https://polyhaven.com/a/wood_floor",
+    "license": "CC0-1.0",
+    "sha256": "3ea99b7585eff741be247f225ac64ccc898010297f769c5c3d57f7e38e0d9dc2"
+  },
+  {
+    "file": "wood_floor_rough_2k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/wood_floor/wood_floor_rough_2k.jpg",
+    "source": "https://polyhaven.com/a/wood_floor",
+    "license": "CC0-1.0",
+    "sha256": "297eda0d75f2020cc541dbf242e1f5fd058053249567f49a4506fc2c5b1a172b"
+  },
+  {
+    "file": "asphalt_02_diff_2k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/asphalt_02/asphalt_02_diff_2k.jpg",
+    "source": "https://polyhaven.com/a/asphalt_02",
+    "license": "CC0-1.0",
+    "sha256": "28f5ba8690553f192c0e5e1a5ff40f34765b4b93f4cc7059b1a3e9c795b6c28c"
+  },
+  {
+    "file": "asphalt_02_nor_dx_2k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/asphalt_02/asphalt_02_nor_dx_2k.jpg",
+    "source": "https://polyhaven.com/a/asphalt_02",
+    "license": "CC0-1.0",
+    "sha256": "64dc04b1fc4288e1ceea00202ad581ef6e1715b12fd7a3e30c9d8b325772fa80"
+  },
+  {
+    "file": "asphalt_02_rough_2k.jpg",
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/asphalt_02/asphalt_02_rough_2k.jpg",
+    "source": "https://polyhaven.com/a/asphalt_02",
+    "license": "CC0-1.0",
+    "sha256": "b9a516b61b7040a9245ac206642d5f767ad9589a0169c4a1668221429e8a998c"
+  }
+]

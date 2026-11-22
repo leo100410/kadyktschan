@@ -1,5 +1,8 @@
 # Claude Code Game Studios -- Game Studio Agent Architecture
 
+> Projektübergabe: Zuerst `HANDOFF.md` und `production/session-state/handoff-2026-11-11.md` lesen. Historische Statusangaben von 2026-11-07 sind überholt; aktuelle Importnachweise und offene Spielabnahme stehen in der neuen Übergabe.
+
+
 Indie game development managed through 49 coordinated Claude Code subagents.
 Each agent owns a specific domain, enforcing separation of concerns and quality.
 

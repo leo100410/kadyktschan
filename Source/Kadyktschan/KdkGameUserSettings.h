@@ -5,6 +5,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameUserSettings.h"
+#include "Scalability.h"
 #include "KdkGameUserSettings.generated.h"
 
 UCLASS(config = GameUserSettings, configdonotcheckdefaults)
@@ -23,6 +24,13 @@ public:
 	/** Also pushes the extra options below into their console variables. */
 	virtual void ApplyNonResolutionSettings() override;
 
+	/** Writes the player's own quality levels even while the shooter mode has lowered them for the frame rate
+	 *  (the engine saves the live levels, also on quit: 2026-11-11 a test run saved shadows 1 / foliage 2). */
+	virtual void SaveSettings() override;
+
+	/** Set by the shooter mode's dynamic graphics while a lowered level is active; unset at level 0. */
+	TOptional<Scalability::FQualityLevels> TemporaryQualityOverride;
+
 	/** Multiplier on mouse/stick look input. */
 	UPROPERTY(config)
 	float MouseSensitivity = 1.f;
@@ -40,7 +48,7 @@ public:
 	UPROPERTY(config)
 	bool bShowFPS = false;
 
-	/** Dusk mode: the sun sits just above the horizon, everything darker (settings menu "Dämmerung"). */
+	/** Dusk mode: the sun sinks below the horizon, sunlight and ambient both dim (settings menu "Dämmerung"). */
 	UPROPERTY(config)
 	bool bDusk = false;
 
@@ -67,4 +75,8 @@ public:
 	/** Camcorder noise (film grain), 0..1 (settings menu "Rauschen (Videokamera)"). */
 	UPROPERTY(config)
 	float CamNoise = 0.75f;
+
+	/** Game language: "de" or "en" (main menu / settings "Sprache"). */
+	UPROPERTY(config)
+	FString Language = TEXT("de");
 };

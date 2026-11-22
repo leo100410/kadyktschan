@@ -1,0 +1,2 @@
+terrain cut + patch, adit at 975.3 N -681.6 E (5828 quads)
+RESULT OK

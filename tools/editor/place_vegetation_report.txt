@@ -1,2 +1,2 @@
-placed 149 vegetation cells (957561 quads)
+placed 31 vegetation cells (246443 quads), 19 instanced layers (200314 instances)
 RESULT OK

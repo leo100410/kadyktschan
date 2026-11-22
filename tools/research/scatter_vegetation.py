@@ -19,10 +19,17 @@ def seg_dist(px, py, ax, ay, bx, by):
 
 def main():
     data = json.load(open(sys.argv[1], encoding="utf-8"))
-    dem.load_tiles(sys.argv[3:])
-    h0 = dem.ground(0.0, 0.0)
+    if sys.argv[3].endswith(".obj"):  # no DEM tiles here: sample the terrain mesh the game uses
+        h0 = dem.load_obj(sys.argv[3])
+    else:
+        dem.load_tiles(sys.argv[3:])
+        h0 = dem.ground(0.0, 0.0)
     from terrain_mesh import TerrainMesh  # objects sit on the rendered mesh, not the raw DEM samples
     gz = TerrainMesh(os.path.join(os.path.dirname(sys.argv[2]), "..", "terrain", "terrain_kadykchan_8km.obj")).z
+
+    def gfoot(x, y, r):
+        """Lowest ground under a rigid prop's footprint: set there it never floats on a slope, the uphill side sinks in."""
+        return min([gz(x, y)] + [gz(x + r * math.cos(k * math.pi / 4), y + r * math.sin(k * math.pi / 4)) for k in range(8)])
     # cheap spatial test lists
     lines = [(r["points_m"], 5.0 + r["width_m"] / 2) for r in data["roads"]] + [(r["points_m"], 8.0) for r in data["rivers"]]
     blds = []
@@ -33,6 +40,8 @@ def main():
         blds.append((b["east_m"], b["north_m"], math.cos(a), math.sin(a), b["length_m"] / 2, hw))
 
     def facade_dist(x, y):
+        if in_section(x, y):
+            return -1
         best = 1e9
         for cx, cy, ca, sa, hl, hw in blds:
             u, v = (x - cx) * ca + (y - cy) * sa, -(x - cx) * sa + (y - cy) * ca
@@ -41,13 +50,31 @@ def main():
         return best
 
     # keep the ground in front of every entrance free (player start, paths); entrances come from build_buildings.py
-    entrances = []
+    entrances, sections = [], []
     man = os.path.join(os.path.dirname(sys.argv[2]), "..", "buildings", "buildings_manifest.json")
     if os.path.exists(man):
         entrances = [(e, n) for b in json.load(open(man, encoding="utf-8")) for n, e, _ in b.get("entrances", [])]
+        sections = [b["section_frame"] for b in json.load(open(man, encoding="utf-8")) if b.get("section_frame")]
+
+    def in_section(x, y):
+        """Inside a furnished section (x = east, y = north). The deep flats reach up to 1.5 m past the blockout
+        rectangle, and a willow grew in Orlow's living room (2026-11-08)."""
+        for (n0, e0), (an, ae), (inn, ie) in sections:
+            dn, de = y - n0, x - e0
+            det = an * ie - inn * ae
+            a, i = (dn * ie - inn * de) / det, (an * de - ae * dn) / det
+            if -8.0 < a < 11.0 and -2.0 < i < 14.0:  # plus a crown width outside the facades
+                return True
+        return False
+
+    # the adit site (tools/research/mine_site.py) is cut into the slope: keep it and its heap free
+    site_f = os.path.join(os.path.dirname(sys.argv[2]), "..", "mine", "adit_site.json")
+    adit = json.load(open(site_f))["portal"] if os.path.exists(site_f) else None
 
     def clear(x, y, margin, wall=3.0):
         if any(abs(x - ex) < 8 and abs(y - ey) < 8 for ex, ey in entrances):
+            return False
+        if adit and math.hypot(x - adit[0], y - adit[1]) < 75:
             return False
         for pts, w in lines:
             for (ax, ay, _), (bx, by, _) in zip(pts, pts[1:]):
@@ -58,9 +85,9 @@ def main():
     def slope(x, y):
         return abs(dem.ground(x + 15, y) - dem.ground(x - 15, y)) / 30 + abs(dem.ground(x, y + 15) - dem.ground(x, y - 15)) / 30
 
-    out = {"origin_height": h0, "birch": [], "larch": [], "shrub": []}
+    out = {"origin_height": h0, "birch": [], "larch": [], "shrub": [], "sapling": [], "willow": []}
     tries = 0
-    while len(out["birch"]) < 420 and tries < 40000:  # courtyards
+    while len(out["birch"]) < 900 and tries < 80000:  # courtyards
         tries += 1
         x, y = rnd.uniform(-700, 700), rnd.uniform(-700, 700)
         d = facade_dist(x, y)
@@ -122,17 +149,30 @@ def main():
                 sc = {"birch": rnd.uniform(0.25, 0.45), "shrub": rnd.uniform(0.5, 0.9), "grass": rnd.uniform(0.6, 1.1)}[kind]
                 if z is not None and kind == "birch":   # on roofs: saplings, and mostly weeds instead (photos)
                     kind, sc = ("birch", sc * 0.5) if rnd.random() < 0.35 else ("grass", rnd.uniform(0.7, 1.2))
-                out[kind].append([round(e, 1), round(n, 1), round(zz, 2), round(rnd.uniform(0, 360)), round(sc, 2)])
+                rot = round(rnd.uniform(0, 360))
+                if z is None and any(abs(e - ex) < 8 and abs(n - ey) < 8 for ex, ey in entrances):
+                    continue  # base plants too keep the doors free (story-room doors were blocked, 2026-11-07)
+                out[kind].append([round(e, 1), round(n, 1), round(zz, 2), rot, round(sc, 2)])
     tries = 0
-    while len(out["larch"]) < 6500 and tries < 300000:  # thicker outward and on slopes (taiga edge)
+    # closed larch taiga around the town and up the hills (user photo 2026-11-08), thinning only near the houses;
+    # area-uniform radius so the ring does not crowd inward
+    while len(out["larch"]) < 110000 and tries < 3000000:
         tries += 1
-        r, a = rnd.uniform(250, 3600), rnd.uniform(0, 2 * math.pi)
+        r, a = math.sqrt(rnd.uniform(250 ** 2, 3800 ** 2)), rnd.uniform(0, 2 * math.pi)
         x, y = r * math.cos(a), r * math.sin(a)
         if abs(x) > 3900 or abs(y) > 3900:
             continue
-        p = min(1.0, (r - 250) / 1500) * 0.6 + min(1.0, slope(x, y) * 4) * 0.4
+        p = 0.3 + 0.7 * min(1.0, (r - 250) / 700)
         if rnd.random() < p and clear(x, y, 2.0):
             out["larch"].append([round(x, 1), round(y, 1), round(gz(x, y), 2), round(rnd.uniform(0, 360)), round(rnd.uniform(0.6, 1.3), 2)])
+    # young larches where the forest creeps back into the town fringe
+    tries = 0
+    while len(out["sapling"]) < 15000 and tries < 500000:
+        tries += 1
+        r, a = math.sqrt(rnd.uniform(150 ** 2, 1300 ** 2)), rnd.uniform(0, 2 * math.pi)
+        x, y = r * math.cos(a), r * math.sin(a)
+        if clear(x, y, 1.0, wall=2.0):
+            out["sapling"].append([round(x, 1), round(y, 1), round(gz(x, y), 2), round(rnd.uniform(0, 360)), round(rnd.uniform(0.7, 1.3), 2)])
     # --- street furniture (briefing V3 "Schutt an Hauswänden", V10 C "Garagen, Kioske, Tanks, Leitungen"); ANNAHME positions
     out["pipes"], out["rubble"], out["tanks"], out["garages"] = [], [], [], []
     for r in data["roads"]:
@@ -186,21 +226,25 @@ def main():
                 out["heaps"].append([round(x, 1), round(y, 1), round(gz(x, y), 2), round(rnd.uniform(0, 360)), round(rnd.uniform(1.6, 2.6), 2)])
     # the town is overgrown (user photos): yellow-green willow/alder thickets and young larches/birches everywhere
     # except on roads, in footprints and in front of entrances; clustered, denser away from the walls
-    thick = [(rnd.uniform(-700, 700), rnd.uniform(-600, 600), rnd.uniform(6, 22)) for _ in range(420)]
-    tries, target = 0, len(out["shrub"]) + 10000
-    while tries < 220000 and len(out["shrub"]) < target:
+    # (2026-11-08: four times the thickets, as willow/alder bushes and young larches instead of scaled-up dwarf shrubs)
+    thick = [(rnd.uniform(-750, 750), rnd.uniform(-650, 650), rnd.uniform(8, 30)) for _ in range(900)]
+    tries, placed = 0, 0
+    while tries < 1000000 and placed < 70000:
         tries += 1
         cx, cy, spread = thick[rnd.randrange(len(thick))]
         x, y = rnd.gauss(cx, spread), rnd.gauss(cy, spread)
         if clear(x, y, 0.5, wall=1.5):
-            out["shrub"].append([round(x, 1), round(y, 1), round(gz(x, y), 2), round(rnd.uniform(0, 360)), round(rnd.uniform(1.4, 3.0), 2)])
+            kind = "willow" if rnd.random() < 0.62 else "sapling"
+            out[kind].append([round(x, 1), round(y, 1), round(gz(x, y), 2), round(rnd.uniform(0, 360)), round(rnd.uniform(0.7, 1.3), 2)])
+            placed += 1
     added = 0
     while added < 1500 and tries < 260000:
         tries += 1
         x, y = rnd.uniform(-750, 750), rnd.uniform(-650, 650)
         if clear(x, y, 1.0, wall=4.0):
-            kind = "larch" if rnd.random() < 0.55 else "birch"
-            out[kind].append([round(x, 1), round(y, 1), round(gz(x, y), 2), round(rnd.uniform(0, 360)), round(rnd.uniform(0.3, 0.6), 2)])
+            kind = "sapling" if rnd.random() < 0.55 else "birch"
+            sc = rnd.uniform(0.8, 1.3) if kind == "sapling" else rnd.uniform(0.3, 0.6)
+            out[kind].append([round(x, 1), round(y, 1), round(gz(x, y), 2), round(rnd.uniform(0, 360)), round(sc, 2)])
             added += 1
     # things left behind (user 2026-11-07: "the town is very empty"): wrecks, barrels, scrap, fences, furniture,
     # utility poles, bus stops, a ruin field of collapsed wooden houses in the south, the club's bust, a chimney
@@ -216,7 +260,7 @@ def main():
         for _ in range(count):
             p_ = spot(rmax, wall)
             if p_:
-                out[kind].append([round(p_[0], 1), round(p_[1], 1), round(gz(*p_), 2), round(rnd.uniform(0, 360))])
+                out[kind].append([round(p_[0], 1), round(p_[1], 1), round(gfoot(*p_, 2.5), 2), round(rnd.uniform(0, 360))])
     for _ in range(45):                                    # barrel groups
         p_ = spot(650, 3.0)
         if p_:
@@ -256,12 +300,12 @@ def main():
             L = math.hypot(bx - ax, by - ay) or 1
             nx, ny = -(by - ay) / L, (bx - ax) / L
             x, y = (ax + bx) / 2 + nx * (r["width_m"] / 2 + 3), (ay + by) / 2 + ny * (r["width_m"] / 2 + 3)
-            out["busstops"].append([round(x, 1), round(y, 1), round(gz(x, y), 2), round(math.degrees(math.atan2(by - ay, bx - ax)))])
+            out["busstops"].append([round(x, 1), round(y, 1), round(gfoot(x, y, 2.0), 2), round(math.degrees(math.atan2(by - ay, bx - ax)))])
     n_ruin = 0
     while n_ruin < 140:                                    # ruin field of the private wooden houses, south of town
         x, y = rnd.uniform(-650, 350), rnd.uniform(-650, -250)
         if clear(x, y, 3.0, wall=8.0):
-            out["woodruins"].append([round(x, 1), round(y, 1), round(gz(x, y), 2), round(rnd.uniform(0, 360)), round(rnd.uniform(0.8, 1.2), 2)])
+            out["woodruins"].append([round(x, 1), round(y, 1), round(gfoot(x, y, 4.0), 2), round(rnd.uniform(0, 360)), round(rnd.uniform(0.8, 1.2), 2)])
             n_ruin += 1
     if os.path.exists(man):
         for b in json.load(open(man, encoding="utf-8")):
@@ -269,17 +313,17 @@ def main():
                 n0, e0, yaw = b["entrances"][len(b["entrances"]) // 2]
                 dn, de = math.cos(math.radians(yaw)), math.sin(math.radians(yaw))
                 x, y = e0 - de * 5, n0 - dn * 5
-                out["busts"].append([round(x, 1), round(y, 1), round(gz(x, y), 2), round(yaw)])
+                out["busts"].append([round(x, 1), round(y, 1), round(gfoot(x, y, 0.8), 2), round(yaw)])
     works = [b for b in data["buildings"] if b["label"].startswith("PLA_OSM_") and b["length_m"] > 30]
     if works:                                              # boiler-house chimney at the nearest works building
         b = min(works, key=lambda b: math.hypot(b["east_m"], b["north_m"]))
         a = math.radians(b["axis_deg_from_east"])
         x, y = b["east_m"] + math.cos(a) * (b["length_m"] / 2 + 4), b["north_m"] + math.sin(a) * (b["length_m"] / 2 + 4)
-        out["chimneys"].append([round(x, 1), round(y, 1), round(gz(x, y), 2), 0])
+        out["chimneys"].append([round(x, 1), round(y, 1), round(gfoot(x, y, 1.5), 2), 0])
     print("props: " + ", ".join("%s %d" % (k, len(out[k])) for k in ("cars", "barrels", "fences", "poles", "furniture", "busstops", "busts", "chimneys", "scrap", "woodruins")))
     # foundations of demolished wooden houses, measured on satellite imagery (ANNAHME, see that file)
     extra = os.path.join(os.path.dirname(sys.argv[1]), "satellite-additions-2026-11-07.json")
-    out["foundations"] = [[e, n, round(gz(e, n), 2), size]
+    out["foundations"] = [[e, n, round(gfoot(e, n, size / 2), 2), size]
                           for e, n, size in (json.load(open(extra)).get("foundations", []) if os.path.exists(extra) else [])]
     for b in data["buildings"]:  # rusty tanks beside the unaddressed (industrial) buildings, photo briefing V7
         if b["label"].startswith("PLA_OSM_") and b["length_m"] > 40:
@@ -287,12 +331,12 @@ def main():
             for k in range(2):
                 u, v = -b["length_m"] / 2 + 6 + k * 9, b["width_m"] / 2 + 8
                 x, y = b["east_m"] + u * math.cos(a) - v * math.sin(a), b["north_m"] + u * math.sin(a) + v * math.cos(a)
-                out["tanks"].append([round(x, 1), round(y, 1), round(gz(x, y), 2), rnd.choice((4.5, 6.0, 7.5))])
+                out["tanks"].append([round(x, 1), round(y, 1), round(gfoot(x, y, 3.0), 2), rnd.choice((4.5, 6.0, 7.5))])
     gx, gy = 120.0, -560.0  # a row of eight metal garages at the southern edge of the town
     for k in range(8):
         x, y = gx + k * 3.4, gy
         if clear(x, y, 1.0):
-            out["garages"].append([round(x, 1), round(y, 1), round(gz(x, y), 2)])
+            out["garages"].append([round(x, 1), round(y, 1), round(gfoot(x, y, 2.5), 2)])
     # courtyard furniture (typical Soviet microdistrict, ANNAHME): street lamps, benches by the doors, playgrounds
     out["lamps"], out["benches"], out["playgrounds"] = [], [], []
     for r in data["roads"]:
@@ -314,17 +358,54 @@ def main():
     for ex, ey in entrances:
         if rnd.random() < 0.45:
             x, y = ex + rnd.choice((-3.0, 3.0)), ey + rnd.uniform(-1.0, 1.0)
-            out["benches"].append([round(x, 1), round(y, 1), round(gz(x, y), 2), round(rnd.uniform(0, 360))])
+            out["benches"].append([round(x, 1), round(y, 1), round(gfoot(x, y, 1.0), 2), round(rnd.uniform(0, 360))])
     tries = 0
     while len(out["playgrounds"]) < 6 and tries < 20000:
         tries += 1
         x, y = rnd.uniform(-400, 400), rnd.uniform(-450, 350)
         if 16 <= facade_dist(x, y) <= 40 and clear(x, y, 6.0) and all(math.hypot(x - px, y - py) > 120 for px, py, *_ in out["playgrounds"]):
-            out["playgrounds"].append([round(x, 1), round(y, 1), round(gz(x, y), 2), round(rnd.uniform(0, 360))])
+            out["playgrounds"].append([round(x, 1), round(y, 1), round(gfoot(x, y, 4.0), 2), round(rnd.uniform(0, 360))])
     if out["playgrounds"]:  # evidence camera 14 m from the first playground (editor_shots.py reads it)
         px, py, pz, _ = out["playgrounds"][0]
         out["cameras"] = [{"name": "courtyard-playground", "north_m": py - 11, "east_m": px - 9, "z_m": pz + 1.7,
                            "yaw_deg": round(math.degrees(math.atan2(px + 2 - (px - 9), py + 1 - (py - 11))), 1)}]
+    # ruins and small structures (user 2026-11-08: "mehr als nur Häuser - zerstörte Häuser, Haufen"; ANNAHME positions):
+    # remains of demolished panel blocks (standing wall panels, slabs, rubble) on open ground between the houses,
+    # and the small concrete/brick huts of the photo (transformer stations, pump houses) beside the roads
+    out["ruins"], out["huts"] = [], []
+    for _ in range(9):
+        for _ in range(60):
+            p_ = spot(620, 18.0, margin=6.0)
+            if p_ and all(math.hypot(p_[0] - q[0], p_[1] - q[1]) > 80 for q in out["ruins"]):
+                out["ruins"].append([round(p_[0], 1), round(p_[1], 1), round(gfoot(*p_, 16.0), 2), round(rnd.uniform(0, 360)), round(rnd.uniform(0.8, 1.2), 2)])
+                break
+    for r in data["roads"]:
+        pts = r["points_m"]
+        for (ax, ay, _), (bx, by, _) in zip(pts, pts[1:]):
+            L = math.hypot(bx - ax, by - ay)
+            if L < 40 or math.hypot(ax, ay) > 750 or rnd.random() > 0.35:
+                continue
+            t, side = rnd.uniform(0.2, 0.8), rnd.choice((-1, 1))
+            nx, ny = -(by - ay) / L * side, (bx - ax) / L * side
+            off = r["width_m"] / 2 + rnd.uniform(9, 14)
+            x, y = ax + (bx - ax) * t + nx * off, ay + (by - ay) * t + ny * off
+            if clear(x, y, 2.0, wall=6.0):
+                out["huts"].append([round(x, 1), round(y, 1), round(gfoot(x, y, 5.0), 2), round(math.degrees(math.atan2(by - ay, bx - ax)))])
+    print("ruins %d huts %d" % (len(out["ruins"]), len(out["huts"])))
+    from refine_vegetation import refine
+    refine(out, gz, data, json.load(open(man)))
+    power_site = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../assets/power/site.json")
+    if os.path.exists(power_site):
+        from power_update import clear_props
+        clear_props(out, data, json.load(open(power_site)))
+    from neighbourhood_update import densify, blocked_doors
+    from pathlib import Path
+    root = Path(__file__).resolve().parents[2]
+    mine_path = root / "assets/mine/adit_site.json"
+    mine_portal = json.load(open(mine_path))["portal"] if mine_path.exists() else None
+    manifest = json.load(open(man))
+    densify(out, data, manifest, gz, json.load(open(power_site)) if os.path.exists(power_site) else None, mine_portal)
+    out["blocked_doors"] = blocked_doors(manifest)
     json.dump(out, open(sys.argv[2], "w"))
     print("lamps %d benches %d playgrounds %d" % (len(out["lamps"]), len(out["benches"]), len(out["playgrounds"])))
     print("birch %d shrub %d larch %d | pipes %d rubble %d tanks %d garages %d" % (

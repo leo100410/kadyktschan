@@ -533,7 +533,7 @@
    ]
   },
   "SM_T5_Entrance_A_Aged": {
-   "tris": 144,
+   "tris": 216,
    "materials": [
     "Facade",
     "Wood",
@@ -542,7 +542,7 @@
    "bounds_m": [
     [
      -0.25,
-     -2.6999999999999997,
+     -4.5,
      -4.65
     ],
     [
@@ -553,7 +553,7 @@
    ]
   },
   "SM_T5_Entrance_Open_A_Aged": {
-   "tris": 132,
+   "tris": 204,
    "materials": [
     "Facade",
     "Concrete"
@@ -561,7 +561,7 @@
    "bounds_m": [
     [
      -0.25,
-     -2.6999999999999997,
+     -4.5,
      -4.65
     ],
     [

@@ -67,7 +67,7 @@
     null
    ]
   ],
-  "tris": 56432,
+  "tris": 56576,
   "entrances": [
    [
     -118.83,
@@ -82,7 +82,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 0
+  "decay": 0,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Shkolnaya_9",
@@ -600,7 +602,7 @@
     null
    ]
   ],
-  "tris": 30416,
+  "tris": 30488,
   "entrances": [
    [
     81.65,
@@ -610,7 +612,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 3
+  "decay": 3,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Yuzhnaya_6",
@@ -1017,7 +1021,7 @@
     null
    ]
   ],
-  "tris": 70232,
+  "tris": 70376,
   "entrances": [
    [
     -180.74,
@@ -1032,7 +1036,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Yuzhnaya_3",
@@ -1448,7 +1454,7 @@
     null
    ]
   ],
-  "tris": 75872,
+  "tris": 76016,
   "entrances": [
    [
     -202.49,
@@ -1463,7 +1469,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_50LetOktyabrya_6",
@@ -1544,7 +1552,7 @@
     null
    ]
   ],
-  "tris": 40164,
+  "tris": 40308,
   "entrances": [
    [
     63.61,
@@ -1559,7 +1567,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 0
+  "decay": 0,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Lenina_8",
@@ -1590,20 +1600,25 @@
    "BlackPlastic",
    "Interior",
    "Stencil",
-   "Lime",
    "Paint_Mint",
+   "Lime",
+   "Glass",
    "FloorBoards",
    "Linoleum",
-   "Wallpaper_Rose",
+   "Wallpaper_Green",
    "Paint_OilBlue",
-   "Furniture",
-   "Glass",
-   "Carpet",
+   "Wallpaper_Rose",
    "Sofa",
+   "Carpet",
+   "Mural_Red",
+   "Furniture",
+   "Enamel",
+   "Pic_NoteAntonina",
+   "Pic_CalendarAntonina",
+   "Pic_Husband",
    "Radiator",
    "Screen",
-   "Enamel",
-   "Wallpaper_Green"
+   "WoodGrey"
   ],
   "plants": [
    [
@@ -1859,7 +1874,7 @@
     null
    ]
   ],
-  "tris": 107772,
+  "tris": 242884,
   "entrances": [
    [
     14.56,
@@ -1887,36 +1902,296 @@
     "pitch_deg": 6.0
    },
    {
-    "name": "lenina8-flatA-room",
-    "north_m": -3.62,
-    "east_m": 268.64,
-    "z_m": 9.16,
-    "yaw_deg": 94.1
-   },
-   {
-    "name": "lenina8-flatA-kitchen",
-    "north_m": -7.19,
-    "east_m": 267.33,
-    "z_m": 9.16,
-    "yaw_deg": -3.3
-   },
-   {
     "name": "lenina8-stairwell",
-    "north_m": -6.26,
-    "east_m": 264.26,
+    "north_m": -6.51,
+    "east_m": 264.43,
     "z_m": 9.16,
-    "yaw_deg": 138.8
+    "yaw_deg": 141.9
    },
    {
-    "name": "lenina8-flatB-room",
-    "north_m": -10.5,
-    "east_m": 258.81,
+    "name": "lenina8-antonina-living",
+    "north_m": -7.48,
+    "east_m": 268.14,
     "z_m": 9.16,
-    "yaw_deg": 81.0
+    "yaw_deg": 19.5
+   },
+   {
+    "name": "lenina8-antonina-kitchen",
+    "north_m": -10.67,
+    "east_m": 270.57,
+    "z_m": 9.16,
+    "yaw_deg": 131.0
+   },
+   {
+    "name": "lenina8-antonina-bedroom",
+    "north_m": -9.42,
+    "east_m": 272.38,
+    "z_m": 9.16,
+    "yaw_deg": 113.9
+   },
+   {
+    "name": "lenina8-antonina-hall",
+    "north_m": -8.67,
+    "east_m": 268.35,
+    "z_m": 9.16,
+    "yaw_deg": 82.0
+   },
+   {
+    "name": "lenina8-floor1-flat1-teacher-living",
+    "north_m": -6.7,
+    "east_m": 268.57,
+    "z_m": 11.96,
+    "yaw_deg": 72.2
+   },
+   {
+    "name": "lenina8-floor1-flat1-teacher-kitchen",
+    "north_m": -11.92,
+    "east_m": 271.92,
+    "z_m": 11.96,
+    "yaw_deg": 72.2
+   },
+   {
+    "name": "lenina8-floor1-flat1-teacher-bedroom",
+    "north_m": -10.27,
+    "east_m": 273.09,
+    "z_m": 11.96,
+    "yaw_deg": 72.2
+   },
+   {
+    "name": "lenina8-floor1-flat2-nurse-living",
+    "north_m": -10.44,
+    "east_m": 263.13,
+    "z_m": 11.96,
+    "yaw_deg": -141.2
+   },
+   {
+    "name": "lenina8-floor1-flat2-nurse-kitchen",
+    "north_m": -15.44,
+    "east_m": 266.81,
+    "z_m": 11.96,
+    "yaw_deg": -141.2
+   },
+   {
+    "name": "lenina8-floor1-flat2-nurse-bedroom",
+    "north_m": -15.94,
+    "east_m": 264.85,
+    "z_m": 11.96,
+    "yaw_deg": -141.2
+   },
+   {
+    "name": "lenina8-floor2-flat1-family-living",
+    "north_m": -6.7,
+    "east_m": 268.57,
+    "z_m": 14.76,
+    "yaw_deg": 72.2
+   },
+   {
+    "name": "lenina8-floor2-flat1-family-kitchen",
+    "north_m": -11.92,
+    "east_m": 271.92,
+    "z_m": 14.76,
+    "yaw_deg": 72.2
+   },
+   {
+    "name": "lenina8-floor2-flat1-family-bedroom",
+    "north_m": -10.27,
+    "east_m": 273.09,
+    "z_m": 14.76,
+    "yaw_deg": 72.2
+   },
+   {
+    "name": "lenina8-floor2-flat2-seamstress-living",
+    "north_m": -10.44,
+    "east_m": 263.13,
+    "z_m": 14.76,
+    "yaw_deg": -141.2
+   },
+   {
+    "name": "lenina8-floor2-flat2-seamstress-kitchen",
+    "north_m": -15.44,
+    "east_m": 266.81,
+    "z_m": 14.76,
+    "yaw_deg": -141.2
+   },
+   {
+    "name": "lenina8-floor2-flat2-seamstress-bedroom",
+    "north_m": -15.94,
+    "east_m": 264.85,
+    "z_m": 14.76,
+    "yaw_deg": -141.2
    }
   ],
   "damage": 1,
-  "decay": 1
+  "decay": 1,
+  "section_frame": [
+   [
+    -4.836,
+    265.103
+   ],
+   [
+    -0.5667,
+    -0.8239
+   ],
+   [
+    -0.8239,
+    0.5667
+   ]
+  ],
+  "clues": {
+   "antonina_note": [
+    -4.542,
+    268.724,
+    8.32
+   ],
+   "antonina_calendar": [
+    -2.737,
+    270.82,
+    8.94
+   ],
+   "antonina_water": [
+    -12.179,
+    271.368,
+    7.91
+   ]
+  },
+  "room_lights": [
+   [
+    -7.746,
+    265.284,
+    9.71
+   ],
+   [
+    -5.031,
+    268.879,
+    9.71
+   ],
+   [
+    -8.564,
+    270.095,
+    9.71
+   ],
+   [
+    -10.113,
+    274.195,
+    9.71
+   ],
+   [
+    -11.814,
+    271.723,
+    9.71
+   ],
+   [
+    -10.131,
+    261.463,
+    9.71
+   ],
+   [
+    -12.531,
+    264.327,
+    9.71
+   ],
+   [
+    -16.914,
+    264.308,
+    9.71
+   ],
+   [
+    -15.214,
+    266.779,
+    9.71
+   ],
+   [
+    -7.746,
+    265.284,
+    12.51
+   ],
+   [
+    -5.031,
+    268.879,
+    12.51
+   ],
+   [
+    -8.564,
+    270.095,
+    12.51
+   ],
+   [
+    -10.113,
+    274.195,
+    12.51
+   ],
+   [
+    -11.814,
+    271.723,
+    12.51
+   ],
+   [
+    -10.131,
+    261.463,
+    12.51
+   ],
+   [
+    -12.531,
+    264.327,
+    12.51
+   ],
+   [
+    -16.914,
+    264.308,
+    12.51
+   ],
+   [
+    -15.214,
+    266.779,
+    12.51
+   ],
+   [
+    -7.746,
+    265.284,
+    15.31
+   ],
+   [
+    -5.031,
+    268.879,
+    15.31
+   ],
+   [
+    -8.564,
+    270.095,
+    15.31
+   ],
+   [
+    -10.113,
+    274.195,
+    15.31
+   ],
+   [
+    -11.814,
+    271.723,
+    15.31
+   ],
+   [
+    -10.131,
+    261.463,
+    15.31
+   ],
+   [
+    -12.531,
+    264.327,
+    15.31
+   ],
+   [
+    -16.914,
+    264.308,
+    15.31
+   ],
+   [
+    -15.214,
+    266.779,
+    15.31
+   ]
+  ],
+  "furnished_floors": 3
  },
  {
   "label": "PLA_50LetOktyabrya_7",
@@ -2453,7 +2728,7 @@
     null
    ]
   ],
-  "tris": 38748,
+  "tris": 38892,
   "entrances": [
    [
     63.7,
@@ -2468,7 +2743,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 3
+  "decay": 3,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Shkolnaya_3",
@@ -2989,7 +3266,7 @@
     null
    ]
   ],
-  "tris": 66700,
+  "tris": 69844,
   "entrances": [
    [
     34.31,
@@ -3019,7 +3296,22 @@
    }
   ],
   "damage": 1,
-  "decay": 3
+  "decay": 3,
+  "section_frame": [
+   [
+    35.433,
+    36.53
+   ],
+   [
+    -0.9981,
+    -0.0621
+   ],
+   [
+    -0.0621,
+    0.9981
+   ]
+  ],
+  "clues": {}
  },
  {
   "label": "PLA_Shkolnaya_10",
@@ -3369,7 +3661,7 @@
     null
    ]
   ],
-  "tris": 26688,
+  "tris": 26760,
   "entrances": [
    [
     31.79,
@@ -3379,7 +3671,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Shkolnaya_6",
@@ -3409,7 +3703,23 @@
    "CurtainRed",
    "BlackPlastic",
    "Interior",
-   "Stencil"
+   "Stencil",
+   "Paint_Mint",
+   "Lime",
+   "Glass",
+   "FloorBoards",
+   "Linoleum",
+   "Wallpaper_Green",
+   "Paint_OilBlue",
+   "Sofa",
+   "Furniture",
+   "Carpet",
+   "Mural_Red",
+   "Screen",
+   "Radiator",
+   "Enamel",
+   "Wallpaper_Rose",
+   "WoodGrey"
   ],
   "plants": [
    [
@@ -3497,7 +3807,7 @@
     null
    ]
   ],
-  "tris": 66744,
+  "tris": 164352,
   "entrances": [
    [
     -47.02,
@@ -3510,9 +3820,202 @@
     69.8
    ]
   ],
-  "cameras": [],
+  "cameras": [
+   {
+    "name": "shkolnaya6-floor0-flat1-retired-living",
+    "north_m": -40.64,
+    "east_m": 21.07,
+    "z_m": 4.34,
+    "yaw_deg": -3.5
+   },
+   {
+    "name": "shkolnaya6-floor0-flat1-retired-kitchen",
+    "north_m": -38.69,
+    "east_m": 26.96,
+    "z_m": 4.34,
+    "yaw_deg": -3.5
+   },
+   {
+    "name": "shkolnaya6-floor0-flat1-retired-bedroom",
+    "north_m": -37.15,
+    "east_m": 25.65,
+    "z_m": 4.34,
+    "yaw_deg": -3.5
+   },
+   {
+    "name": "shkolnaya6-floor0-flat2-seamstress-living",
+    "north_m": -46.84,
+    "east_m": 23.35,
+    "z_m": 4.34,
+    "yaw_deg": 143.1
+   },
+   {
+    "name": "shkolnaya6-floor0-flat2-seamstress-kitchen",
+    "north_m": -44.51,
+    "east_m": 29.1,
+    "z_m": 4.34,
+    "yaw_deg": 143.1
+   },
+   {
+    "name": "shkolnaya6-floor0-flat2-seamstress-bedroom",
+    "north_m": -46.54,
+    "east_m": 29.1,
+    "z_m": 4.34,
+    "yaw_deg": 143.1
+   },
+   {
+    "name": "shkolnaya6-floor1-flat1-nurse-living",
+    "north_m": -40.64,
+    "east_m": 21.07,
+    "z_m": 7.14,
+    "yaw_deg": -3.5
+   },
+   {
+    "name": "shkolnaya6-floor1-flat1-nurse-kitchen",
+    "north_m": -38.69,
+    "east_m": 26.96,
+    "z_m": 7.14,
+    "yaw_deg": -3.5
+   },
+   {
+    "name": "shkolnaya6-floor1-flat1-nurse-bedroom",
+    "north_m": -37.15,
+    "east_m": 25.65,
+    "z_m": 7.14,
+    "yaw_deg": -3.5
+   },
+   {
+    "name": "shkolnaya6-floor1-flat2-family-living",
+    "north_m": -46.84,
+    "east_m": 23.35,
+    "z_m": 7.14,
+    "yaw_deg": 143.1
+   },
+   {
+    "name": "shkolnaya6-floor1-flat2-family-kitchen",
+    "north_m": -44.51,
+    "east_m": 29.1,
+    "z_m": 7.14,
+    "yaw_deg": 143.1
+   },
+   {
+    "name": "shkolnaya6-floor1-flat2-family-bedroom",
+    "north_m": -46.54,
+    "east_m": 29.1,
+    "z_m": 7.14,
+    "yaw_deg": 143.1
+   }
+  ],
   "damage": 0,
-  "decay": 0
+  "decay": 0,
+  "section_frame": [
+   [
+    -43.543,
+    18.411
+   ],
+   [
+    -0.9385,
+    0.3453
+   ],
+   [
+    0.3453,
+    0.9385
+   ]
+  ],
+  "clues": {},
+  "room_lights": [
+   [
+    -44.087,
+    21.275,
+    4.89
+   ],
+   [
+    -39.933,
+    19.533,
+    4.89
+   ],
+   [
+    -39.629,
+    23.257,
+    4.89
+   ],
+   [
+    -36.039,
+    25.773,
+    4.89
+   ],
+   [
+    -38.855,
+    26.809,
+    4.89
+   ],
+   [
+    -48.38,
+    22.641,
+    4.89
+   ],
+   [
+    -46.198,
+    25.674,
+    4.89
+   ],
+   [
+    -47.301,
+    29.916,
+    4.89
+   ],
+   [
+    -44.486,
+    28.88,
+    4.89
+   ],
+   [
+    -44.087,
+    21.275,
+    7.69
+   ],
+   [
+    -39.933,
+    19.533,
+    7.69
+   ],
+   [
+    -39.629,
+    23.257,
+    7.69
+   ],
+   [
+    -36.039,
+    25.773,
+    7.69
+   ],
+   [
+    -38.855,
+    26.809,
+    7.69
+   ],
+   [
+    -48.38,
+    22.641,
+    7.69
+   ],
+   [
+    -46.198,
+    25.674,
+    7.69
+   ],
+   [
+    -47.301,
+    29.916,
+    7.69
+   ],
+   [
+    -44.486,
+    28.88,
+    7.69
+   ]
+  ],
+  "furnished_floors": 2
  },
  {
   "label": "PLA_Shkolnaya_2",
@@ -3773,7 +4276,7 @@
     null
    ]
   ],
-  "tris": 85820,
+  "tris": 85964,
   "entrances": [
    [
     157.66,
@@ -3788,7 +4291,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 1
+  "decay": 1,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Yuzhnaya_4",
@@ -3967,7 +4472,7 @@
     null
    ]
   ],
-  "tris": 73240,
+  "tris": 73384,
   "entrances": [
    [
     -202.02,
@@ -3982,7 +4487,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 1
+  "decay": 1,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_50LetOktyabrya_3",
@@ -4084,7 +4591,7 @@
     null
    ]
   ],
-  "tris": 43932,
+  "tris": 44076,
   "entrances": [
    [
     120.17,
@@ -4099,7 +4606,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 0
+  "decay": 0,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_50LetOktyabrya_4",
@@ -4483,7 +4992,7 @@
     null
    ]
   ],
-  "tris": 44780,
+  "tris": 44924,
   "entrances": [
    [
     117.22,
@@ -4498,7 +5007,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_50LetOktyabrya_8",
@@ -4592,7 +5103,7 @@
     null
    ]
   ],
-  "tris": 69864,
+  "tris": 70008,
   "entrances": [
    [
     -43.33,
@@ -4607,7 +5118,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 0
+  "decay": 0,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Lenina_7",
@@ -4638,221 +5151,240 @@
    "Paper",
    "CurtainRed",
    "Interior",
-   "Stencil"
+   "Stencil",
+   "Paint_Mint",
+   "Lime",
+   "Glass",
+   "FloorBoards",
+   "Linoleum",
+   "Wallpaper_Rose",
+   "Paint_OilBlue",
+   "Wallpaper_Green",
+   "Pic_ShiftPage@180",
+   "Enamel",
+   "Pic_AditPlan",
+   "Mural_Red",
+   "Sofa",
+   "Pic_Brigade",
+   "Screen",
+   "Carpet",
+   "Radiator",
+   "Pic_KeyBoard",
+   "WoodGrey"
   ],
   "plants": [
    [
-    "shrub",
-    47.43,
-    243.64,
+    "grass",
+    13.37,
+    218.32,
     21.27
    ],
    [
     "birch",
-    47.01,
-    252.55,
+    40.63,
+    244.53,
+    21.27
+   ],
+   [
+    "shrub",
+    42.52,
+    237.76,
     21.27
    ],
    [
     "grass",
-    21.37,
-    204.35,
+    2.27,
+    211.01,
     21.27
    ],
    [
     "birch",
-    21.0,
-    217.88,
-    21.27
-   ],
-   [
-    "shrub",
-    42.3,
-    252.46,
-    21.27
-   ],
-   [
-    "shrub",
-    33.14,
-    214.29,
-    21.27
-   ],
-   [
-    "shrub",
-    39.75,
-    223.84,
+    37.45,
+    232.18,
     21.27
    ],
    [
     "grass",
-    18.42,
-    225.32,
+    12.35,
+    206.44,
+    21.27
+   ],
+   [
+    "grass",
+    10.0,
+    208.35,
     21.27
    ],
    [
     "birch",
-    11.21,
-    220.04,
-    21.27
-   ],
-   [
-    "shrub",
-    26.89,
-    218.31,
-    21.27
-   ],
-   [
-    "shrub",
-    44.51,
-    239.69,
-    21.27
-   ],
-   [
-    "shrub",
-    41.41,
-    226.91,
+    21.92,
+    215.65,
     21.27
    ],
    [
     "grass",
-    7.87,
-    211.19,
+    29.54,
+    234.57,
+    21.27
+   ],
+   [
+    "shrub",
+    11.66,
+    211.04,
     21.27
    ],
    [
     "birch",
-    13.67,
-    204.7,
+    21.51,
+    219.75,
     21.27
    ],
    [
-    "shrub",
-    23.16,
-    240.52,
+    "birch",
+    31.68,
+    232.46,
+    21.27
+   ],
+   [
+    "birch",
+    28.23,
+    233.19,
+    21.27
+   ],
+   [
+    "grass",
+    18.22,
+    225.61,
+    21.27
+   ],
+   [
+    "grass",
+    31.45,
+    241.45,
     null
    ],
    [
     "grass",
-    52.71,
-    250.51,
-    null
-   ],
-   [
-    "shrub",
-    29.75,
-    207.17,
+    34.45,
+    245.33,
     null
    ],
    [
     "grass",
-    43.91,
-    235.33,
+    43.48,
+    234.77,
+    null
+   ],
+   [
+    "shrub",
+    10.54,
+    224.19,
+    null
+   ],
+   [
+    "grass",
+    40.81,
+    231.31,
     null
    ],
    [
     "birch",
-    39.88,
-    230.11,
+    4.1,
+    206.43,
     null
    ],
    [
     "birch",
-    24.84,
-    200.82,
+    41.11,
+    221.89,
     null
    ],
    [
     "shrub",
-    3.65,
-    206.77,
-    null
-   ],
-   [
-    "grass",
-    33.29,
-    243.83,
-    null
-   ],
-   [
-    "grass",
-    20.53,
-    237.12,
-    null
-   ],
-   [
-    "grass",
-    13.93,
-    198.83,
+    51.14,
+    244.7,
     null
    ],
    [
     "shrub",
-    28.12,
-    205.06,
+    5.04,
+    217.05,
     null
    ],
    [
-    "grass",
-    21.72,
-    196.77,
+    "shrub",
+    9.41,
+    202.33,
     null
    ],
    [
     "birch",
-    8.51,
-    221.55,
+    13.83,
+    198.91,
     null
    ],
    [
     "birch",
-    1.22,
-    212.11,
+    32.71,
+    211.01,
     null
    ],
    [
-    "shrub",
-    1.75,
-    208.23,
+    "birch",
+    18.87,
+    195.02,
     null
    ],
    [
-    "shrub",
+    "birch",
+    40.86,
+    253.63,
+    null
+   ],
+   [
+    "grass",
+    8.81,
+    221.93,
+    null
+   ],
+   [
+    "grass",
     28.36,
     238.98,
     null
    ],
    [
     "shrub",
-    39.1,
-    219.29,
+    42.78,
+    233.87,
+    null
+   ],
+   [
+    "grass",
+    10.94,
+    201.14,
+    null
+   ],
+   [
+    "grass",
+    42.03,
+    228.44,
+    null
+   ],
+   [
+    "grass",
+    48.55,
+    253.72,
     null
    ],
    [
     "birch",
-    11.46,
-    200.74,
-    null
-   ],
-   [
-    "birch",
-    15.12,
-    230.11,
-    null
-   ],
-   [
-    "birch",
-    41.92,
-    228.51,
-    null
-   ],
-   [
-    "birch",
-    22.72,
-    198.07,
+    22.65,
+    197.97,
     null
    ]
   ],
-  "tris": 92796,
+  "tris": 242192,
   "entrances": [
    [
     41.83,
@@ -4865,9 +5397,310 @@
     142.3
    ]
   ],
-  "cameras": [],
+  "cameras": [
+   {
+    "name": "lenina7-stairwell",
+    "north_m": 36.29,
+    "east_m": 218.59,
+    "z_m": 8.87,
+    "yaw_deg": 138.8
+   },
+   {
+    "name": "lenina7-orlow-living",
+    "north_m": 35.52,
+    "east_m": 222.34,
+    "z_m": 8.87,
+    "yaw_deg": 16.4
+   },
+   {
+    "name": "lenina7-orlow-kitchen",
+    "north_m": 32.48,
+    "east_m": 224.94,
+    "z_m": 8.87,
+    "yaw_deg": 127.9
+   },
+   {
+    "name": "lenina7-orlow-bedroom",
+    "north_m": 33.82,
+    "east_m": 226.68,
+    "z_m": 8.87,
+    "yaw_deg": 110.7
+   },
+   {
+    "name": "lenina7-orlow-hall",
+    "north_m": 34.35,
+    "east_m": 222.61,
+    "z_m": 8.87,
+    "yaw_deg": 78.9
+   },
+   {
+    "name": "lenina7-collapsed",
+    "north_m": 33.93,
+    "east_m": 220.28,
+    "z_m": 8.87,
+    "yaw_deg": -97.1
+   },
+   {
+    "name": "lenina7-floor1-flat1-technician-living",
+    "north_m": 36.33,
+    "east_m": 222.73,
+    "z_m": 11.67,
+    "yaw_deg": 69.0
+   },
+   {
+    "name": "lenina7-floor1-flat1-technician-kitchen",
+    "north_m": 31.3,
+    "east_m": 226.36,
+    "z_m": 11.67,
+    "yaw_deg": 69.0
+   },
+   {
+    "name": "lenina7-floor1-flat1-technician-bedroom",
+    "north_m": 33.01,
+    "east_m": 227.43,
+    "z_m": 11.67,
+    "yaw_deg": 69.0
+   },
+   {
+    "name": "lenina7-floor1-flat2-retired-living",
+    "north_m": 32.29,
+    "east_m": 217.5,
+    "z_m": 11.67,
+    "yaw_deg": -144.4
+   },
+   {
+    "name": "lenina7-floor1-flat2-retired-kitchen",
+    "north_m": 27.51,
+    "east_m": 221.45,
+    "z_m": 11.67,
+    "yaw_deg": -144.4
+   },
+   {
+    "name": "lenina7-floor1-flat2-retired-bedroom",
+    "north_m": 26.9,
+    "east_m": 219.52,
+    "z_m": 11.67,
+    "yaw_deg": -144.4
+   },
+   {
+    "name": "lenina7-floor2-flat1-teacher-living",
+    "north_m": 36.33,
+    "east_m": 222.73,
+    "z_m": 14.47,
+    "yaw_deg": 69.0
+   },
+   {
+    "name": "lenina7-floor2-flat1-teacher-kitchen",
+    "north_m": 31.3,
+    "east_m": 226.36,
+    "z_m": 14.47,
+    "yaw_deg": 69.0
+   },
+   {
+    "name": "lenina7-floor2-flat1-teacher-bedroom",
+    "north_m": 33.01,
+    "east_m": 227.43,
+    "z_m": 14.47,
+    "yaw_deg": 69.0
+   },
+   {
+    "name": "lenina7-floor2-flat2-family-living",
+    "north_m": 32.29,
+    "east_m": 217.5,
+    "z_m": 14.47,
+    "yaw_deg": -144.4
+   },
+   {
+    "name": "lenina7-floor2-flat2-family-kitchen",
+    "north_m": 27.51,
+    "east_m": 221.45,
+    "z_m": 14.47,
+    "yaw_deg": -144.4
+   },
+   {
+    "name": "lenina7-floor2-flat2-family-bedroom",
+    "north_m": 26.9,
+    "east_m": 219.52,
+    "z_m": 14.47,
+    "yaw_deg": -144.4
+   }
+  ],
   "damage": 1,
-  "decay": 1
+  "decay": 1,
+  "section_frame": [
+   [
+    37.998,
+    219.164
+   ],
+   [
+    -0.6111,
+    -0.7915
+   ],
+   [
+    -0.7915,
+    0.6111
+   ]
+  ],
+  "clues": {
+   "orlow_page": [
+    40.458,
+    223.43,
+    8.05
+   ],
+   "orlow_plan": [
+    40.78,
+    224.469,
+    8.9
+   ],
+   "orlow_photo": [
+    36.611,
+    224.403,
+    8.84
+   ],
+   "orlow_keys": [
+    33.045,
+    223.139,
+    8.77
+   ]
+  },
+  "room_lights": [
+   [
+    35.102,
+    219.504,
+    9.42
+   ],
+   [
+    38.011,
+    222.944,
+    9.42
+   ],
+   [
+    34.55,
+    224.352,
+    9.42
+   ],
+   [
+    33.228,
+    228.531,
+    9.42
+   ],
+   [
+    31.395,
+    226.156,
+    9.42
+   ],
+   [
+    32.511,
+    215.82,
+    9.42
+   ],
+   [
+    30.272,
+    218.811,
+    9.42
+   ],
+   [
+    25.895,
+    219.033,
+    9.42
+   ],
+   [
+    27.728,
+    221.407,
+    9.42
+   ],
+   [
+    35.102,
+    219.504,
+    12.22
+   ],
+   [
+    38.011,
+    222.944,
+    12.22
+   ],
+   [
+    34.55,
+    224.352,
+    12.22
+   ],
+   [
+    33.228,
+    228.531,
+    12.22
+   ],
+   [
+    31.395,
+    226.156,
+    12.22
+   ],
+   [
+    32.511,
+    215.82,
+    12.22
+   ],
+   [
+    30.272,
+    218.811,
+    12.22
+   ],
+   [
+    25.895,
+    219.033,
+    12.22
+   ],
+   [
+    27.728,
+    221.407,
+    12.22
+   ],
+   [
+    35.102,
+    219.504,
+    15.02
+   ],
+   [
+    38.011,
+    222.944,
+    15.02
+   ],
+   [
+    34.55,
+    224.352,
+    15.02
+   ],
+   [
+    33.228,
+    228.531,
+    15.02
+   ],
+   [
+    31.395,
+    226.156,
+    15.02
+   ],
+   [
+    32.511,
+    215.82,
+    15.02
+   ],
+   [
+    30.272,
+    218.811,
+    15.02
+   ],
+   [
+    25.895,
+    219.033,
+    15.02
+   ],
+   [
+    27.728,
+    221.407,
+    15.02
+   ]
+  ],
+  "furnished_floors": 3
  },
  {
   "label": "PLA_Shkolnaya_8",
@@ -4897,167 +5730,182 @@
    "BlackPlastic",
    "Interior",
    "Stencil",
+   "Paint_OilBlue",
+   "Lime",
+   "Linoleum",
+   "Paper",
+   "Furniture",
+   "Screen",
+   "Pic_RadioLog@90",
+   "Enamel",
+   "Radiator",
    "Roof"
   ],
   "plants": [
    [
-    "birch",
-    62.8,
-    5.15,
-    9.6
-   ],
-   [
-    "birch",
-    69.1,
-    -1.08,
-    9.6
-   ],
-   [
-    "shrub",
-    70.44,
-    7.64,
-    9.6
-   ],
-   [
-    "shrub",
-    74.41,
-    1.95,
-    9.6
-   ],
-   [
-    "shrub",
-    62.26,
-    -1.21,
-    9.6
-   ],
-   [
-    "shrub",
-    69.87,
-    12.15,
-    9.6
-   ],
-   [
-    "shrub",
-    74.4,
-    -3.39,
+    "grass",
+    63.05,
+    16.89,
     9.6
    ],
    [
     "grass",
-    61.04,
-    6.91,
+    65.08,
+    -0.3,
+    9.6
+   ],
+   [
+    "grass",
+    75.52,
+    -3.41,
     9.6
    ],
    [
     "birch",
-    67.93,
+    67.45,
+    16.73,
+    9.6
+   ],
+   [
+    "grass",
+    72.92,
+    14.22,
+    9.6
+   ],
+   [
+    "shrub",
+    61.41,
+    8.64,
+    9.6
+   ],
+   [
+    "grass",
+    69.17,
+    3.06,
+    9.6
+   ],
+   [
+    "grass",
+    72.74,
+    -6.05,
+    9.6
+   ],
+   [
+    "birch",
+    60.75,
     10.9,
     9.6
    ],
    [
     "grass",
-    63.83,
-    -7.68,
+    64.08,
+    7.41,
+    9.6
+   ],
+   [
+    "grass",
+    63.19,
+    -6.5,
+    9.6
+   ],
+   [
+    "grass",
+    61.86,
+    -1.33,
     9.6
    ],
    [
     "birch",
-    64.88,
-    10.28,
+    61.54,
+    1.29,
     9.6
    ],
    [
     "grass",
-    73.16,
-    9.45,
-    9.6
-   ],
-   [
-    "grass",
-    66.05,
-    -0.95,
-    9.6
-   ],
-   [
-    "grass",
-    63.91,
-    17.15,
+    60.23,
+    17.53,
     9.6
    ],
    [
     "birch",
-    59.47,
-    7.81,
+    69.38,
+    -8.95,
+    null
+   ],
+   [
+    "shrub",
+    75.94,
+    9.95,
     null
    ],
    [
     "grass",
-    66.06,
-    22.48,
+    58.43,
+    19.09,
+    null
+   ],
+   [
+    "grass",
+    61.14,
+    22.03,
+    null
+   ],
+   [
+    "grass",
+    60.42,
+    -2.52,
+    null
+   ],
+   [
+    "shrub",
+    75.43,
+    15.59,
     null
    ],
    [
     "birch",
-    76.5,
-    3.86,
+    59.24,
+    10.36,
+    null
+   ],
+   [
+    "grass",
+    74.92,
+    21.1,
     null
    ],
    [
     "shrub",
-    60.17,
-    21.94,
-    null
-   ],
-   [
-    "grass",
-    60.36,
-    -1.83,
-    null
-   ],
-   [
-    "grass",
-    60.81,
-    -6.76,
-    null
-   ],
-   [
-    "grass",
-    75.38,
-    16.08,
+    73.13,
+    23.13,
     null
    ],
    [
     "shrub",
-    74.88,
-    21.56,
+    77.49,
+    -6.89,
+    null
+   ],
+   [
+    "grass",
+    76.95,
+    -0.99,
     null
    ],
    [
     "birch",
-    73.51,
-    23.16,
+    60.56,
+    -4.05,
     null
    ],
    [
     "grass",
-    62.99,
-    22.19,
-    null
-   ],
-   [
-    "shrub",
-    77.35,
-    -5.38,
-    null
-   ],
-   [
-    "shrub",
-    76.94,
-    -0.91,
+    75.66,
+    13.06,
     null
    ]
   ],
-  "tris": 26152,
+  "tris": 38800,
   "entrances": [
    [
     54.32,
@@ -5065,9 +5913,57 @@
     5.2
    ]
   ],
-  "cameras": [],
+  "cameras": [
+   {
+    "name": "shkolnaya8-ats-radio",
+    "north_m": 61.06,
+    "east_m": 10.17,
+    "z_m": 5.6,
+    "yaw_deg": 72.2
+   },
+   {
+    "name": "shkolnaya8-ats-tapes",
+    "north_m": 61.24,
+    "east_m": 13.7,
+    "z_m": 5.6,
+    "yaw_deg": -29.0
+   },
+   {
+    "name": "shkolnaya8-ats-relays",
+    "north_m": 66.24,
+    "east_m": 4.07,
+    "z_m": 5.6,
+    "yaw_deg": -174.8
+   }
+  ],
   "damage": 1,
-  "decay": 1
+  "decay": 1,
+  "section_frame": [
+   [
+    60.431,
+    6.094
+   ],
+   [
+    -0.0915,
+    0.9958
+   ],
+   [
+    0.9958,
+    0.0915
+   ]
+  ],
+  "clues": {
+   "ats_log": [
+    62.105,
+    14.653,
+    4.79
+   ],
+   "ats_shelf": [
+    65.744,
+    10.79,
+    5.42
+   ]
+  }
  },
  {
   "label": "PLA_Shkolnaya_4",
@@ -5098,157 +5994,106 @@
    "CurtainRed",
    "Paper",
    "Interior",
-   "Stencil"
+   "Stencil",
+   "Paint_Mint",
+   "Lime",
+   "Glass",
+   "FloorBoards",
+   "Linoleum",
+   "Wallpaper_Green",
+   "Paint_OilBlue",
+   "Sofa",
+   "Carpet",
+   "Mural_Red",
+   "Screen",
+   "Radiator",
+   "Enamel",
+   "Wallpaper_Rose",
+   "WoodGrey"
   ],
   "plants": [
    [
-    "grass",
-    -5.4,
-    56.71,
-    18.82
-   ],
-   [
-    "grass",
-    -22.3,
-    68.14,
-    18.82
-   ],
-   [
     "shrub",
-    -6.25,
-    54.2,
+    -25.33,
+    63.72,
     18.82
    ],
    [
     "grass",
-    -36.49,
-    67.59,
+    -4.18,
+    59.06,
+    18.82
+   ],
+   [
+    "grass",
+    -41.72,
+    75.97,
     18.82
    ],
    [
     "shrub",
-    -11.94,
-    62.62,
+    -20.24,
+    57.3,
     18.82
    ],
    [
     "shrub",
-    -31.36,
-    71.58,
-    18.82
-   ],
-   [
-    "shrub",
-    -13.8,
-    64.5,
+    -23.35,
+    58.37,
     18.82
    ],
    [
     "birch",
-    -21.97,
-    63.88,
+    -15.08,
+    54.01,
     18.82
    ],
    [
     "grass",
-    -25.68,
-    68.82,
-    18.82
-   ],
-   [
-    "grass",
-    -13.9,
-    60.49,
-    18.82
-   ],
-   [
-    "grass",
-    -45.95,
-    68.84,
-    18.82
-   ],
-   [
-    "grass",
-    -23.88,
-    65.62,
-    18.82
-   ],
-   [
-    "shrub",
-    -50.52,
-    70.48,
-    18.82
-   ],
-   [
-    "grass",
-    -24.78,
-    58.78,
-    18.82
-   ],
-   [
-    "shrub",
-    -13.54,
-    57.66,
-    18.82
-   ],
-   [
-    "shrub",
-    -15.1,
-    54.78,
+    -1.52,
+    57.89,
     18.82
    ],
    [
     "birch",
-    -0.49,
-    57.48,
-    18.82
-   ],
-   [
-    "grass",
-    -48.29,
-    78.23,
-    18.82
-   ],
-   [
-    "birch",
-    -49.31,
-    69.08,
+    -18.2,
+    65.37,
     18.82
    ],
    [
     "shrub",
-    -39.88,
-    69.29,
+    -16.67,
+    62.47,
     18.82
    ],
    [
     "birch",
-    -40.68,
-    67.02,
+    -20.58,
+    68.09,
     18.82
    ],
    [
     "grass",
-    -12.31,
-    54.15,
+    -44.13,
+    71.26,
     18.82
    ],
    [
     "grass",
-    -33.01,
-    62.33,
+    -7.41,
+    61.01,
     18.82
    ],
    [
     "grass",
-    -45.11,
-    77.67,
+    -17.24,
+    59.01,
     18.82
    ],
    [
     "grass",
-    -17.13,
-    65.98,
+    -22.63,
+    68.38,
     18.82
    ],
    [
@@ -5259,180 +6104,228 @@
    ],
    [
     "grass",
-    -25.43,
-    62.02,
+    -39.55,
+    74.7,
     18.82
    ],
    [
     "grass",
-    -17.95,
-    56.27,
+    -42.71,
+    67.03,
     18.82
    ],
    [
     "grass",
-    -49.64,
-    73.54,
+    -8.73,
+    62.3,
     18.82
    ],
    [
     "grass",
-    -21.6,
-    58.44,
+    -32.96,
+    69.93,
+    18.82
+   ],
+   [
+    "shrub",
+    -51.47,
+    71.78,
+    18.82
+   ],
+   [
+    "grass",
+    -35.41,
+    63.45,
     18.82
    ],
    [
     "birch",
-    -40.37,
-    63.54,
+    -37.37,
+    63.8,
+    18.82
+   ],
+   [
+    "birch",
+    -36.23,
+    68.51,
+    18.82
+   ],
+   [
+    "birch",
+    -24.88,
+    66.32,
+    18.82
+   ],
+   [
+    "shrub",
+    -18.58,
+    62.19,
+    18.82
+   ],
+   [
+    "grass",
+    -26.66,
+    60.11,
+    18.82
+   ],
+   [
+    "grass",
+    -4.49,
+    57.42,
+    18.82
+   ],
+   [
+    "birch",
+    -23.06,
+    61.84,
+    18.82
+   ],
+   [
+    "birch",
+    -28.92,
+    64.3,
+    18.82
+   ],
+   [
+    "grass",
+    -33.02,
+    66.88,
+    18.82
+   ],
+   [
+    "shrub",
+    -41.16,
+    63.88,
     null
    ],
    [
     "shrub",
-    -35.43,
-    76.22,
+    -36.65,
+    76.75,
     null
    ],
    [
     "birch",
-    -29.29,
-    58.72,
+    -6.07,
+    48.62,
     null
    ],
    [
-    "birch",
-    -0.58,
+    "shrub",
+    -0.56,
     61.06,
     null
    ],
    [
+    "birch",
+    0.8,
+    57.18,
+    null
+   ],
+   [
     "shrub",
-    -23.94,
-    71.22,
-    null
-   ],
-   [
-    "birch",
-    -48.65,
-    67.13,
-    null
-   ],
-   [
-    "birch",
-    -44.08,
-    79.98,
+    -51.49,
+    76.35,
     null
    ],
    [
     "grass",
-    -18.29,
-    53.94,
+    -24.61,
+    71.51,
     null
    ],
    [
     "shrub",
-    -42.95,
-    64.66,
-    null
-   ],
-   [
-    "shrub",
-    -14.93,
-    67.3,
-    null
-   ],
-   [
-    "birch",
-    -13.28,
-    51.76,
-    null
-   ],
-   [
-    "birch",
-    -37.69,
-    62.37,
+    -24.64,
+    56.7,
     null
    ],
    [
     "grass",
-    -7.89,
-    64.24,
-    null
-   ],
-   [
-    "shrub",
-    -33.69,
-    75.46,
+    -20.17,
+    69.58,
     null
    ],
    [
     "birch",
-    -3.39,
-    62.29,
-    null
-   ],
-   [
-    "birch",
-    -32.91,
-    60.29,
-    null
-   ],
-   [
-    "grass",
-    -28.12,
-    58.21,
-    null
-   ],
-   [
-    "birch",
-    -51.35,
-    68.31,
+    -39.56,
+    78.01,
     null
    ],
    [
     "shrub",
-    -47.24,
-    81.35,
+    -0.4,
+    54.41,
     null
    ],
    [
     "shrub",
-    -49.67,
-    80.53,
+    -32.64,
+    75.01,
     null
    ],
    [
     "birch",
-    -47.52,
-    66.65,
+    -52.09,
+    74.98,
     null
    ],
    [
     "grass",
-    -16.71,
-    53.25,
+    -2.68,
+    61.98,
     null
    ],
    [
     "shrub",
-    -10.96,
-    65.58,
+    -27.46,
+    72.75,
     null
    ],
    [
     "grass",
-    -10.15,
-    50.4,
+    -26.66,
+    57.57,
     null
    ],
    [
     "grass",
-    -30.67,
-    74.15,
+    -51.99,
+    68.59,
+    null
+   ],
+   [
+    "grass",
+    -22.96,
+    55.97,
+    null
+   ],
+   [
+    "grass",
+    -46.56,
+    81.06,
+    null
+   ],
+   [
+    "shrub",
+    -50.38,
+    78.9,
+    null
+   ],
+   [
+    "birch",
+    -16.46,
+    53.14,
+    null
+   ],
+   [
+    "grass",
+    -30.18,
+    73.93,
     null
    ]
   ],
-  "tris": 63776,
+  "tris": 159476,
   "entrances": [
    [
     -15.85,
@@ -5445,9 +6338,202 @@
     66.5
    ]
   ],
-  "cameras": [],
+  "cameras": [
+   {
+    "name": "shkolnaya4-floor0-flat1-nurse-living",
+    "north_m": -33.8,
+    "east_m": 65.37,
+    "z_m": 6.42,
+    "yaw_deg": -6.8
+   },
+   {
+    "name": "shkolnaya4-floor0-flat1-nurse-kitchen",
+    "north_m": -31.51,
+    "east_m": 71.13,
+    "z_m": 6.42,
+    "yaw_deg": -6.8
+   },
+   {
+    "name": "shkolnaya4-floor0-flat1-nurse-bedroom",
+    "north_m": -30.05,
+    "east_m": 69.73,
+    "z_m": 6.42,
+    "yaw_deg": -6.8
+   },
+   {
+    "name": "shkolnaya4-floor0-flat2-family-living",
+    "north_m": -39.85,
+    "east_m": 68.0,
+    "z_m": 6.42,
+    "yaw_deg": 139.8
+   },
+   {
+    "name": "shkolnaya4-floor0-flat2-family-kitchen",
+    "north_m": -37.2,
+    "east_m": 73.61,
+    "z_m": 6.42,
+    "yaw_deg": 139.8
+   },
+   {
+    "name": "shkolnaya4-floor0-flat2-family-bedroom",
+    "north_m": -39.22,
+    "east_m": 73.72,
+    "z_m": 6.42,
+    "yaw_deg": 139.8
+   },
+   {
+    "name": "shkolnaya4-floor1-flat1-teacher-living",
+    "north_m": -33.8,
+    "east_m": 65.37,
+    "z_m": 9.22,
+    "yaw_deg": -6.8
+   },
+   {
+    "name": "shkolnaya4-floor1-flat1-teacher-kitchen",
+    "north_m": -31.51,
+    "east_m": 71.13,
+    "z_m": 9.22,
+    "yaw_deg": -6.8
+   },
+   {
+    "name": "shkolnaya4-floor1-flat1-teacher-bedroom",
+    "north_m": -30.05,
+    "east_m": 69.73,
+    "z_m": 9.22,
+    "yaw_deg": -6.8
+   },
+   {
+    "name": "shkolnaya4-floor1-flat2-technician-living",
+    "north_m": -39.85,
+    "east_m": 68.0,
+    "z_m": 9.22,
+    "yaw_deg": 139.8
+   },
+   {
+    "name": "shkolnaya4-floor1-flat2-technician-kitchen",
+    "north_m": -37.2,
+    "east_m": 73.61,
+    "z_m": 9.22,
+    "yaw_deg": 139.8
+   },
+   {
+    "name": "shkolnaya4-floor1-flat2-technician-bedroom",
+    "north_m": -39.22,
+    "east_m": 73.72,
+    "z_m": 9.22,
+    "yaw_deg": 139.8
+   }
+  ],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": [
+   [
+    -36.846,
+    62.876
+   ],
+   [
+    -0.9171,
+    0.3987
+   ],
+   [
+    0.3987,
+    0.9171
+   ]
+  ],
+  "clues": {},
+  "room_lights": [
+   [
+    -37.225,
+    65.767,
+    6.97
+   ],
+   [
+    -33.178,
+    63.789,
+    6.97
+   ],
+   [
+    -32.659,
+    67.49,
+    6.97
+   ],
+   [
+    -28.931,
+    69.794,
+    6.97
+   ],
+   [
+    -31.682,
+    70.99,
+    6.97
+   ],
+   [
+    -41.431,
+    67.378,
+    6.97
+   ],
+   [
+    -39.079,
+    70.281,
+    6.97
+   ],
+   [
+    -39.936,
+    74.579,
+    6.97
+   ],
+   [
+    -37.185,
+    73.383,
+    6.97
+   ],
+   [
+    -37.225,
+    65.767,
+    9.77
+   ],
+   [
+    -33.178,
+    63.789,
+    9.77
+   ],
+   [
+    -32.659,
+    67.49,
+    9.77
+   ],
+   [
+    -28.931,
+    69.794,
+    9.77
+   ],
+   [
+    -31.682,
+    70.99,
+    9.77
+   ],
+   [
+    -41.431,
+    67.378,
+    9.77
+   ],
+   [
+    -39.079,
+    70.281,
+    9.77
+   ],
+   [
+    -39.936,
+    74.579,
+    9.77
+   ],
+   [
+    -37.185,
+    73.383,
+    9.77
+   ]
+  ],
+  "furnished_floors": 2
  },
  {
   "label": "PLA_Shkolnaya_1",
@@ -6036,7 +7122,7 @@
     null
    ]
   ],
-  "tris": 32440,
+  "tris": 32512,
   "entrances": [
    [
     105.41,
@@ -6046,7 +7132,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 3
+  "decay": 3,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_50LetOktyabrya_2",
@@ -6398,7 +7486,7 @@
     null
    ]
   ],
-  "tris": 44204,
+  "tris": 44348,
   "entrances": [
    [
     208.41,
@@ -6413,7 +7501,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Shkolnaya_7",
@@ -6500,7 +7590,7 @@
     null
    ]
   ],
-  "tris": 35184,
+  "tris": 35256,
   "entrances": [
    [
     174.32,
@@ -6510,7 +7600,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 0
+  "decay": 0,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Shkolnaya_5",
@@ -6604,7 +7696,7 @@
     null
    ]
   ],
-  "tris": 61776,
+  "tris": 61920,
   "entrances": [
    [
     211.03,
@@ -6619,7 +7711,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 0
+  "decay": 0,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Mira_9",
@@ -6893,7 +7987,7 @@
     null
    ]
   ],
-  "tris": 82828,
+  "tris": 83044,
   "entrances": [
    [
     152.14,
@@ -6913,7 +8007,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 1
+  "decay": 1,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_50LetOktyabrya_1",
@@ -7259,7 +8355,7 @@
     null
    ]
   ],
-  "tris": 46396,
+  "tris": 46540,
   "entrances": [
    [
     211.22,
@@ -7274,7 +8370,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_OSM_170990575",
@@ -7384,7 +8482,7 @@
     null
    ]
   ],
-  "tris": 8188,
+  "tris": 8260,
   "entrances": [
    [
     264.32,
@@ -7394,7 +8492,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Mira_1",
@@ -7739,7 +8839,7 @@
     null
    ]
   ],
-  "tris": 78424,
+  "tris": 78496,
   "entrances": [
    [
     241.36,
@@ -7758,7 +8858,9 @@
    }
   ],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Mira_2",
@@ -7832,7 +8934,7 @@
     null
    ]
   ],
-  "tris": 72868,
+  "tris": 72940,
   "entrances": [
    [
     189.8,
@@ -7842,7 +8944,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 0
+  "decay": 0,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_OSM_170991186",
@@ -8162,7 +9266,7 @@
     null
    ]
   ],
-  "tris": 12436,
+  "tris": 12508,
   "entrances": [
    [
     87.13,
@@ -8172,7 +9276,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 3
+  "decay": 3,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Yuzhnaya_11",
@@ -8864,7 +9970,7 @@
     null
    ]
   ],
-  "tris": 61852,
+  "tris": 61924,
   "entrances": [
    [
     -415.83,
@@ -8874,7 +9980,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 3
+  "decay": 3,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_OSM_170991710",
@@ -9452,7 +10560,7 @@
     null
    ]
   ],
-  "tris": 85020,
+  "tris": 85092,
   "entrances": [
    [
     419.87,
@@ -9462,7 +10570,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Yuzhnaya_9",
@@ -9734,7 +10844,7 @@
     null
    ]
   ],
-  "tris": 70704,
+  "tris": 70920,
   "entrances": [
    [
     -462.83,
@@ -9769,7 +10879,9 @@
    }
   ],
   "damage": 1,
-  "decay": 1
+  "decay": 1,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_OSM_170991713",
@@ -9797,365 +10909,374 @@
    "Crack",
    "CurtainRed",
    "BlackPlastic",
-   "Interior"
+   "Interior",
+   "Paint_OilBlue",
+   "Lime",
+   "Enamel",
+   "Sofa",
+   "Carpet",
+   "Glass",
+   "Pic_KesselLog",
+   "Paper",
+   "Mural_Red"
   ],
   "plants": [
    [
-    "grass",
-    433.4,
-    -619.79,
+    "shrub",
+    453.66,
+    -607.2,
     -3.67
    ],
    [
     "grass",
-    448.11,
-    -614.97,
+    448.31,
+    -619.0,
     -3.67
    ],
    [
     "birch",
-    443.53,
-    -626.7,
+    450.3,
+    -605.85,
     -3.67
    ],
    [
     "grass",
-    435.64,
-    -628.85,
-    -3.67
-   ],
-   [
-    "grass",
-    437.42,
-    -613.34,
-    -3.67
-   ],
-   [
-    "grass",
-    429.52,
-    -624.7,
-    -3.67
-   ],
-   [
-    "grass",
-    439.28,
-    -623.12,
-    -3.67
-   ],
-   [
-    "grass",
-    461.32,
-    -620.84,
+    438.38,
+    -619.36,
     -3.67
    ],
    [
     "birch",
-    451.5,
-    -602.49,
+    448.63,
+    -610.86,
     -3.67
    ],
    [
     "grass",
-    457.01,
-    -620.06,
-    -3.67
-   ],
-   [
-    "grass",
-    455.94,
-    -610.16,
+    437.32,
+    -634.32,
     -3.67
    ],
    [
     "birch",
-    441.3,
-    -610.6,
+    441.07,
+    -610.64,
+    -3.67
+   ],
+   [
+    "grass",
+    432.98,
+    -627.81,
+    -3.67
+   ],
+   [
+    "grass",
+    446.16,
+    -616.27,
     -3.67
    ],
    [
     "shrub",
-    446.23,
-    -631.31,
+    455.25,
+    -614.47,
     -3.67
    ],
    [
     "grass",
-    457.69,
-    -622.87,
-    -3.67
-   ],
-   [
-    "shrub",
-    447.45,
-    -601.3,
+    439.71,
+    -633.16,
     -3.67
    ],
    [
     "birch",
-    438.42,
-    -630.29,
-    -3.67
-   ],
-   [
-    "shrub",
-    441.64,
-    -631.8,
-    -3.67
-   ],
-   [
-    "birch",
-    454.77,
-    -613.68,
-    -3.67
-   ],
-   [
-    "birch",
-    447.62,
-    -616.82,
+    441.04,
+    -628.97,
     -3.67
    ],
    [
     "grass",
-    429.8,
-    -614.54,
+    435.22,
+    -617.57,
     -3.67
    ],
    [
     "grass",
-    452.99,
-    -626.16,
-    -3.67
-   ],
-   [
-    "shrub",
-    449.62,
-    -617.69,
+    447.58,
+    -607.73,
     -3.67
    ],
    [
     "grass",
-    432.21,
-    -626.62,
+    445.54,
+    -621.75,
+    -3.67
+   ],
+   [
+    "grass",
+    436.51,
+    -613.85,
+    -3.67
+   ],
+   [
+    "grass",
+    450.15,
+    -602.4,
     -3.67
    ],
    [
     "birch",
-    434.57,
-    -620.87,
+    452.19,
+    -613.06,
     -3.67
    ],
    [
     "grass",
-    458.6,
-    -613.19,
-    -3.67
-   ],
-   [
-    "birch",
-    448.93,
-    -611.35,
+    441.19,
+    -621.16,
     -3.67
    ],
    [
     "grass",
-    453.53,
-    -614.91,
-    -3.67
-   ],
-   [
-    "birch",
-    436.76,
-    -625.08,
-    -3.67
-   ],
-   [
-    "birch",
-    453.23,
-    -604.56,
-    -3.67
-   ],
-   [
-    "birch",
-    453.32,
-    -609.45,
+    452.12,
+    -628.63,
     -3.67
    ],
    [
     "grass",
-    450.55,
-    -631.72,
-    null
+    459.12,
+    -614.47,
+    -3.67
    ],
    [
     "grass",
-    455.23,
-    -604.49,
-    null
+    451.84,
+    -625.17,
+    -3.67
    ],
    [
     "grass",
-    445.33,
-    -600.24,
-    null
+    454.02,
+    -626.1,
+    -3.67
+   ],
+   [
+    "birch",
+    443.91,
+    -622.75,
+    -3.67
    ],
    [
     "grass",
-    424.79,
-    -621.43,
+    449.02,
+    -629.51,
+    -3.67
+   ],
+   [
+    "grass",
+    445.13,
+    -610.55,
+    -3.67
+   ],
+   [
+    "birch",
+    443.74,
+    -608.84,
+    -3.67
+   ],
+   [
+    "shrub",
+    440.97,
+    -624.01,
+    -3.67
+   ],
+   [
+    "grass",
+    427.7,
+    -622.29,
+    -3.67
+   ],
+   [
+    "shrub",
+    444.43,
+    -633.04,
+    -3.67
+   ],
+   [
+    "grass",
+    459.98,
+    -624.93,
     null
    ],
    [
     "shrub",
-    431.04,
-    -610.53,
-    null
-   ],
-   [
-    "grass",
-    439.92,
-    -639.38,
-    null
-   ],
-   [
-    "shrub",
-    437.11,
-    -638.54,
-    null
-   ],
-   [
-    "grass",
-    433.85,
-    -634.0,
-    null
-   ],
-   [
-    "shrub",
-    452.88,
-    -630.04,
-    null
-   ],
-   [
-    "grass",
-    448.78,
-    -597.75,
-    null
-   ],
-   [
-    "shrub",
-    451.06,
-    -598.7,
+    454.33,
+    -603.24,
     null
    ],
    [
     "birch",
-    456.41,
-    -627.5,
+    428.09,
+    -626.01,
     null
    ],
    [
     "shrub",
-    462.61,
-    -623.04,
+    425.53,
+    -622.46,
+    null
+   ],
+   [
+    "shrub",
+    426.73,
+    -613.63,
     null
    ],
    [
     "birch",
-    463.69,
-    -616.24,
-    null
-   ],
-   [
-    "shrub",
-    459.78,
-    -610.81,
-    null
-   ],
-   [
-    "birch",
-    441.91,
-    -637.94,
-    null
-   ],
-   [
-    "shrub",
-    427.86,
-    -612.82,
-    null
-   ],
-   [
-    "birch",
-    437.37,
-    -605.97,
-    null
-   ],
-   [
-    "shrub",
-    434.0,
-    -608.39,
+    430.1,
+    -611.2,
     null
    ],
    [
     "grass",
-    442.13,
-    -602.54,
+    437.25,
+    -638.73,
     null
    ],
    [
     "shrub",
-    430.75,
-    -629.71,
+    448.28,
+    -598.11,
     null
    ],
    [
     "shrub",
-    464.52,
-    -621.66,
+    450.84,
+    -598.39,
     null
    ],
    [
     "grass",
-    422.8,
-    -618.66,
-    null
-   ],
-   [
-    "birch",
-    461.38,
-    -613.03,
-    null
-   ],
-   [
-    "shrub",
-    457.67,
-    -607.89,
-    null
-   ],
-   [
-    "shrub",
-    432.33,
-    -631.91,
+    461.31,
+    -623.98,
     null
    ],
    [
     "grass",
-    444.32,
-    -636.21,
+    460.49,
+    -611.79,
+    null
+   ],
+   [
+    "grass",
+    442.97,
+    -637.18,
+    null
+   ],
+   [
+    "grass",
+    438.72,
+    -605.0,
+    null
+   ],
+   [
+    "shrub",
+    433.47,
+    -608.78,
+    null
+   ],
+   [
+    "grass",
+    443.51,
+    -601.55,
+    null
+   ],
+   [
+    "shrub",
+    456.45,
+    -606.18,
+    null
+   ],
+   [
+    "grass",
+    430.34,
+    -629.14,
+    null
+   ],
+   [
+    "shrub",
+    453.03,
+    -601.43,
+    null
+   ],
+   [
+    "grass",
+    426.06,
+    -623.2,
+    null
+   ],
+   [
+    "shrub",
+    464.05,
+    -622.0,
     null
    ],
    [
     "birch",
-    455.31,
-    -628.29,
+    465.48,
+    -618.72,
+    null
+   ],
+   [
+    "shrub",
+    423.25,
+    -616.14,
     null
    ],
    [
     "birch",
-    440.32,
-    -603.84,
+    422.85,
+    -618.74,
+    null
+   ],
+   [
+    "shrub",
+    461.53,
+    -613.24,
+    null
+   ],
+   [
+    "birch",
+    435.26,
+    -635.97,
+    null
+   ],
+   [
+    "shrub",
+    435.17,
+    -607.56,
+    null
+   ],
+   [
+    "birch",
+    458.58,
+    -609.14,
+    null
+   ],
+   [
+    "shrub",
+    444.56,
+    -636.04,
+    null
+   ],
+   [
+    "grass",
+    455.91,
+    -627.86,
     null
    ]
   ],
-  "tris": 29880,
+  "tris": 37016,
   "entrances": [
    [
     432.75,
@@ -10163,9 +11284,50 @@
     -54.2
    ]
   ],
-  "cameras": [],
+  "cameras": [
+   {
+    "name": "osm170991713-kessel-pjotr",
+    "north_m": 441.19,
+    "east_m": -605.19,
+    "z_m": -7.67,
+    "yaw_deg": -27.7
+   },
+   {
+    "name": "osm170991713-kessel-hall",
+    "north_m": 436.67,
+    "east_m": -608.32,
+    "z_m": -7.67,
+    "yaw_deg": 28.3
+   }
+  ],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": [
+   [
+    435.044,
+    -608.632
+   ],
+   [
+    0.8115,
+    0.5844
+   ],
+   [
+    0.5844,
+    -0.8115
+   ]
+  ],
+  "clues": {
+   "kessel_log": [
+    443.174,
+    -606.609,
+    -8.75
+   ],
+   "kessel_phone": [
+    444.391,
+    -606.484,
+    -7.95
+   ]
+  }
  },
  {
   "label": "PLA_OSM_170991715",
@@ -10581,7 +11743,7 @@
     null
    ]
   ],
-  "tris": 40404,
+  "tris": 40476,
   "entrances": [
    [
     -171.11,
@@ -10591,7 +11753,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Yuzhnaya_10",
@@ -10689,7 +11853,7 @@
     null
    ]
   ],
-  "tris": 25484,
+  "tris": 25556,
   "entrances": [
    [
     -408.66,
@@ -10699,7 +11863,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 0
+  "decay": 0,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_OSM_170991719",
@@ -10909,7 +12075,7 @@
     null
    ]
   ],
-  "tris": 35844,
+  "tris": 35916,
   "entrances": [
    [
     502.39,
@@ -10919,7 +12085,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 1
+  "decay": 1,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_OSM_170991720",
@@ -11564,7 +12732,7 @@
     null
    ]
   ],
-  "tris": 44556,
+  "tris": 44628,
   "entrances": [
    [
     -416.01,
@@ -11574,7 +12742,9 @@
   ],
   "cameras": [],
   "damage": 2,
-  "decay": 3
+  "decay": 3,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_OSM_654296774",
@@ -11936,7 +13106,7 @@
     null
    ]
   ],
-  "tris": 26820,
+  "tris": 27036,
   "entrances": [
    [
     137.08,
@@ -11956,7 +13126,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_OSM_654296775",
@@ -12396,7 +13568,7 @@
     null
    ]
   ],
-  "tris": 19960,
+  "tris": 20032,
   "entrances": [
    [
     109.44,
@@ -12406,7 +13578,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 3
+  "decay": 3,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_OSM_654296776",
@@ -12473,7 +13647,7 @@
     null
    ]
   ],
-  "tris": 18204,
+  "tris": 18276,
   "entrances": [
    [
     208.1,
@@ -12483,7 +13657,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 0
+  "decay": 0,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_OSM_654296777",
@@ -13098,7 +14274,7 @@
     null
    ]
   ],
-  "tris": 83292,
+  "tris": 83436,
   "entrances": [
    [
     230.77,
@@ -13113,7 +14289,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Lenina_9",
@@ -13289,7 +14467,7 @@
     null
    ]
   ],
-  "tris": 24980,
+  "tris": 25052,
   "entrances": [
    [
     -64.65,
@@ -13299,7 +14477,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 1
+  "decay": 1,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Mira_7",
@@ -13386,7 +14566,7 @@
     null
    ]
   ],
-  "tris": 32576,
+  "tris": 32648,
   "entrances": [
    [
     161.92,
@@ -13396,7 +14576,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 0
+  "decay": 0,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Yuzhnaya_7",
@@ -13784,7 +14966,7 @@
     null
    ]
   ],
-  "tris": 49744,
+  "tris": 49816,
   "entrances": [
    [
     -387.1,
@@ -13794,7 +14976,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Yuzhnaya_1",
@@ -13887,7 +15071,7 @@
     null
    ]
   ],
-  "tris": 29984,
+  "tris": 30056,
   "entrances": [
    [
     47.82,
@@ -13897,7 +15081,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 0
+  "decay": 0,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_Yuzhnaya_2",
@@ -14290,7 +15476,7 @@
     null
    ]
   ],
-  "tris": 19620,
+  "tris": 19692,
   "entrances": [
    [
     27.5,
@@ -14300,7 +15486,9 @@
   ],
   "cameras": [],
   "damage": 2,
-  "decay": 3
+  "decay": 3,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_OSM_1540985882",
@@ -14434,7 +15622,7 @@
     null
    ]
   ],
-  "tris": 11860,
+  "tris": 11932,
   "entrances": [
    [
     304.88,
@@ -14444,7 +15632,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 1
+  "decay": 1,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_OSM_1540985885",
@@ -14542,7 +15732,7 @@
     null
    ]
   ],
-  "tris": 7444,
+  "tris": 7516,
   "entrances": [
    [
     235.71,
@@ -14552,7 +15742,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 1
+  "decay": 1,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_NE_Profilaktoriy_A",
@@ -15204,7 +16396,7 @@
     null
    ]
   ],
-  "tris": 88548,
+  "tris": 88764,
   "entrances": [
    [
     312.1,
@@ -15224,7 +16416,9 @@
   ],
   "cameras": [],
   "damage": 2,
-  "decay": 3
+  "decay": 3,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_NE_Profilaktoriy_B",
@@ -15310,7 +16504,7 @@
     null
    ]
   ],
-  "tris": 22372,
+  "tris": 22444,
   "entrances": [
    [
     371.7,
@@ -15320,7 +16514,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 0
+  "decay": 0,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_NE_Row_1",
@@ -15412,7 +16608,7 @@
     null
    ]
   ],
-  "tris": 26968,
+  "tris": 27040,
   "entrances": [
    [
     307.4,
@@ -15422,7 +16618,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 0
+  "decay": 0,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_NE_Row_2",
@@ -15599,7 +16797,7 @@
     null
    ]
   ],
-  "tris": 29740,
+  "tris": 29812,
   "entrances": [
    [
     307.4,
@@ -15609,7 +16807,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 1
+  "decay": 1,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_NE_Row_3",
@@ -15989,7 +17189,7 @@
     null
    ]
   ],
-  "tris": 27040,
+  "tris": 27112,
   "entrances": [
    [
     306.4,
@@ -15999,7 +17199,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_NE_Dvor_W",
@@ -16214,7 +17416,7 @@
     null
    ]
   ],
-  "tris": 75480,
+  "tris": 75624,
   "entrances": [
    [
     477.2,
@@ -16229,7 +17431,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 1
+  "decay": 1,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_NE_Dvor_N",
@@ -16449,7 +17653,7 @@
     null
    ]
   ],
-  "tris": 76512,
+  "tris": 76656,
   "entrances": [
    [
     379.8,
@@ -16464,7 +17668,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 1
+  "decay": 1,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_NE_Dvor_S",
@@ -16700,7 +17906,7 @@
     null
    ]
   ],
-  "tris": 77316,
+  "tris": 77460,
   "entrances": [
    [
     273.9,
@@ -16715,7 +17921,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 1
+  "decay": 1,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_NE_Dvor_E1",
@@ -17284,7 +18492,7 @@
     null
    ]
   ],
-  "tris": 64224,
+  "tris": 64368,
   "entrances": [
    [
     465.0,
@@ -17299,7 +18507,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 3
+  "decay": 3,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_NE_Dvor_E2",
@@ -17433,7 +18643,7 @@
     null
    ]
   ],
-  "tris": 100560,
+  "tris": 100848,
   "entrances": [
    [
     306.0,
@@ -17458,7 +18668,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 0
+  "decay": 0,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_E_Diag_1",
@@ -18081,7 +19293,7 @@
     null
    ]
   ],
-  "tris": 78216,
+  "tris": 78432,
   "entrances": [
    [
     114.27,
@@ -18101,7 +19313,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 3
+  "decay": 3,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_E_Diag_2",
@@ -18229,7 +19443,7 @@
     null
    ]
   ],
-  "tris": 122592,
+  "tris": 122880,
   "entrances": [
    [
     42.73,
@@ -18254,7 +19468,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 0
+  "decay": 0,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_E_Diag_3",
@@ -18390,7 +19606,7 @@
     null
    ]
   ],
-  "tris": 107244,
+  "tris": 107532,
   "entrances": [
    [
     115.15,
@@ -18415,7 +19631,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 0
+  "decay": 0,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_E_Diag_4",
@@ -18659,7 +19877,7 @@
     null
    ]
   ],
-  "tris": 86688,
+  "tris": 86904,
   "entrances": [
    [
     185.26,
@@ -18679,7 +19897,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 1
+  "decay": 1,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_S_Block",
@@ -18707,107 +19927,122 @@
    "Paper",
    "CurtainRed",
    "BlackPlastic",
-   "Interior"
+   "Interior",
+   "Paint_Mint",
+   "Lime",
+   "Glass",
+   "FloorBoards",
+   "Linoleum",
+   "Wallpaper_Rose",
+   "Paint_OilBlue",
+   "Wallpaper_Green",
+   "Furniture",
+   "Sofa",
+   "Carpet",
+   "Screen",
+   "Mural_Red",
+   "Radiator",
+   "Pic_LetterGorbunov",
+   "Pic_FamilyPhoto",
+   "Pic_DrawingLida",
+   "Enamel",
+   "Pic_CalendarGorbunov",
+   "Pic_Order",
+   "WoodGrey"
   ],
   "plants": [
    [
     "shrub",
-    -26.25,
-    107.94,
+    -25.31,
+    109.73,
+    20.17
+   ],
+   [
+    "shrub",
+    -27.9,
+    111.08,
     20.17
    ],
    [
     "grass",
-    -27.95,
-    149.46,
+    -22.63,
+    119.69,
     20.17
    ],
    [
-    "grass",
-    -25.96,
-    146.49,
-    20.17
-   ],
-   [
-    "grass",
+    "shrub",
     -17.2,
-    114.15,
-    null
-   ],
-   [
-    "grass",
-    -18.69,
-    166.8,
-    null
-   ],
-   [
-    "birch",
-    -30.8,
-    129.56,
+    163.88,
     null
    ],
    [
     "birch",
     -17.2,
-    134.07,
+    135.14,
     null
    ],
    [
-    "shrub",
+    "birch",
     -17.2,
-    145.8,
+    117.5,
+    null
+   ],
+   [
+    "birch",
+    -30.8,
+    144.22,
     null
    ],
    [
     "grass",
-    -30.8,
-    104.18,
-    null
-   ],
-   [
-    "shrub",
-    -30.8,
-    109.77,
-    null
-   ],
-   [
-    "shrub",
     -17.2,
-    123.27,
+    129.15,
+    null
+   ],
+   [
+    "grass",
+    -17.2,
+    111.31,
+    null
+   ],
+   [
+    "birch",
+    -30.8,
+    120.56,
+    null
+   ],
+   [
+    "birch",
+    -30.8,
+    125.93,
     null
    ],
    [
     "shrub",
     -30.8,
-    132.18,
+    159.2,
+    null
+   ],
+   [
+    "grass",
+    -17.2,
+    137.82,
+    null
+   ],
+   [
+    "shrub",
+    -21.48,
+    99.2,
     null
    ],
    [
     "shrub",
     -30.8,
-    119.19,
-    null
-   ],
-   [
-    "shrub",
-    -30.8,
-    114.18,
-    null
-   ],
-   [
-    "shrub",
-    -30.8,
-    101.45,
-    null
-   ],
-   [
-    "shrub",
-    -30.8,
-    135.16,
+    133.73,
     null
    ]
   ],
-  "tris": 67248,
+  "tris": 145880,
   "entrances": [
    [
     -12.0,
@@ -18820,9 +20055,218 @@
     180.0
    ]
   ],
-  "cameras": [],
+  "cameras": [
+   {
+    "name": "satsblock-stairwell",
+    "north_m": -19.0,
+    "east_m": 128.5,
+    "z_m": 7.77,
+    "yaw_deg": 176.4
+   },
+   {
+    "name": "satsblock-gorbunov-living",
+    "north_m": -21.9,
+    "east_m": 131.0,
+    "z_m": 7.77,
+    "yaw_deg": 54.1
+   },
+   {
+    "name": "satsblock-gorbunov-kitchen",
+    "north_m": -25.9,
+    "east_m": 131.2,
+    "z_m": 7.77,
+    "yaw_deg": 165.5
+   },
+   {
+    "name": "satsblock-gorbunov-bedroom",
+    "north_m": -25.9,
+    "east_m": 133.4,
+    "z_m": 7.77,
+    "yaw_deg": 148.4
+   },
+   {
+    "name": "satsblock-gorbunov-hall",
+    "north_m": -23.0,
+    "east_m": 130.5,
+    "z_m": 7.77,
+    "yaw_deg": 116.6
+   },
+   {
+    "name": "satsblock-neighbours",
+    "north_m": -21.9,
+    "east_m": 126.0,
+    "z_m": 7.77,
+    "yaw_deg": -54.1
+   },
+   {
+    "name": "satsblock-floor1-flat1-retired-living",
+    "north_m": -21.5,
+    "east_m": 131.8,
+    "z_m": 10.57,
+    "yaw_deg": 106.7
+   },
+   {
+    "name": "satsblock-floor1-flat1-retired-kitchen",
+    "north_m": -27.7,
+    "east_m": 131.6,
+    "z_m": 10.57,
+    "yaw_deg": 106.7
+   },
+   {
+    "name": "satsblock-floor1-flat1-retired-bedroom",
+    "north_m": -27.0,
+    "east_m": 133.5,
+    "z_m": 10.57,
+    "yaw_deg": 106.7
+   },
+   {
+    "name": "satsblock-floor1-flat2-seamstress-living",
+    "north_m": -21.5,
+    "east_m": 125.2,
+    "z_m": 10.57,
+    "yaw_deg": -106.7
+   },
+   {
+    "name": "satsblock-floor1-flat2-seamstress-kitchen",
+    "north_m": -27.7,
+    "east_m": 125.4,
+    "z_m": 10.57,
+    "yaw_deg": -106.7
+   },
+   {
+    "name": "satsblock-floor1-flat2-seamstress-bedroom",
+    "north_m": -27.0,
+    "east_m": 123.5,
+    "z_m": 10.57,
+    "yaw_deg": -106.7
+   }
+  ],
   "damage": 0,
-  "decay": 0
+  "decay": 0,
+  "section_frame": [
+   [
+    -18.0,
+    130.0
+   ],
+   [
+    0.0,
+    -1.0
+   ],
+   [
+    -1.0,
+    0.0
+   ]
+  ],
+  "clues": {
+   "gorbunov_letter": [
+    -22.19,
+    135.12,
+    6.73
+   ],
+   "gorbunov_calendar": [
+    -26.16,
+    132.9,
+    7.62
+   ],
+   "gorbunov_order": [
+    -26.81,
+    132.9,
+    7.62
+   ]
+  },
+  "room_lights": [
+   [
+    -20.5,
+    128.5,
+    8.32
+   ],
+   [
+    -20.3,
+    133.0,
+    8.32
+   ],
+   [
+    -23.9,
+    132.0,
+    8.32
+   ],
+   [
+    -27.5,
+    134.5,
+    8.32
+   ],
+   [
+    -27.5,
+    131.5,
+    8.32
+   ],
+   [
+    -20.3,
+    124.0,
+    8.32
+   ],
+   [
+    -23.9,
+    125.0,
+    8.32
+   ],
+   [
+    -27.5,
+    122.5,
+    8.32
+   ],
+   [
+    -27.5,
+    125.5,
+    8.32
+   ],
+   [
+    -20.5,
+    128.5,
+    11.12
+   ],
+   [
+    -20.3,
+    133.0,
+    11.12
+   ],
+   [
+    -23.9,
+    132.0,
+    11.12
+   ],
+   [
+    -27.5,
+    134.5,
+    11.12
+   ],
+   [
+    -27.5,
+    131.5,
+    11.12
+   ],
+   [
+    -20.3,
+    124.0,
+    11.12
+   ],
+   [
+    -23.9,
+    125.0,
+    11.12
+   ],
+   [
+    -27.5,
+    122.5,
+    11.12
+   ],
+   [
+    -27.5,
+    125.5,
+    11.12
+   ]
+  ],
+  "furnished_floors": 2
  },
  {
   "label": "PLA_SAT_NE_Profilaktoriy_Main",
@@ -19064,7 +20508,7 @@
     null
    ]
   ],
-  "tris": 49452,
+  "tris": 49524,
   "entrances": [
    [
     285.0,
@@ -19074,7 +20518,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 1
+  "decay": 1,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_NE_Profilaktoriy_C",
@@ -19376,7 +20822,7 @@
     null
    ]
   ],
-  "tris": 21900,
+  "tris": 21972,
   "entrances": [
    [
     359.9,
@@ -19386,7 +20832,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_NE_Profilaktoriy_D",
@@ -19569,7 +21017,7 @@
     null
    ]
   ],
-  "tris": 19960,
+  "tris": 20032,
   "entrances": [
    [
     372.7,
@@ -19579,7 +21027,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 1
+  "decay": 1,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_NE_Dvor_W2",
@@ -19984,7 +21434,7 @@
     null
    ]
   ],
-  "tris": 73536,
+  "tris": 73680,
   "entrances": [
    [
     377.7,
@@ -19999,7 +21449,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_N_House_1",
@@ -20083,7 +21535,7 @@
     null
    ]
   ],
-  "tris": 8584,
+  "tris": 8656,
   "entrances": [
    [
     506.8,
@@ -20093,7 +21545,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 0
+  "decay": 0,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_N_House_2",
@@ -20370,7 +21824,7 @@
     null
    ]
   ],
-  "tris": 9460,
+  "tris": 9532,
   "entrances": [
    [
     526.7,
@@ -20380,7 +21834,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_E_Complex_Main",
@@ -20857,7 +22313,7 @@
     null
    ]
   ],
-  "tris": 60196,
+  "tris": 60268,
   "entrances": [
    [
     168.3,
@@ -20867,7 +22323,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_E_Complex_WingW",
@@ -20948,7 +22406,7 @@
     null
    ]
   ],
-  "tris": 19816,
+  "tris": 19888,
   "entrances": [
    [
     187.9,
@@ -20958,7 +22416,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 0
+  "decay": 0,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_E_Complex_WingE",
@@ -21279,7 +22739,7 @@
     null
    ]
   ],
-  "tris": 20044,
+  "tris": 20116,
   "entrances": [
    [
     187.9,
@@ -21289,7 +22749,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_E_Small_1",
@@ -21368,7 +22830,7 @@
     null
    ]
   ],
-  "tris": 19872,
+  "tris": 19944,
   "entrances": [
    [
     137.0,
@@ -21378,7 +22840,9 @@
   ],
   "cameras": [],
   "damage": 0,
-  "decay": 0
+  "decay": 0,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_E_Small_2",
@@ -21680,7 +23144,7 @@
     null
    ]
   ],
-  "tris": 19980,
+  "tris": 20052,
   "entrances": [
    [
     84.6,
@@ -21690,7 +23154,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_NW_Diag",
@@ -22232,7 +23698,7 @@
     null
    ]
   ],
-  "tris": 26820,
+  "tris": 26892,
   "entrances": [
    [
     351.32,
@@ -22242,7 +23708,9 @@
   ],
   "cameras": [],
   "damage": 2,
-  "decay": 3
+  "decay": 3,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_NW_Small",
@@ -22550,7 +24018,7 @@
     null
    ]
   ],
-  "tris": 19420,
+  "tris": 19492,
   "entrances": [
    [
     470.4,
@@ -22560,7 +24028,9 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  },
  {
   "label": "PLA_SAT_NW_Ruin",
@@ -22933,7 +24403,7 @@
     null
    ]
   ],
-  "tris": 15676,
+  "tris": 15748,
   "entrances": [
    [
     397.9,
@@ -22943,6 +24413,8 @@
   ],
   "cameras": [],
   "damage": 1,
-  "decay": 2
+  "decay": 2,
+  "section_frame": null,
+  "clues": {}
  }
 ]

@@ -1,1788 +1,747 @@
-[
- {
-  "mesh": "SM_Props_-3_-1",
-  "north_m": -1500.0,
-  "east_m": -300.0,
-  "count": 0,
-  "quads": 1540,
-  "materials": [
-   "Metal",
-   "Concrete"
-  ],
-  "props": true
- },
- {
-  "mesh": "SM_Props_-2_-2",
-  "north_m": -900.0,
-  "east_m": -900.0,
-  "count": 0,
-  "quads": 408,
-  "materials": [
-   "WoodGrey",
-   "Enamel"
-  ],
-  "props": true
- },
- {
-  "mesh": "SM_Props_-2_-1",
-  "north_m": -900.0,
-  "east_m": -300.0,
-  "count": 0,
-  "quads": 3836,
-  "materials": [
-   "Metal",
-   "Concrete",
-   "WoodGrey",
-   "Enamel",
-   "Brick"
-  ],
-  "props": true
- },
- {
-  "mesh": "SM_Props_-2_0",
-  "north_m": -900.0,
-  "east_m": 300.0,
-  "count": 0,
-  "quads": 1928,
-  "materials": [
-   "Metal",
-   "Concrete",
-   "WoodGrey",
-   "Enamel",
-   "Brick"
-  ],
-  "props": true
- },
- {
-  "mesh": "SM_Props_-1_-2",
-  "north_m": -300.0,
-  "east_m": -900.0,
-  "count": 0,
-  "quads": 3896,
-  "materials": [
-   "Lime",
-   "Concrete",
-   "WoodGrey",
-   "Enamel",
-   "Metal",
-   "Brick",
-   "Furniture"
-  ],
-  "props": true
- },
- {
-  "mesh": "SM_Props_-1_-1",
-  "north_m": -300.0,
-  "east_m": -300.0,
-  "count": 0,
-  "quads": 27200,
-  "materials": [
-   "Metal",
-   "Concrete",
-   "Lime",
-   "Wood",
-   "Furniture",
-   "BlackPlastic",
-   "WoodGrey",
-   "Enamel",
-   "Brick"
-  ],
-  "props": true
- },
- {
-  "mesh": "SM_Props_-1_0",
-  "north_m": -300.0,
-  "east_m": 300.0,
-  "count": 0,
-  "quads": 21836,
-  "materials": [
-   "Metal",
-   "Concrete",
-   "Lime",
-   "Furniture",
-   "Wood",
-   "BlackPlastic",
-   "WoodGrey",
-   "Enamel",
-   "Brick"
-  ],
-  "props": true
- },
- {
-  "mesh": "SM_Props_-1_1",
-  "north_m": -300.0,
-  "east_m": 900.0,
-  "count": 0,
-  "quads": 1070,
-  "materials": [
-   "Metal",
-   "Concrete",
-   "Wood",
-   "WoodGrey",
-   "Enamel"
-  ],
-  "props": true
- },
- {
-  "mesh": "SM_Props_0_-2",
-  "north_m": 300.0,
-  "east_m": -900.0,
-  "count": 0,
-  "quads": 7176,
-  "materials": [
-   "Metal",
-   "Concrete",
-   "Lime",
-   "WoodGrey",
-   "Enamel",
-   "Brick",
-   "Furniture"
-  ],
-  "props": true
- },
- {
-  "mesh": "SM_Props_0_-1",
-  "north_m": 300.0,
-  "east_m": -300.0,
-  "count": 0,
-  "quads": 38548,
-  "materials": [
-   "Metal",
-   "Concrete",
-   "Lime",
-   "Furniture",
-   "Wood",
-   "BlackPlastic",
-   "WoodGrey",
-   "Enamel"
-  ],
-  "props": true
- },
- {
-  "mesh": "SM_Props_0_0",
-  "north_m": 300.0,
-  "east_m": 300.0,
-  "count": 0,
-  "quads": 62948,
-  "materials": [
-   "Metal",
-   "Concrete",
-   "Lime",
-   "Wood",
-   "Furniture",
-   "BlackPlastic",
-   "WoodGrey",
-   "Enamel"
-  ],
-  "props": true
- },
- {
-  "mesh": "SM_Props_0_1",
-  "north_m": 300.0,
-  "east_m": 900.0,
-  "count": 0,
-  "quads": 11062,
-  "materials": [
-   "Metal",
-   "Concrete",
-   "Lime",
-   "Furniture",
-   "Wood",
-   "WoodGrey",
-   "Enamel"
-  ],
-  "props": true
- },
- {
-  "mesh": "SM_Props_0_2",
-  "north_m": 300.0,
-  "east_m": 1500.0,
-  "count": 0,
-  "quads": 484,
-  "materials": [
-   "Metal",
-   "Concrete"
-  ],
-  "props": true
- },
- {
-  "mesh": "SM_Props_1_-2",
-  "north_m": 900.0,
-  "east_m": -900.0,
-  "count": 0,
-  "quads": 216,
-  "materials": [
-   "WoodGrey",
-   "Enamel"
-  ],
-  "props": true
- },
- {
-  "mesh": "SM_Props_1_-1",
-  "north_m": 900.0,
-  "east_m": -300.0,
-  "count": 0,
-  "quads": 828,
-  "materials": [
-   "WoodGrey",
-   "Enamel"
-  ],
-  "props": true
- },
- {
-  "mesh": "SM_Props_1_0",
-  "north_m": 900.0,
-  "east_m": 300.0,
-  "count": 0,
-  "quads": 1414,
-  "materials": [
-   "Metal",
-   "Concrete",
-   "WoodGrey",
-   "Enamel"
-  ],
-  "props": true
- },
- {
-  "mesh": "SM_Props_1_1",
-  "north_m": 900.0,
-  "east_m": 900.0,
-  "count": 0,
-  "quads": 380,
-  "materials": [
-   "Metal",
-   "Concrete",
-   "WoodGrey",
-   "Enamel"
-  ],
-  "props": true
- },
- {
-  "mesh": "SM_Veg_-6_-4",
-  "north_m": -3300.0,
-  "east_m": -2100.0,
-  "count": 1,
-  "quads": 55,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-6_-3",
-  "north_m": -3300.0,
-  "east_m": -1500.0,
-  "count": 19,
-  "quads": 1045,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-6_-2",
-  "north_m": -3300.0,
-  "east_m": -900.0,
-  "count": 28,
-  "quads": 1540,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-6_-1",
-  "north_m": -3300.0,
-  "east_m": -300.0,
-  "count": 35,
-  "quads": 1925,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-6_0",
-  "north_m": -3300.0,
-  "east_m": 300.0,
-  "count": 32,
-  "quads": 1760,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-6_1",
-  "north_m": -3300.0,
-  "east_m": 900.0,
-  "count": 34,
-  "quads": 1870,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-6_2",
-  "north_m": -3300.0,
-  "east_m": 1500.0,
-  "count": 16,
-  "quads": 880,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-6_3",
-  "north_m": -3300.0,
-  "east_m": 2100.0,
-  "count": 1,
-  "quads": 55,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-5_-5",
-  "north_m": -2700.0,
-  "east_m": -2700.0,
-  "count": 10,
-  "quads": 550,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-5_-4",
-  "north_m": -2700.0,
-  "east_m": -2100.0,
-  "count": 26,
-  "quads": 1430,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-5_-3",
-  "north_m": -2700.0,
-  "east_m": -1500.0,
-  "count": 30,
-  "quads": 1650,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-5_-2",
-  "north_m": -2700.0,
-  "east_m": -900.0,
-  "count": 37,
-  "quads": 2035,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-5_-1",
-  "north_m": -2700.0,
-  "east_m": -300.0,
-  "count": 48,
-  "quads": 2640,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-5_0",
-  "north_m": -2700.0,
-  "east_m": 300.0,
-  "count": 38,
-  "quads": 2090,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-5_1",
-  "north_m": -2700.0,
-  "east_m": 900.0,
-  "count": 37,
-  "quads": 2035,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-5_2",
-  "north_m": -2700.0,
-  "east_m": 1500.0,
-  "count": 33,
-  "quads": 1815,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-5_3",
-  "north_m": -2700.0,
-  "east_m": 2100.0,
-  "count": 38,
-  "quads": 2090,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-5_4",
-  "north_m": -2700.0,
-  "east_m": 2700.0,
-  "count": 5,
-  "quads": 275,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-4_-6",
-  "north_m": -2100.0,
-  "east_m": -3300.0,
-  "count": 1,
-  "quads": 55,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-4_-5",
-  "north_m": -2100.0,
-  "east_m": -2700.0,
-  "count": 27,
-  "quads": 1485,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-4_-4",
-  "north_m": -2100.0,
-  "east_m": -2100.0,
-  "count": 39,
-  "quads": 2145,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-4_-3",
-  "north_m": -2100.0,
-  "east_m": -1500.0,
-  "count": 47,
-  "quads": 2585,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-4_-2",
-  "north_m": -2100.0,
-  "east_m": -900.0,
-  "count": 42,
-  "quads": 2310,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-4_-1",
-  "north_m": -2100.0,
-  "east_m": -300.0,
-  "count": 47,
-  "quads": 2585,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-4_0",
-  "north_m": -2100.0,
-  "east_m": 300.0,
-  "count": 68,
-  "quads": 3740,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-4_1",
-  "north_m": -2100.0,
-  "east_m": 900.0,
-  "count": 57,
-  "quads": 3135,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-4_2",
-  "north_m": -2100.0,
-  "east_m": 1500.0,
-  "count": 45,
-  "quads": 2475,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-4_3",
-  "north_m": -2100.0,
-  "east_m": 2100.0,
-  "count": 44,
-  "quads": 2420,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-4_4",
-  "north_m": -2100.0,
-  "east_m": 2700.0,
-  "count": 34,
-  "quads": 1870,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-4_5",
-  "north_m": -2100.0,
-  "east_m": 3300.0,
-  "count": 1,
-  "quads": 55,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-3_-6",
-  "north_m": -1500.0,
-  "east_m": -3300.0,
-  "count": 13,
-  "quads": 715,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-3_-5",
-  "north_m": -1500.0,
-  "east_m": -2700.0,
-  "count": 36,
-  "quads": 1980,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-3_-4",
-  "north_m": -1500.0,
-  "east_m": -2100.0,
-  "count": 53,
-  "quads": 2915,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-3_-3",
-  "north_m": -1500.0,
-  "east_m": -1500.0,
-  "count": 59,
-  "quads": 3245,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-3_-2",
-  "north_m": -1500.0,
-  "east_m": -900.0,
-  "count": 89,
-  "quads": 4444,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub"
-  ]
- },
- {
-  "mesh": "SM_Veg_-3_-1",
-  "north_m": -1500.0,
-  "east_m": -300.0,
-  "count": 103,
-  "quads": 4394,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub"
-  ]
- },
- {
-  "mesh": "SM_Veg_-3_0",
-  "north_m": -1500.0,
-  "east_m": 300.0,
-  "count": 85,
-  "quads": 3568,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub"
-  ]
- },
- {
-  "mesh": "SM_Veg_-3_1",
-  "north_m": -1500.0,
-  "east_m": 900.0,
-  "count": 74,
-  "quads": 3619,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub"
-  ]
- },
- {
-  "mesh": "SM_Veg_-3_2",
-  "north_m": -1500.0,
-  "east_m": 1500.0,
-  "count": 68,
-  "quads": 3740,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-3_3",
-  "north_m": -1500.0,
-  "east_m": 2100.0,
-  "count": 54,
-  "quads": 2970,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-3_4",
-  "north_m": -1500.0,
-  "east_m": 2700.0,
-  "count": 46,
-  "quads": 2530,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-3_5",
-  "north_m": -1500.0,
-  "east_m": 3300.0,
-  "count": 20,
-  "quads": 1100,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-2_-6",
-  "north_m": -900.0,
-  "east_m": -3300.0,
-  "count": 35,
-  "quads": 1925,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-2_-5",
-  "north_m": -900.0,
-  "east_m": -2700.0,
-  "count": 41,
-  "quads": 2255,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-2_-4",
-  "north_m": -900.0,
-  "east_m": -2100.0,
-  "count": 45,
-  "quads": 2475,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-2_-3",
-  "north_m": -900.0,
-  "east_m": -1500.0,
-  "count": 66,
-  "quads": 3384,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub"
-  ]
- },
- {
-  "mesh": "SM_Veg_-2_-2",
-  "north_m": -900.0,
-  "east_m": -900.0,
-  "count": 144,
-  "quads": 5160,
-  "materials": [
-   "Bark_Birch",
-   "Leaves_Birch",
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub"
-  ]
- },
- {
-  "mesh": "SM_Veg_-2_-1",
-  "north_m": -900.0,
-  "east_m": -300.0,
-  "count": 226,
-  "quads": 6816,
-  "materials": [
-   "Bark_Birch",
-   "Leaves_Birch",
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub",
-   "Grass"
-  ]
- },
- {
-  "mesh": "SM_Veg_-2_0",
-  "north_m": -900.0,
-  "east_m": 300.0,
-  "count": 246,
-  "quads": 7653,
-  "materials": [
-   "Bark_Birch",
-   "Leaves_Birch",
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub",
-   "Grass"
-  ]
- },
- {
-  "mesh": "SM_Veg_-2_1",
-  "north_m": -900.0,
-  "east_m": 900.0,
-  "count": 180,
-  "quads": 6033,
-  "materials": [
-   "Bark_Birch",
-   "Leaves_Birch",
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub"
-  ]
- },
- {
-  "mesh": "SM_Veg_-2_2",
-  "north_m": -900.0,
-  "east_m": 1500.0,
-  "count": 76,
-  "quads": 3934,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub"
-  ]
- },
- {
-  "mesh": "SM_Veg_-2_3",
-  "north_m": -900.0,
-  "east_m": 2100.0,
-  "count": 75,
-  "quads": 4125,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-2_4",
-  "north_m": -900.0,
-  "east_m": 2700.0,
-  "count": 45,
-  "quads": 2475,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-2_5",
-  "north_m": -900.0,
-  "east_m": 3300.0,
-  "count": 31,
-  "quads": 1705,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-1_-6",
-  "north_m": -300.0,
-  "east_m": -3300.0,
-  "count": 36,
-  "quads": 1980,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-1_-5",
-  "north_m": -300.0,
-  "east_m": -2700.0,
-  "count": 50,
-  "quads": 2750,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-1_-4",
-  "north_m": -300.0,
-  "east_m": -2100.0,
-  "count": 75,
-  "quads": 4125,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-1_-3",
-  "north_m": -300.0,
-  "east_m": -1500.0,
-  "count": 109,
-  "quads": 4724,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub"
-  ]
- },
- {
-  "mesh": "SM_Veg_-1_-2",
-  "north_m": -300.0,
-  "east_m": -900.0,
-  "count": 782,
-  "quads": 18453,
-  "materials": [
-   "Bark_Birch",
-   "Leaves_Birch",
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub",
-   "Grass"
-  ]
- },
- {
-  "mesh": "SM_Veg_-1_-1",
-  "north_m": -300.0,
-  "east_m": -300.0,
-  "count": 4509,
-  "quads": 76467,
-  "materials": [
-   "Bark_Birch",
-   "Leaves_Birch",
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub",
-   "Grass"
-  ]
- },
- {
-  "mesh": "SM_Veg_-1_0",
-  "north_m": -300.0,
-  "east_m": 300.0,
-  "count": 3757,
-  "quads": 66382,
-  "materials": [
-   "Bark_Birch",
-   "Leaves_Birch",
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub",
-   "Grass"
-  ]
- },
- {
-  "mesh": "SM_Veg_-1_1",
-  "north_m": -300.0,
-  "east_m": 900.0,
-  "count": 532,
-  "quads": 14900,
-  "materials": [
-   "Bark_Birch",
-   "Leaves_Birch",
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub",
-   "Grass"
-  ]
- },
- {
-  "mesh": "SM_Veg_-1_2",
-  "north_m": -300.0,
-  "east_m": 1500.0,
-  "count": 118,
-  "quads": 5342,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub"
-  ]
- },
- {
-  "mesh": "SM_Veg_-1_3",
-  "north_m": -300.0,
-  "east_m": 2100.0,
-  "count": 66,
-  "quads": 3630,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-1_4",
-  "north_m": -300.0,
-  "east_m": 2700.0,
-  "count": 41,
-  "quads": 2255,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_-1_5",
-  "north_m": -300.0,
-  "east_m": 3300.0,
-  "count": 44,
-  "quads": 2420,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_0_-6",
-  "north_m": 300.0,
-  "east_m": -3300.0,
-  "count": 34,
-  "quads": 1870,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_0_-5",
-  "north_m": 300.0,
-  "east_m": -2700.0,
-  "count": 61,
-  "quads": 3355,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_0_-4",
-  "north_m": 300.0,
-  "east_m": -2100.0,
-  "count": 65,
-  "quads": 3575,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_0_-3",
-  "north_m": 300.0,
-  "east_m": -1500.0,
-  "count": 144,
-  "quads": 6239,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub"
-  ]
- },
- {
-  "mesh": "SM_Veg_0_-2",
-  "north_m": 300.0,
-  "east_m": -900.0,
-  "count": 1067,
-  "quads": 27543,
-  "materials": [
-   "Bark_Birch",
-   "Leaves_Birch",
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub",
-   "Grass"
-  ]
- },
- {
-  "mesh": "SM_Veg_0_-1",
-  "north_m": 300.0,
-  "east_m": -300.0,
-  "count": 5761,
-  "quads": 85499,
-  "materials": [
-   "Bark_Birch",
-   "Leaves_Birch",
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub",
-   "Grass"
-  ]
- },
- {
-  "mesh": "SM_Veg_0_0",
-  "north_m": 300.0,
-  "east_m": 300.0,
-  "count": 8385,
-  "quads": 111665,
-  "materials": [
-   "Bark_Birch",
-   "Leaves_Birch",
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub",
-   "Grass"
-  ]
- },
- {
-  "mesh": "SM_Veg_0_1",
-  "north_m": 300.0,
-  "east_m": 900.0,
-  "count": 781,
-  "quads": 19560,
-  "materials": [
-   "Bark_Birch",
-   "Leaves_Birch",
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub",
-   "Grass"
-  ]
- },
- {
-  "mesh": "SM_Veg_0_2",
-  "north_m": 300.0,
-  "east_m": 1500.0,
-  "count": 129,
-  "quads": 5291,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub"
-  ]
- },
- {
-  "mesh": "SM_Veg_0_3",
-  "north_m": 300.0,
-  "east_m": 2100.0,
-  "count": 62,
-  "quads": 3410,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_0_4",
-  "north_m": 300.0,
-  "east_m": 2700.0,
-  "count": 50,
-  "quads": 2750,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_0_5",
-  "north_m": 300.0,
-  "east_m": 3300.0,
-  "count": 48,
-  "quads": 2640,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_1_-6",
-  "north_m": 900.0,
-  "east_m": -3300.0,
-  "count": 30,
-  "quads": 1650,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_1_-5",
-  "north_m": 900.0,
-  "east_m": -2700.0,
-  "count": 57,
-  "quads": 3135,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_1_-4",
-  "north_m": 900.0,
-  "east_m": -2100.0,
-  "count": 61,
-  "quads": 3355,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_1_-3",
-  "north_m": 900.0,
-  "east_m": -1500.0,
-  "count": 86,
-  "quads": 4279,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub"
-  ]
- },
- {
-  "mesh": "SM_Veg_1_-2",
-  "north_m": 900.0,
-  "east_m": -900.0,
-  "count": 183,
-  "quads": 6699,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub",
-   "Grass"
-  ]
- },
- {
-  "mesh": "SM_Veg_1_-1",
-  "north_m": 900.0,
-  "east_m": -300.0,
-  "count": 210,
-  "quads": 5725,
-  "materials": [
-   "Bark_Birch",
-   "Leaves_Birch",
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub",
-   "Grass"
-  ]
- },
- {
-  "mesh": "SM_Veg_1_0",
-  "north_m": 900.0,
-  "east_m": 300.0,
-  "count": 217,
-  "quads": 7771,
-  "materials": [
-   "Bark_Birch",
-   "Leaves_Birch",
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub",
-   "Grass"
-  ]
- },
- {
-  "mesh": "SM_Veg_1_1",
-  "north_m": 900.0,
-  "east_m": 900.0,
-  "count": 163,
-  "quads": 5670,
-  "materials": [
-   "Bark_Birch",
-   "Leaves_Birch",
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub",
-   "Grass"
-  ]
- },
- {
-  "mesh": "SM_Veg_1_2",
-  "north_m": 900.0,
-  "east_m": 1500.0,
-  "count": 89,
-  "quads": 4608,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub"
-  ]
- },
- {
-  "mesh": "SM_Veg_1_3",
-  "north_m": 900.0,
-  "east_m": 2100.0,
-  "count": 67,
-  "quads": 3685,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_1_4",
-  "north_m": 900.0,
-  "east_m": 2700.0,
-  "count": 56,
-  "quads": 3080,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_1_5",
-  "north_m": 900.0,
-  "east_m": 3300.0,
-  "count": 34,
-  "quads": 1870,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_2_-6",
-  "north_m": 1500.0,
-  "east_m": -3300.0,
-  "count": 13,
-  "quads": 715,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_2_-5",
-  "north_m": 1500.0,
-  "east_m": -2700.0,
-  "count": 38,
-  "quads": 2090,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_2_-4",
-  "north_m": 1500.0,
-  "east_m": -2100.0,
-  "count": 56,
-  "quads": 3080,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_2_-3",
-  "north_m": 1500.0,
-  "east_m": -1500.0,
-  "count": 92,
-  "quads": 5060,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_2_-2",
-  "north_m": 1500.0,
-  "east_m": -900.0,
-  "count": 93,
-  "quads": 4869,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub"
-  ]
- },
- {
-  "mesh": "SM_Veg_2_-1",
-  "north_m": 1500.0,
-  "east_m": -300.0,
-  "count": 125,
-  "quads": 5604,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub"
-  ]
- },
- {
-  "mesh": "SM_Veg_2_0",
-  "north_m": 1500.0,
-  "east_m": 300.0,
-  "count": 108,
-  "quads": 4546,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub"
-  ]
- },
- {
-  "mesh": "SM_Veg_2_1",
-  "north_m": 1500.0,
-  "east_m": 900.0,
-  "count": 82,
-  "quads": 4305,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch",
-   "Leaves_Shrub"
-  ]
- },
- {
-  "mesh": "SM_Veg_2_2",
-  "north_m": 1500.0,
-  "east_m": 1500.0,
-  "count": 76,
-  "quads": 4180,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_2_3",
-  "north_m": 1500.0,
-  "east_m": 2100.0,
-  "count": 59,
-  "quads": 3245,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_2_4",
-  "north_m": 1500.0,
-  "east_m": 2700.0,
-  "count": 64,
-  "quads": 3520,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_2_5",
-  "north_m": 1500.0,
-  "east_m": 3300.0,
-  "count": 22,
-  "quads": 1210,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_3_-6",
-  "north_m": 2100.0,
-  "east_m": -3300.0,
-  "count": 3,
-  "quads": 165,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_3_-5",
-  "north_m": 2100.0,
-  "east_m": -2700.0,
-  "count": 39,
-  "quads": 2145,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_3_-4",
-  "north_m": 2100.0,
-  "east_m": -2100.0,
-  "count": 53,
-  "quads": 2915,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_3_-3",
-  "north_m": 2100.0,
-  "east_m": -1500.0,
-  "count": 53,
-  "quads": 2915,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_3_-2",
-  "north_m": 2100.0,
-  "east_m": -900.0,
-  "count": 84,
-  "quads": 4620,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_3_-1",
-  "north_m": 2100.0,
-  "east_m": -300.0,
-  "count": 62,
-  "quads": 3410,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_3_0",
-  "north_m": 2100.0,
-  "east_m": 300.0,
-  "count": 69,
-  "quads": 3795,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_3_1",
-  "north_m": 2100.0,
-  "east_m": 900.0,
-  "count": 56,
-  "quads": 3080,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_3_2",
-  "north_m": 2100.0,
-  "east_m": 1500.0,
-  "count": 55,
-  "quads": 3025,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_3_3",
-  "north_m": 2100.0,
-  "east_m": 2100.0,
-  "count": 60,
-  "quads": 3300,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_3_4",
-  "north_m": 2100.0,
-  "east_m": 2700.0,
-  "count": 43,
-  "quads": 2365,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_3_5",
-  "north_m": 2100.0,
-  "east_m": 3300.0,
-  "count": 2,
-  "quads": 110,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_4_-5",
-  "north_m": 2700.0,
-  "east_m": -2700.0,
-  "count": 5,
-  "quads": 275,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_4_-4",
-  "north_m": 2700.0,
-  "east_m": -2100.0,
-  "count": 51,
-  "quads": 2805,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_4_-3",
-  "north_m": 2700.0,
-  "east_m": -1500.0,
-  "count": 45,
-  "quads": 2475,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_4_-2",
-  "north_m": 2700.0,
-  "east_m": -900.0,
-  "count": 61,
-  "quads": 3355,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_4_-1",
-  "north_m": 2700.0,
-  "east_m": -300.0,
-  "count": 54,
-  "quads": 2970,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_4_0",
-  "north_m": 2700.0,
-  "east_m": 300.0,
-  "count": 53,
-  "quads": 2915,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_4_1",
-  "north_m": 2700.0,
-  "east_m": 900.0,
-  "count": 59,
-  "quads": 3245,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_4_2",
-  "north_m": 2700.0,
-  "east_m": 1500.0,
-  "count": 57,
-  "quads": 3135,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_4_3",
-  "north_m": 2700.0,
-  "east_m": 2100.0,
-  "count": 51,
-  "quads": 2805,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_4_4",
-  "north_m": 2700.0,
-  "east_m": 2700.0,
-  "count": 3,
-  "quads": 165,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_5_-4",
-  "north_m": 3300.0,
-  "east_m": -2100.0,
-  "count": 1,
-  "quads": 55,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_5_-3",
-  "north_m": 3300.0,
-  "east_m": -1500.0,
-  "count": 29,
-  "quads": 1595,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_5_-2",
-  "north_m": 3300.0,
-  "east_m": -900.0,
-  "count": 43,
-  "quads": 2365,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_5_-1",
-  "north_m": 3300.0,
-  "east_m": -300.0,
-  "count": 58,
-  "quads": 3190,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_5_0",
-  "north_m": 3300.0,
-  "east_m": 300.0,
-  "count": 37,
-  "quads": 2035,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_5_1",
-  "north_m": 3300.0,
-  "east_m": 900.0,
-  "count": 31,
-  "quads": 1705,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_5_2",
-  "north_m": 3300.0,
-  "east_m": 1500.0,
-  "count": 21,
-  "quads": 1155,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- },
- {
-  "mesh": "SM_Veg_5_3",
-  "north_m": 3300.0,
-  "east_m": 2100.0,
-  "count": 3,
-  "quads": 165,
-  "materials": [
-   "Bark_Larch",
-   "Leaves_Larch"
-  ]
- }
-]
+{
+ "cells": [
+  {
+   "mesh": "SM_Props_-3_-1",
+   "north_m": -1500.0,
+   "east_m": -300.0,
+   "count": 0,
+   "quads": 1474,
+   "materials": [
+    "Metal",
+    "Concrete"
+   ],
+   "props": true
+  },
+  {
+   "mesh": "SM_Props_-2_-2",
+   "north_m": -900.0,
+   "east_m": -900.0,
+   "count": 0,
+   "quads": 402,
+   "materials": [
+    "WoodGrey",
+    "Enamel"
+   ],
+   "props": true
+  },
+  {
+   "mesh": "SM_Props_-2_-1",
+   "north_m": -900.0,
+   "east_m": -300.0,
+   "count": 0,
+   "quads": 3500,
+   "materials": [
+    "Metal",
+    "Concrete",
+    "WoodGrey",
+    "Enamel",
+    "Brick"
+   ],
+   "props": true
+  },
+  {
+   "mesh": "SM_Props_-2_0",
+   "north_m": -900.0,
+   "east_m": 300.0,
+   "count": 0,
+   "quads": 2294,
+   "materials": [
+    "Metal",
+    "Concrete",
+    "WoodGrey",
+    "Enamel",
+    "Brick"
+   ],
+   "props": true
+  },
+  {
+   "mesh": "SM_Props_-1_-2",
+   "north_m": -300.0,
+   "east_m": -900.0,
+   "count": 0,
+   "quads": 2884,
+   "materials": [
+    "Concrete",
+    "Lime",
+    "Metal",
+    "WoodGrey",
+    "Enamel",
+    "Brick",
+    "Wood"
+   ],
+   "props": true
+  },
+  {
+   "mesh": "SM_Props_-1_-1",
+   "north_m": -300.0,
+   "east_m": -300.0,
+   "count": 0,
+   "quads": 29820,
+   "materials": [
+    "Metal",
+    "Concrete",
+    "Lime",
+    "Furniture",
+    "Wood",
+    "BlackPlastic",
+    "WoodGrey",
+    "Enamel",
+    "Brick"
+   ],
+   "props": true
+  },
+  {
+   "mesh": "SM_Props_-1_0",
+   "north_m": -300.0,
+   "east_m": 300.0,
+   "count": 0,
+   "quads": 26282,
+   "materials": [
+    "Metal",
+    "Concrete",
+    "Lime",
+    "Wood",
+    "Furniture",
+    "BlackPlastic",
+    "WoodGrey",
+    "Enamel",
+    "Brick"
+   ],
+   "props": true
+  },
+  {
+   "mesh": "SM_Props_-1_1",
+   "north_m": -300.0,
+   "east_m": 900.0,
+   "count": 0,
+   "quads": 898,
+   "materials": [
+    "Metal",
+    "Concrete",
+    "WoodGrey",
+    "Enamel"
+   ],
+   "props": true
+  },
+  {
+   "mesh": "SM_Props_0_-2",
+   "north_m": 300.0,
+   "east_m": -900.0,
+   "count": 0,
+   "quads": 7962,
+   "materials": [
+    "Metal",
+    "Concrete",
+    "Lime",
+    "WoodGrey",
+    "Enamel",
+    "Brick",
+    "Furniture",
+    "BlackPlastic",
+    "Wood"
+   ],
+   "props": true
+  },
+  {
+   "mesh": "SM_Props_0_-1",
+   "north_m": 300.0,
+   "east_m": -300.0,
+   "count": 0,
+   "quads": 44632,
+   "materials": [
+    "Metal",
+    "Concrete",
+    "Lime",
+    "Wood",
+    "Furniture",
+    "BlackPlastic",
+    "WoodGrey",
+    "Enamel",
+    "Brick"
+   ],
+   "props": true
+  },
+  {
+   "mesh": "SM_Props_0_0",
+   "north_m": 300.0,
+   "east_m": 300.0,
+   "count": 0,
+   "quads": 73320,
+   "materials": [
+    "Metal",
+    "Concrete",
+    "Lime",
+    "Furniture",
+    "Wood",
+    "BlackPlastic",
+    "WoodGrey",
+    "Enamel",
+    "Brick"
+   ],
+   "props": true
+  },
+  {
+   "mesh": "SM_Props_0_1",
+   "north_m": 300.0,
+   "east_m": 900.0,
+   "count": 0,
+   "quads": 11806,
+   "materials": [
+    "Metal",
+    "Concrete",
+    "Lime",
+    "Wood",
+    "Furniture",
+    "BlackPlastic",
+    "WoodGrey",
+    "Enamel"
+   ],
+   "props": true
+  },
+  {
+   "mesh": "SM_Props_0_2",
+   "north_m": 300.0,
+   "east_m": 1500.0,
+   "count": 0,
+   "quads": 440,
+   "materials": [
+    "Metal",
+    "Concrete"
+   ],
+   "props": true
+  },
+  {
+   "mesh": "SM_Props_1_-2",
+   "north_m": 900.0,
+   "east_m": -900.0,
+   "count": 0,
+   "quads": 216,
+   "materials": [
+    "WoodGrey",
+    "Enamel"
+   ],
+   "props": true
+  },
+  {
+   "mesh": "SM_Props_1_-1",
+   "north_m": 900.0,
+   "east_m": -300.0,
+   "count": 0,
+   "quads": 900,
+   "materials": [
+    "WoodGrey",
+    "Enamel",
+    "Brick",
+    "Metal",
+    "Concrete"
+   ],
+   "props": true
+  },
+  {
+   "mesh": "SM_Props_1_0",
+   "north_m": 900.0,
+   "east_m": 300.0,
+   "count": 0,
+   "quads": 1370,
+   "materials": [
+    "Metal",
+    "Concrete",
+    "WoodGrey",
+    "Enamel"
+   ],
+   "props": true
+  },
+  {
+   "mesh": "SM_Props_1_1",
+   "north_m": 900.0,
+   "east_m": 900.0,
+   "count": 0,
+   "quads": 344,
+   "materials": [
+    "Metal",
+    "Concrete",
+    "WoodGrey",
+    "Enamel"
+   ],
+   "props": true
+  },
+  {
+   "mesh": "SM_Veg_-2_-1",
+   "north_m": -900.0,
+   "east_m": -300.0,
+   "count": 16,
+   "quads": 80,
+   "materials": [
+    "Grass"
+   ]
+  },
+  {
+   "mesh": "SM_Veg_-2_0",
+   "north_m": -900.0,
+   "east_m": 300.0,
+   "count": 37,
+   "quads": 185,
+   "materials": [
+    "Grass"
+   ]
+  },
+  {
+   "mesh": "SM_Veg_-1_-2",
+   "north_m": -300.0,
+   "east_m": -900.0,
+   "count": 92,
+   "quads": 460,
+   "materials": [
+    "Grass"
+   ]
+  },
+  {
+   "mesh": "SM_Veg_-1_-1",
+   "north_m": -300.0,
+   "east_m": -300.0,
+   "count": 1428,
+   "quads": 7140,
+   "materials": [
+    "Grass"
+   ]
+  },
+  {
+   "mesh": "SM_Veg_-1_0",
+   "north_m": -300.0,
+   "east_m": 300.0,
+   "count": 1122,
+   "quads": 5610,
+   "materials": [
+    "Grass"
+   ]
+  },
+  {
+   "mesh": "SM_Veg_-1_1",
+   "north_m": -300.0,
+   "east_m": 900.0,
+   "count": 18,
+   "quads": 90,
+   "materials": [
+    "Grass"
+   ]
+  },
+  {
+   "mesh": "SM_Veg_0_-2",
+   "north_m": 300.0,
+   "east_m": -900.0,
+   "count": 235,
+   "quads": 1175,
+   "materials": [
+    "Grass"
+   ]
+  },
+  {
+   "mesh": "SM_Veg_0_-1",
+   "north_m": 300.0,
+   "east_m": -300.0,
+   "count": 2650,
+   "quads": 13250,
+   "materials": [
+    "Grass"
+   ]
+  },
+  {
+   "mesh": "SM_Veg_0_0",
+   "north_m": 300.0,
+   "east_m": 300.0,
+   "count": 5386,
+   "quads": 26930,
+   "materials": [
+    "Grass"
+   ]
+  },
+  {
+   "mesh": "SM_Veg_0_1",
+   "north_m": 300.0,
+   "east_m": 900.0,
+   "count": 113,
+   "quads": 565,
+   "materials": [
+    "Grass"
+   ]
+  },
+  {
+   "mesh": "SM_Veg_1_-2",
+   "north_m": 900.0,
+   "east_m": -900.0,
+   "count": 5,
+   "quads": 25,
+   "materials": [
+    "Grass"
+   ]
+  },
+  {
+   "mesh": "SM_Veg_1_-1",
+   "north_m": 900.0,
+   "east_m": -300.0,
+   "count": 38,
+   "quads": 190,
+   "materials": [
+    "Grass"
+   ]
+  },
+  {
+   "mesh": "SM_Veg_1_0",
+   "north_m": 900.0,
+   "east_m": 300.0,
+   "count": 13,
+   "quads": 65,
+   "materials": [
+    "Grass"
+   ]
+  },
+  {
+   "mesh": "SM_Veg_1_1",
+   "north_m": 900.0,
+   "east_m": 900.0,
+   "count": 3,
+   "quads": 15,
+   "materials": [
+    "Grass"
+   ]
+  }
+ ],
+ "layers": [
+  {
+   "kind": "larch",
+   "lods": [
+    "SM_Tree_larch_0_LOD0",
+    "SM_Tree_larch_0_LOD1",
+    "SM_Tree_larch_0_LOD2"
+   ],
+   "data": "larch_0.txt",
+   "count": 47681,
+   "cull_cm": 0,
+   "shadow": true
+  },
+  {
+   "kind": "larch",
+   "lods": [
+    "SM_Tree_larch_1_LOD0",
+    "SM_Tree_larch_1_LOD1",
+    "SM_Tree_larch_1_LOD2"
+   ],
+   "data": "larch_1.txt",
+   "count": 47681,
+   "cull_cm": 0,
+   "shadow": true
+  },
+  {
+   "kind": "larch",
+   "lods": [
+    "SM_Tree_larch_2_LOD0",
+    "SM_Tree_larch_2_LOD1",
+    "SM_Tree_larch_2_LOD2"
+   ],
+   "data": "larch_2.txt",
+   "count": 47681,
+   "cull_cm": 0,
+   "shadow": true
+  },
+  {
+   "kind": "larch",
+   "lods": [
+    "SM_Tree_larch_3_LOD0",
+    "SM_Tree_larch_3_LOD1",
+    "SM_Tree_larch_3_LOD2"
+   ],
+   "data": "larch_3.txt",
+   "count": 47680,
+   "cull_cm": 0,
+   "shadow": true
+  },
+  {
+   "kind": "birch",
+   "lods": [
+    "SM_Tree_birch_0_LOD0",
+    "SM_Tree_birch_0_LOD1",
+    "SM_Tree_birch_0_LOD2"
+   ],
+   "data": "birch_0.txt",
+   "count": 832,
+   "cull_cm": 450000,
+   "shadow": true
+  },
+  {
+   "kind": "birch",
+   "lods": [
+    "SM_Tree_birch_1_LOD0",
+    "SM_Tree_birch_1_LOD1",
+    "SM_Tree_birch_1_LOD2"
+   ],
+   "data": "birch_1.txt",
+   "count": 831,
+   "cull_cm": 450000,
+   "shadow": true
+  },
+  {
+   "kind": "birch",
+   "lods": [
+    "SM_Tree_birch_2_LOD0",
+    "SM_Tree_birch_2_LOD1",
+    "SM_Tree_birch_2_LOD2"
+   ],
+   "data": "birch_2.txt",
+   "count": 831,
+   "cull_cm": 450000,
+   "shadow": true
+  },
+  {
+   "kind": "birch",
+   "lods": [
+    "SM_Tree_birch_3_LOD0",
+    "SM_Tree_birch_3_LOD1",
+    "SM_Tree_birch_3_LOD2"
+   ],
+   "data": "birch_3.txt",
+   "count": 831,
+   "cull_cm": 450000,
+   "shadow": true
+  },
+  {
+   "kind": "sapling",
+   "lods": [
+    "SM_Tree_sapling_0_LOD0",
+    "SM_Tree_sapling_0_LOD1",
+    "SM_Tree_sapling_0_LOD2"
+   ],
+   "data": "sapling_0.txt",
+   "count": 3977,
+   "cull_cm": 300000,
+   "shadow": true
+  },
+  {
+   "kind": "sapling",
+   "lods": [
+    "SM_Tree_sapling_1_LOD0",
+    "SM_Tree_sapling_1_LOD1",
+    "SM_Tree_sapling_1_LOD2"
+   ],
+   "data": "sapling_1.txt",
+   "count": 3976,
+   "cull_cm": 300000,
+   "shadow": true
+  },
+  {
+   "kind": "sapling",
+   "lods": [
+    "SM_Tree_sapling_2_LOD0",
+    "SM_Tree_sapling_2_LOD1",
+    "SM_Tree_sapling_2_LOD2"
+   ],
+   "data": "sapling_2.txt",
+   "count": 3976,
+   "cull_cm": 300000,
+   "shadow": true
+  },
+  {
+   "kind": "sapling",
+   "lods": [
+    "SM_Tree_sapling_3_LOD0",
+    "SM_Tree_sapling_3_LOD1",
+    "SM_Tree_sapling_3_LOD2"
+   ],
+   "data": "sapling_3.txt",
+   "count": 3976,
+   "cull_cm": 300000,
+   "shadow": true
+  },
+  {
+   "kind": "willow",
+   "lods": [
+    "SM_Tree_willow_0_LOD0",
+    "SM_Tree_willow_0_LOD1",
+    "SM_Tree_willow_0_LOD2"
+   ],
+   "data": "willow_0.txt",
+   "count": 4345,
+   "cull_cm": 180000,
+   "shadow": true
+  },
+  {
+   "kind": "willow",
+   "lods": [
+    "SM_Tree_willow_1_LOD0",
+    "SM_Tree_willow_1_LOD1",
+    "SM_Tree_willow_1_LOD2"
+   ],
+   "data": "willow_1.txt",
+   "count": 4345,
+   "cull_cm": 180000,
+   "shadow": true
+  },
+  {
+   "kind": "willow",
+   "lods": [
+    "SM_Tree_willow_2_LOD0",
+    "SM_Tree_willow_2_LOD1",
+    "SM_Tree_willow_2_LOD2"
+   ],
+   "data": "willow_2.txt",
+   "count": 4345,
+   "cull_cm": 180000,
+   "shadow": true
+  },
+  {
+   "kind": "willow",
+   "lods": [
+    "SM_Tree_willow_3_LOD0",
+    "SM_Tree_willow_3_LOD1",
+    "SM_Tree_willow_3_LOD2"
+   ],
+   "data": "willow_3.txt",
+   "count": 4345,
+   "cull_cm": 180000,
+   "shadow": true
+  },
+  {
+   "kind": "shrub",
+   "lods": [
+    "SM_Tree_shrub_0_LOD0",
+    "SM_Tree_shrub_0_LOD1",
+    "SM_Tree_shrub_0_LOD2"
+   ],
+   "data": "shrub_0.txt",
+   "count": 6849,
+   "cull_cm": 25000,
+   "shadow": false
+  },
+  {
+   "kind": "shrub",
+   "lods": [
+    "SM_Tree_shrub_1_LOD0",
+    "SM_Tree_shrub_1_LOD1",
+    "SM_Tree_shrub_1_LOD2"
+   ],
+   "data": "shrub_1.txt",
+   "count": 6849,
+   "cull_cm": 25000,
+   "shadow": false
+  },
+  {
+   "kind": "shrub",
+   "lods": [
+    "SM_Tree_shrub_2_LOD0",
+    "SM_Tree_shrub_2_LOD1",
+    "SM_Tree_shrub_2_LOD2"
+   ],
+   "data": "shrub_2.txt",
+   "count": 6848,
+   "cull_cm": 25000,
+   "shadow": false
+  },
+  {
+   "kind": "low_willow",
+   "lods": [
+    "SM_Tree_low_willow_0_LOD0",
+    "SM_Tree_low_willow_0_LOD1",
+    "SM_Tree_low_willow_0_LOD2"
+   ],
+   "data": "low_willow_0.txt",
+   "count": 7028,
+   "cull_cm": 35000,
+   "shadow": false
+  },
+  {
+   "kind": "low_willow",
+   "lods": [
+    "SM_Tree_low_willow_1_LOD0",
+    "SM_Tree_low_willow_1_LOD1",
+    "SM_Tree_low_willow_1_LOD2"
+   ],
+   "data": "low_willow_1.txt",
+   "count": 7028,
+   "cull_cm": 35000,
+   "shadow": false
+  },
+  {
+   "kind": "low_willow",
+   "lods": [
+    "SM_Tree_low_willow_2_LOD0",
+    "SM_Tree_low_willow_2_LOD1",
+    "SM_Tree_low_willow_2_LOD2"
+   ],
+   "data": "low_willow_2.txt",
+   "count": 7028,
+   "cull_cm": 35000,
+   "shadow": false
+  },
+  {
+   "kind": "alder",
+   "lods": [
+    "SM_Tree_alder_0_LOD0",
+    "SM_Tree_alder_0_LOD1",
+    "SM_Tree_alder_0_LOD2"
+   ],
+   "data": "alder_0.txt",
+   "count": 6675,
+   "cull_cm": 220000,
+   "shadow": true
+  },
+  {
+   "kind": "alder",
+   "lods": [
+    "SM_Tree_alder_1_LOD0",
+    "SM_Tree_alder_1_LOD1",
+    "SM_Tree_alder_1_LOD2"
+   ],
+   "data": "alder_1.txt",
+   "count": 6674,
+   "cull_cm": 220000,
+   "shadow": true
+  },
+  {
+   "kind": "alder",
+   "lods": [
+    "SM_Tree_alder_2_LOD0",
+    "SM_Tree_alder_2_LOD1",
+    "SM_Tree_alder_2_LOD2"
+   ],
+   "data": "alder_2.txt",
+   "count": 6674,
+   "cull_cm": 220000,
+   "shadow": true
+  },
+  {
+   "kind": "dry_shrub",
+   "lods": [
+    "SM_Tree_dry_shrub_0_LOD0",
+    "SM_Tree_dry_shrub_0_LOD1",
+    "SM_Tree_dry_shrub_0_LOD2"
+   ],
+   "data": "dry_shrub_0.txt",
+   "count": 1068,
+   "cull_cm": 20000,
+   "shadow": false
+  },
+  {
+   "kind": "dry_shrub",
+   "lods": [
+    "SM_Tree_dry_shrub_1_LOD0",
+    "SM_Tree_dry_shrub_1_LOD1",
+    "SM_Tree_dry_shrub_1_LOD2"
+   ],
+   "data": "dry_shrub_1.txt",
+   "count": 1067,
+   "cull_cm": 20000,
+   "shadow": false
+  },
+  {
+   "kind": "dry_shrub",
+   "lods": [
+    "SM_Tree_dry_shrub_2_LOD0",
+    "SM_Tree_dry_shrub_2_LOD1",
+    "SM_Tree_dry_shrub_2_LOD2"
+   ],
+   "data": "dry_shrub_2.txt",
+   "count": 1067,
+   "cull_cm": 20000,
+   "shadow": false
+  }
+ ]
+}

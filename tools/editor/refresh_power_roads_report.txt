@@ -1,0 +1,6 @@
+Backup: /Users/leolange/UnrealProjects/Kadyktschan/Saved/PowerRoadAssetBackups/20261109-180600-278644
+Roads_Blockout <- assets/terrain/roads_kadykchan.obj (MI_Road, collision True)
+Paths_Footpaths <- assets/terrain/paths_kadykchan.obj (MI_Path, collision False)
+placed 31 vegetation cells (245640 quads), 28 instanced layers (196822 instances)
+Power station imported; roads and props refreshed.
+RESULT OK

@@ -1,4 +1,14 @@
-# HANDOFF — Kadyktschan (Stand 2026-11-07, Ende Sitzung 1)
+# HANDOFF — aktueller Einstieg 2026-11-11
+
+## Aktueller Einstieg — 2026-11-11
+
+**Zuerst `production/session-state/handoff-2026-11-11.md` lesen**, danach bei Bedarf die neuesten Einträge in `production/session-state/active.md` und die dort genannten QA-Berichte. Diese aktuelle Übergabe beschreibt installierte Änderungen, Codeorte, Prüfstatus und noch offene Spielabnahme.
+
+Das Karten-/Fernwald-Update ist laut Protokollen erfolgreich gebaut und importiert. Die älteren Abschnitte unten sind eine Chronik vom 2026-11-07; ihre Statusangaben und damaligen Aufträge sind überholt. Weiterhin gültige Schutzregeln wie keine Git-Änderungen ohne Anweisung und persönliche Einstellungen erhalten gelten unverändert. `CLAUDE.md` ebenfalls lesen.
+
+---
+
+# Historischer Stand — Kadyktschan, 2026-11-07
 
 Ausführlicher Pipeline-/Feature-Stand: `production/session-state/handoff-2026-11-07.md`. Diese Datei hier ist der Einstieg.
 

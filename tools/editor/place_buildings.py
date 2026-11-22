@@ -23,7 +23,7 @@ SLOT_MI = {"Facade_Mint": "MI_T5_PaintMint", "Facade_Rose": "MI_T5_PaintRose", "
            "Wallpaper_Rose": "MI_Int_WallpaperRose", "Wallpaper_Green": "MI_Int_WallpaperGreen", "FloorBoards": "MI_Int_FloorBoards",
            "Linoleum": "MI_Int_Linoleum", "Furniture": "MI_Int_Furniture", "Carpet": "MI_Int_Carpet", "Sofa": "MI_Int_Sofa",
            "Radiator": "MI_Int_Radiator", "BlackPlastic": "MI_Int_BlackPlastic", "Screen": "MI_Int_Screen", "Paper": "MI_Int_Paper",
-           "Enamel": "MI_Int_Enamel", "Stencil": "MI_T5_Stencil",
+           "WoodGrey": "MI_WoodGrey", "Enamel": "MI_Int_Enamel", "Stencil": "MI_T5_Stencil",
            # gable mosaic (tools/asset-pipeline/murals.py)
            "Mural_Red": "MI_Mural_Red", "Mural_Brown": "MI_Mural_Brown", "Mural_White": "MI_Facade_Lime", "Mural_Skin": "MI_T5_PaintRose",
            # Kulturhaus (tools/asset-pipeline/kulturhaus.py)
@@ -31,6 +31,9 @@ SLOT_MI = {"Facade_Mint": "MI_T5_PaintMint", "Facade_Rose": "MI_T5_PaintRose", "
            "Crack": "MI_Decal_Crack", "Spall": "MI_Decal_Spall", "Rust": "MI_Decal_Rust",
            "CurtainRed": "MI_Int_Curtain", "Glass_StainBlue": "MI_Glass_StainBlue", "Glass_StainRed": "MI_Glass_StainRed",
            "Glass_StainCyan": "MI_Glass_StainCyan", "Parapet": "MI_Facade_Lime", "Roof": "MI_Roof_Slate", "Fin": "MI_Facade_Lime"}
+# story pictures (story_textures.swift): slot Pic_<Name> -> MI_Pic_<Name> (build_materials.build_pictures)
+SLOT_MI.update({"Pic_" + f[6:-6] + turn: "MI_Pic_" + f[6:-6] for f in os.listdir(os.path.join(ROOT, "assets/textures"))
+                if f.startswith("T_Pic_") and f.endswith("_D.png") for turn in ("", "@90", "@180", "@270", "_90", "_180", "_270")})  # FBX turns @ into _
 
 log_lines = []
 def log(m):
@@ -62,6 +65,7 @@ def main():
     smd.set_editor_property("combine_meshes", True)
     smd.set_editor_property("auto_generate_collision", False)
     smd.set_editor_property("generate_lightmap_u_vs", False)
+    smd.set_editor_property("normal_import_method", unreal.FBXNormalImportMethod.FBXNIM_IMPORT_NORMALS)
     tasks = []
     for b in MANIFEST:
         for name in filter(None, (b["mesh"], b.get("glass_mesh"))):
@@ -147,11 +151,12 @@ def main():
         elif unreal.EditorAssetLibrary.does_directory_exist(old):
             unreal.EditorAssetLibrary.delete_directory(old)
 
-try:
-    main()
-    log("RESULT OK")
-except Exception:
-    log("RESULT FAILED\n" + traceback.format_exc())
-finally:
-    open(REPORT, "w", encoding="utf-8").write("\n".join(log_lines) + "\n")
-    unreal.SystemLibrary.quit_editor()
+if __name__ == "__main__":
+    try:
+        main()
+        log("RESULT OK")
+    except Exception:
+        log("RESULT FAILED\n" + traceback.format_exc())
+    finally:
+        open(REPORT, "w", encoding="utf-8").write("\n".join(log_lines) + "\n")
+        unreal.SystemLibrary.quit_editor()

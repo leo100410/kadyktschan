@@ -1,0 +1,369 @@
+{
+ "steps": [
+  {
+   "id": "power",
+   "place": "Elektrizitätswerk",
+   "place_en": "Power station",
+   "sequential": true,
+   "goal": "Geh zum verlassenen Elektrizitätswerk. Prüfe die Anlage, setze die Ersatzsicherung ein und starte den Notstrom (E).",
+   "goal_en": "Go to the abandoned power station. Inspect the set, fit the spare fuse and start backup power (E).",
+   "done": "Der Beleuchtungsring hat wieder Strom. Sieh dich nun in Antoninas Wohnung um.",
+   "done_en": "The lighting circuit has power again. Now explore Antonina’s flat.",
+   "door": [
+    69.2,
+    340,
+    7.579
+   ],
+   "clues": [
+    {
+     "id": "power_inspect",
+     "title": "Notstromanlage prüfen",
+     "text": "Die alte Netzeinspeisung ist abgetrennt. Ein kleines Dieselaggregat versorgt nur den Beleuchtungsring. Die Ersatzsicherung liegt auf der Werkbank.",
+     "title_en": "Inspect backup plant",
+     "text_en": "The old mains feed is isolated. A small diesel set supplies only the lighting circuit. A spare fuse is on the workbench.",
+     "pos": [
+      78.1,
+      336.2,
+      9.029
+     ]
+    },
+    {
+     "id": "power_fuse",
+     "title": "Ersatzsicherung einsetzen",
+     "text": "Du setzt die bereitliegende Sicherung in den getrennten Notstromkreis ein. Jetzt fehlt noch der Start am Starthebel.",
+     "title_en": "Fit spare fuse",
+     "text_en": "You fit the spare fuse into the isolated backup circuit. Use the start lever to start the set.",
+     "pos": [
+      76,
+      343.6,
+      8.629
+     ]
+    },
+    {
+     "id": "power_restore",
+     "title": "Notstrom starten",
+     "text": "Das Aggregat läuft an. Auf der Straße leuchten erste gelbe Lampen. Einige Leitungen und Leuchten sind beschädigt; die Versorgung bleibt unzuverlässig.",
+     "title_en": "Start backup power",
+     "text_en": "The generator starts. The first yellow streetlights come on. Damaged cables and fixtures leave parts of the circuit unreliable.",
+     "pos": [
+      78.1,
+      338.2,
+      8.929
+     ]
+    }
+   ]
+  },
+  {
+   "id": "antonina",
+   "place": "Antonina (Lenina 8)",
+   "goal": "Sieh dich in Antoninas Wohnung um: ул. Ленина 8, der Eingang vor dir, im Treppenhaus die Tür links.",
+   "done": "Antonina lebte nach der Abschaltung allein im kalten Block. Petja brachte ihr Kohle – bis er Ende März 2004 nicht mehr kam. Sie wollte, dass Brigadier Orlow sie holt. Orlow wohnte gegenüber, in der ул. Ленина 7.",
+   "place_en": "Antonina (Lenina 8)",
+   "goal_en": "Look around Antonina's flat: ul. Lenina 8, the entrance in front of you, in the stairwell the door on the left.",
+   "done_en": "After the shutdown Antonina lived alone in the cold block. Petya brought her coal – until he stopped coming at the end of March 2004. She wanted brigade leader Orlov to come for her. Orlov lived across the yard, at ul. Lenina 7.",
+   "door": [
+    -0.74,
+    260.47,
+    6.41
+   ],
+   "clues": [
+    {
+     "id": "antonina_note",
+     "title": "Zettel auf dem Tisch",
+     "text": "„Петя, спасибо за уголь. Храни тебя Бог. Если увидишь Орлова — пусть заберёт меня отсюда. — А. Ф.“\n\n(Petja, danke für die Kohle. Gott schütze dich. Wenn du Orlow siehst – er soll mich hier rausholen.)\n\nDer Zettel wurde nie abgeholt.",
+     "title_en": "Note on the table",
+     "text_en": "„Петя, спасибо за уголь. Храни тебя Бог. Если увидишь Орлова — пусть заберёт меня отсюда. — А. Ф.“\n\n(Petya, thank you for the coal. God keep you. If you see Orlov – tell him to get me out of here.)\n\nNobody ever picked up the note.",
+     "pos": [
+      -4.542,
+      268.724,
+      8.32
+     ]
+    },
+    {
+     "id": "antonina_calendar",
+     "title": "Wandkalender 2004",
+     "text": "Januar bis März 2004. Alle drei, vier Tage steht in zittriger Schrift „уголь“ – Kohle.\n\nAm 28., 29., 30. und 31. März steht dasselbe: „Пети нет“ – Petja ist nicht gekommen.\nDarunter: „Вода замёрзла. В печке последние дрова.“ – Das Wasser ist gefroren. Die letzten Scheite im Ofen.",
+     "title_en": "Wall calendar 2004",
+     "text_en": "January to March 2004. Every three or four days, in shaky handwriting: „уголь“ – coal.\n\nOn 28, 29, 30 and 31 March the same words: „Пети нет“ – Petya did not come.\nBelow: „The water has frozen. The last logs are in the stove.“",
+     "pos": [
+      -2.737,
+      270.82,
+      8.94
+     ]
+    },
+    {
+     "id": "antonina_water",
+     "title": "Eimer in der Küche",
+     "text": "Zwei Emailleeimer und ein Kanister. Seit dem 1. November 2003 gibt es in Kadyktschan weder Wasser noch Heizung.\n\nDas Wasser in den Eimern ist zu Eis gefroren. Ein Becher steckt darin fest.",
+     "title_en": "Buckets in the kitchen",
+     "text_en": "Two enamel buckets and a canister. Since 1 November 2003 Kadykchan has had neither water nor heating.\n\nThe water in the buckets has frozen solid. A mug is stuck in the ice.",
+     "pos": [
+      -12.179,
+      271.368,
+      7.91
+     ]
+    }
+   ]
+  },
+  {
+   "id": "orlow",
+   "place": "Brigadier Orlow (Lenina 7)",
+   "goal": "Wer ist Petja, und warum kam er nicht mehr? Durchsuche Brigadier Orlows Wohnung: ул. Ленина 7, Tür links.",
+   "done": "Petja ist Pjotr Gorbunow aus Orlows Brigade. Jemand ist in Orlows Wohnung eingebrochen und hat den Schlüssel zum Stollentor mitgenommen. Gorbunow wohnte im Block ohne Hausnummer an der ул. Ленина.",
+   "place_en": "Brigade leader Orlov (Lenina 7)",
+   "goal_en": "Who is Petya, and why did he stop coming? Search brigade leader Orlov's flat: ul. Lenina 7, door on the left.",
+   "done_en": "Petya is Pyotr Gorbunov from Orlov's brigade. Someone broke into Orlov's flat and took the key to the adit gate. Gorbunov lived in the block without a house number on ul. Lenina.",
+   "door": [
+    41.83,
+    214.31,
+    6.55
+   ],
+   "clues": [
+    {
+     "id": "orlow_photo",
+     "title": "Brigadefoto",
+     "text": "Zwölf Männer vor dem Portal von Stollen 3, Juli 1999. Einer ist mit Kuli eingekreist: „Петя“.\n\nDaneben der Wimpel „Лучшая бригада“ – beste Brigade.",
+     "title_en": "Brigade photo",
+     "text_en": "Twelve men in front of the portal of Adit 3, July 1999. One is circled in ballpoint: „Петя“.\n\nBeside it the pennant „Лучшая бригада“ – best brigade.",
+     "pos": [
+      36.611,
+      224.403,
+      8.84
+     ]
+    },
+    {
+     "id": "orlow_page",
+     "title": "Seite aus dem Schichtbuch",
+     "text": "„15.11.2001. Letzte Schicht. Stollen auf Befehl geschlossen. Die Ehrentafel ist im Stollen geblieben, 42 m. Tor versiegeln. Der Schlüssel ist bei mir. — Orlow“\n\nDarunter die Adressen der Brigade. Rot unterstrichen: „Горбунов П. – дом без номера у Ленина, кв. 1“.",
+     "title_en": "Page from the shift log",
+     "text_en": "„15.11.2001. Last shift. Adit closed by order. The board of honour has stayed in the adit, 42 m. Seal the gate. I have the key. — Orlov“\n\nBelow, the brigade's addresses. Underlined in red: „Горбунов П. – дом без номера у Ленина, кв. 1“ – the block without a number on Lenina Street.",
+     "pos": [
+      40.458,
+      223.43,
+      8.05
+     ]
+    },
+    {
+     "id": "orlow_plan",
+     "title": "Plan von Stollen 3",
+     "text": "Grubenplan im Maßstab 1:500. Bei 42 m ist mit Bleistift die Ehrentafel eingetragen.\n\nKurz davor, blau: „вент. ходок → выход на склон“ – ein alter Wetterschacht, Ausgang am Hang.",
+     "title_en": "Plan of Adit 3",
+     "text_en": "Mine plan, scale 1:500. At 42 m the board of honour is pencilled in.\n\nJust before it, in blue: „вент. ходок → выход на склон“ – an old ventilation raise, exit on the slope.",
+     "pos": [
+      40.78,
+      224.469,
+      8.9
+     ]
+    },
+    {
+     "id": "orlow_keys",
+     "title": "Schlüsselbrett",
+     "text": "Sechs Haken, jeder beschriftet. Unter dem fünften steht „штольня 3 – ворота“ – Stollen 3, Tor.\n\nDer Haken ist leer. Am Türrahmen der Wohnung sind frische Hebelspuren – jemand ist eingebrochen.",
+     "title_en": "Key board",
+     "text_en": "Six hooks, each labelled. Under the fifth: „штольня 3 – ворота“ – Adit 3, gate.\n\nThe hook is empty. Fresh pry marks on the door frame – someone broke in.",
+     "pos": [
+      33.045,
+      223.139,
+      8.77
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gorbunov",
+   "place": "Wohnung Gorbunow",
+   "goal": "Finde Pjotr Gorbunows Wohnung: der Block ohne Hausnummer an der ул. Ленина (Karte Nr. 1), Tür links.",
+   "done": "Pjotr hat sich der Räumung widersetzt und ist geblieben, um mit Kessel 2 im Kesselhaus die letzten Alten durch den Winter zu bringen. Das Kesselhaus liegt im Nordwesten (Karte Nr. 2).",
+   "place_en": "Gorbunov's flat",
+   "goal_en": "Find Pyotr Gorbunov's flat: the block without a house number on ul. Lenina (map no. 1), door on the left.",
+   "done_en": "Pyotr defied the evacuation and stayed, to keep boiler 2 in the boiler house running and get the last old people through the winter. The boiler house is in the north-west (map no. 2).",
+   "door": [
+    -12.0,
+    128.5,
+    5.23
+   ],
+   "clues": [
+    {
+     "id": "gorbunov_order",
+     "title": "Bescheid der Verwaltung",
+     "text": "„ПРЕДПИСАНИЕ. Wärme- und Stromversorgung werden am 01.11.2003 eingestellt. Alle Bewohner haben die Siedlung bis zum 31.10.2003 zu verlassen. Wer bleibt, bleibt auf eigene Verantwortung.“\n\nQuer darüber mit Kugelschreiber: „Не поеду. П. Г.“ – Ich fahre nicht.",
+     "title_en": "Order from the administration",
+     "text_en": "„ORDER. Heating and electricity will be cut off on 01.11.2003. All residents must leave the settlement by 31.10.2003. Those who stay do so at their own risk.“\n\nScrawled across it in ballpoint: „Не поеду. П. Г.“ – I am not going.",
+     "pos": [
+      -26.81,
+      132.9,
+      7.62
+     ]
+    },
+    {
+     "id": "gorbunov_calendar",
+     "title": "Küchenkalender",
+     "text": "Oktober 2003. Die Tage bis zum 9. sind abgestrichen. Der 10. ist rot eingekreist: „автобус 7:40 — Валя и Лида“.\n\nAn diesem Morgen fuhren seine Frau und seine Tochter nach Magadan. Ohne ihn.",
+     "title_en": "Kitchen calendar",
+     "text_en": "October 2003. The days up to the 9th are crossed out. The 10th is circled in red: „автобус 7:40 — Валя и Лида“.\n\nThat morning his wife and daughter left for Magadan. Without him.",
+     "pos": [
+      -26.16,
+      132.9,
+      7.62
+     ]
+    },
+    {
+     "id": "gorbunov_letter",
+     "title": "Brief auf dem Nachttisch",
+     "text": "„Валя, родная! Я не могу уехать. В нашем доме остались старики … Если котёл встанет, они замёрзнут.“\n\n(Walja, Liebste! Ich kann nicht weg. In unserem Haus sind noch die Alten. Wenn der Kessel stehen bleibt, erfrieren sie. Die Verwaltung hat den Strom abgedreht, ich halte den Kessel mit Holz am Laufen. Im Frühjahr komme ich. Sag Lida: Papa ist nicht stur, Papa hat Dienst.)\n\nNie abgeschickt.",
+     "title_en": "Letter on the bedside table",
+     "text_en": "„Валя, родная! Я не могу уехать. В нашем доме остались старики … Если котёл встанет, они замёрзнут.“\n\n(Valya, my love! I can't leave. The old people are still in our building. If the boiler stops, they'll freeze. The administration has cut the power, I keep the boiler going on wood. I'll come in spring. Tell Lida: papa isn't stubborn, papa is on duty.)\n\nNever sent.",
+     "pos": [
+      -22.19,
+      135.12,
+      6.73
+     ]
+    }
+   ]
+  },
+  {
+   "id": "kessel",
+   "place": "Kesselhaus",
+   "goal": "Geh zum Kesselhaus im Nordwesten (Karte Nr. 2). Pjotrs Ecke ist neben Kessel 2, ganz rechts.",
+   "done": "Als die letzten Alten fort waren, löschte Pjotr den Kessel und ging in den gesperrten Stollen, um die Ehrentafel seiner Brigade herauszuholen. Schura in der Telefonzentrale hat alles mitgehört (Karte Nr. 3).",
+   "place_en": "Boiler house",
+   "goal_en": "Go to the boiler house in the north-west (map no. 2). Pyotr's corner is next to boiler 2, on the far right.",
+   "done_en": "When the last old people were gone, Pyotr put out the boiler and went into the sealed adit to bring out his brigade's board of honour. Shura at the telephone exchange heard everything (map no. 3).",
+   "door": [
+    432.75,
+    -602.89,
+    -10.25
+   ],
+   "clues": [
+    {
+     "id": "kessel_log",
+     "title": "Pjotrs Kesselbuch",
+     "text": "Ein Winter in Zahlen: Druck fällt, die Kohle geht aus, er verheizt Bretter aus der Schule. 14.02.: „Stromleitung gekappt. Nur noch Holz.“ 27.02.: „−52 Grad draußen. Ich halte durch.“\n\n30.03.2004: „Котёл 2 погашен. Антонину забрал вертолёт МЧС. Греть больше некого. Иду в третью штольню за доской почёта. Ребята поедут со мной.“\n\n(Kessel 2 gelöscht. Antonina hat der Rettungshubschrauber geholt. Es gibt niemanden mehr zu wärmen. Ich gehe in Stollen 3, die Ehrentafel holen. Die Jungs fahren mit mir.)",
+     "title_en": "Pyotr's boiler log",
+     "text_en": "A winter in numbers: the pressure falls, the coal runs out, he burns planks from the school. 14.02: „Power line cut. Only wood now.“ 27.02: „−52 degrees outside. Holding on.“\n\n30.03.2004: „Котёл 2 погашен. Антонину забрал вертолёт МЧС. Греть больше некого. Иду в третью штольню за доской почёта. Ребята поедут со мной.“\n\n(Boiler 2 put out. The rescue helicopter took Antonina. There is no one left to keep warm. I'm going into Adit 3 for the board of honour. The lads are coming with me.)",
+     "pos": [
+      443.174,
+      -606.609,
+      -8.75
+     ]
+    },
+    {
+     "id": "kessel_phone",
+     "title": "Feldtelefon",
+     "text": "Eine Leitung zur Telefonzentrale – und eine zweite, frisch verlegte, die den Hang hinauf führt.\n\nAuf Pappe daneben: „Шура – АТС, по полевому“. Schura, der Funkamateur, hörte mit.",
+     "title_en": "Field telephone",
+     "text_en": "One line to the telephone exchange – and a second, freshly laid, running up the slope.\n\nOn a piece of cardboard: „Шура – АТС, по полевому“. Shura, the radio amateur, was listening.",
+     "pos": [
+      444.391,
+      -606.484,
+      -7.95
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ats",
+   "place": "Telefonzentrale",
+   "goal": "Geh zur Telefonzentrale, ул. Школьная 8 (Karte Nr. 3). Der Funkraum ist rechts vom Flur.",
+   "done": "Im Stollen gab es einen Einsturz, während Pjotr mit der Tafel auf dem Rückweg war. Danach nur noch Stille. Niemand kam ihm zu Hilfe. Stollen 3 liegt oben am Nordhang (Karte Nr. 8).",
+   "place_en": "Telephone exchange",
+   "goal_en": "Go to the telephone exchange, ul. Shkolnaya 8 (map no. 3). The radio room is to the right of the corridor.",
+   "done_en": "The adit collapsed while Pyotr was on his way back with the board. After that, only silence. Nobody came to help. Adit 3 lies up on the northern slope (map no. 8).",
+   "door": [
+    54.32,
+    7.04,
+    3.29
+   ],
+   "clues": [
+    {
+     "id": "ats_log",
+     "title": "Funk-Logbuch",
+     "text": "03.04.2004, 09:15: „Er ist drin. Tor mit Orlows Schlüssel geöffnet.“\n11:40: „Die Tafel ist bei ihm. Er kommt zurück.“\n11:52: „Грохот. Связь пропала.“ – Ein Donnern. Die Verbindung ist weg.\n\nIn Rot: „12:30 Stille. 16:00 Stille. 04.04. 08:00 Stille. In Sussuman angerufen. Rettung erst im Frühjahr.“",
+     "title_en": "Radio log",
+     "text_en": "03.04.2004, 09:15: „He is in. Gate opened with Orlov's key.“\n11:40: „He has the board. He is coming back.“\n11:52: „Грохот. Связь пропала.“ – A roar. The line is dead.\n\nIn red: „12:30 silence. 16:00 silence. 04.04 08:00 silence. Called Susuman. No rescue before spring.“",
+     "pos": [
+      62.105,
+      14.653,
+      4.79
+     ]
+    },
+    {
+     "id": "ats_shelf",
+     "title": "Tonbandregal",
+     "text": "Bänder 1 bis 72, sauber nummeriert. Nummer 41 fehlt.\n\nAuf dem leeren Platz ein Zettel: „41 – 03.04.2004, штольня. Отдать Орлову.“ – Für Orlow.",
+     "title_en": "Tape shelf",
+     "text_en": "Tapes 1 to 72, neatly numbered. Number 41 is missing.\n\nOn the empty space a note: „41 – 03.04.2004, штольня. Отдать Орлову.“ – For Orlov.",
+     "pos": [
+      65.744,
+      10.79,
+      5.42
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mine",
+   "place": "Stollen 3",
+   "goal": "Steig zu Stollen 3 am Nordhang hinauf (Karte Nr. 8). Folge dem Kabel in den Stollen. Taschenlampe: L.",
+   "done": "Pjotr hat den Einsturz überlebt. Er kletterte durch den alten Wetterschacht hinaus, mit der Ehrentafel seiner Brigade, und machte sich auf den Weg nach Magadan, zu Walja und Lida.\n\nEnde dieser Version. Das Finale ist ein Vorschlag (design/narrative/story-places.md).",
+   "place_en": "Adit 3",
+   "goal_en": "Climb up to Adit 3 on the northern slope (map no. 8). Follow the cable into the adit. Flashlight: L.",
+   "done_en": "Pyotr survived the collapse. He climbed out through the old ventilation raise with his brigade's board of honour and set off for Magadan, to Valya and Lida.\n\nEnd of this version. The ending is a proposal.",
+   "door": [
+    975.34,
+    -681.57,
+    8.06
+   ],
+   "clues": [
+    {
+     "id": "mine_gate",
+     "title": "Das Tor",
+     "text": "Das Gittertor steht offen, aufgeschlossen, nicht aufgebrochen. Am Boden läuft ein Telefonkabel hinein.",
+     "title_en": "The gate",
+     "text_en": "The barred gate stands open, unlocked, not forced. A telephone cable runs in along the floor.",
+     "pos": [
+      973.969,
+      -681.725,
+      10.4
+     ]
+    },
+    {
+     "id": "mine_board",
+     "title": "Leere Halterung",
+     "text": "Zwei Halterungen im Fels, dazwischen ein heller Fleck, wo zwanzig Jahre die Ehrentafel der Brigade hing. Sie ist abgeschraubt, nicht abgerissen.\n\nDahinter versperrt Geröll den Stollen. Das Kabel verschwindet darin.",
+     "title_en": "Empty brackets",
+     "text_en": "Two brackets in the rock, between them a pale patch where the brigade's board of honour hung for twenty years. It was unscrewed, not torn off.\n\nBehind it, rubble blocks the adit. The cable disappears into it.",
+     "pos": [
+      1006.888,
+      -709.935,
+      10.65
+     ]
+    },
+    {
+     "id": "mine_vent",
+     "title": "Der Wetterschacht",
+     "text": "Ein alter Holzrahmen, dahinter Sprossen, die steil nach oben ins Dunkel führen. Auf den Pfosten schwarze Handabdrücke aus Kohlenstaub – frisch, von innen nach oben.",
+     "title_en": "The ventilation raise",
+     "text_en": "An old timber frame, behind it rungs climbing steeply up into the dark. On the posts, black handprints of coal dust – fresh, leading upwards.",
+     "pos": [
+      1005.503,
+      -705.052,
+      10.2
+     ]
+    },
+    {
+     "id": "mine_note",
+     "title": "Pjotrs Zettel",
+     "text": "„Завалило за мной. Выхожу через вент. ходок. Доска со мной. Ребята едут домой. Шура, Орлов — я живой. Валя, Лида — иду. — П. Г., 04.04.2004“\n\n(Hinter mir ist es eingestürzt. Ich gehe durch den Wetterschacht raus. Die Tafel habe ich. Die Jungs fahren nach Hause. Schura, Orlow – ich lebe. Walja, Lida – ich komme.)",
+     "title_en": "Pyotr's note",
+     "text_en": "„Завалило за мной. Выхожу через вент. ходок. Доска со мной. Ребята едут домой. Шура, Орлов — я живой. Валя, Лида — иду. — П. Г., 04.04.2004“\n\n(It caved in behind me. I'm getting out through the ventilation raise. I have the board. The lads are going home. Shura, Orlov – I'm alive. Valya, Lida – I'm coming.)",
+     "pos": [
+      1008.079,
+      -707.723,
+      9.56
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,8 @@
+# Lampensichtweite und Dämmerung
+
+
+### 2026-11-09 — Lampensichtweite und Dämmerung korrigiert
+Nutzer meldet späte Lampenbeleuchtung sowie hellen Boden bei Dämmerung 100 %. Ursache im Code: AKdkTownPower aktivierte nur 16 nächste Lichtquellen innerhalb 100 m; AKdkSkyCycle dimmte das direkte Sonnenlicht, ließ die SkyLight-Intensität aber unverändert.
+Änderung: Entfernungs-/Anzahlabschaltung entfernt, alle funktionierenden Leuchten folgen dem Stromzustand; normale Sichtfeld-/Größenprüfung des Renderers bleibt. r.MinScreenRadiusForLights von Engine-Standard 0,03 auf 0,01 reduziert. Keine Vergrößerung des physikalischen Lichtkegels oder Leuchtradius. Bei voller Dämmerung Sonne -4 Grad, direkte Intensität 3 %, Himmelslicht 4 %, Nebelluminanz 15 % des geladenen Tageswerts. Regler 0 bzw. Dämmerung aus stellt gespeicherte Tages-Basiswerte wieder her. Helligkeitsregler bleibt erhalten.
+Prüfung: originale EvaluateSkyCycle-Funktion mit clang++ separat kompiliert, Tageswerte, Dämmerung, Zwischenwerte, Clamping und Rückkehr geprüft. UE-Automation SkyCycle.DuskDimsSunAndAmbient ergänzt; noch nicht ausgeführt. Entfernung/Anzahlabschaltung und gemeinsamer Zustand für Leuchtkörper/Lichtquelle statisch geprüft. UE-APIs gegen installierte Header geprüft.
+Vollständiger UE-Build und Spielprüfung offen (bekannte Sandbox-Sperre für UBT-Trace). tools/play.sh kompiliert beim nächsten normalen Start automatisch; kein erneuter Asset-/Vegetationsimport nötig. Mehr gleichzeitig sichtbare Lichter können Bildrate kosten; tatsächliche Leistung und Dämmerung im Spiel noch prüfen. Keine Git-Befehle und keine persönlichen GameUserSettings geändert.

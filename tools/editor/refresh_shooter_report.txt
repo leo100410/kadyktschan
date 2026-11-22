@@ -1,0 +1,28 @@
+SM_Obs_Slabs: 144 quads, collision True
+SM_Obs_ConcreteFence: 576 quads, collision True
+SM_Obs_Truck: 176 quads, collision True
+SM_Obs_Bus: 248 quads, collision True
+SM_Obs_Barricade: 170 quads, collision True
+SM_Obs_CableDrums: 360 quads, collision True
+SM_Obs_Scrap: 116 quads, collision True
+SM_Shooter_Bandage: 12 quads, collision False
+SM_Shooter_Medkit: 24 quads, collision False
+SM_Shooter_Ammo: 18 quads, collision False
+SM_Shooter_Vest: 18 quads, collision False
+SM_Shooter_Radio: 20 quads, collision False
+SM_Shooter_Documents: 12 quads, collision False
+SM_Shooter_Jammer: 28 quads, collision False
+SM_Shooter_Workbench: 126 quads, collision True
+SM_Shooter_Rifle: 80 quads, collision False
+SM_Shooter_TurretBase: 62 quads, collision True
+SM_Shooter_TurretHead: 70 quads, collision True
+SM_Shooter_Drone: 194 quads, collision True
+sound A_CamGlitch
+sound A_Click
+sound A_DroneMotor_Loop
+sound A_Impact
+sound A_Shot
+sound A_ShotFar
+sound A_TurretSpin
+19 meshes, 7 sounds under /Game/Kadykchan/Shooter
+RESULT OK

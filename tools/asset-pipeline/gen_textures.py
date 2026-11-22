@@ -7,7 +7,10 @@ PaintColor by (_D * 2), so the material's albedo mean equals the palette value (
 """
 import os, sys, zlib
 import numpy as np
-import imagecodecs
+try:
+    import imagecodecs
+except ImportError:  # e.g. Blender's bundled Python: plain zlib PNG writer below
+    imagecodecs = None
 
 N = 2048
 rng = np.random.default_rng(1986_2011)
@@ -42,7 +45,17 @@ def lin_to_srgb(x):
     return np.where(x <= 0.0031308, 12.92 * x, 1.055 * np.power(x, 1 / 2.4) - 0.055)
 
 def save(path, arr):
-    open(path, "wb").write(imagecodecs.png_encode(arr))
+    if imagecodecs:
+        open(path, "wb").write(imagecodecs.png_encode(arr))
+        return
+    import struct
+    a = arr if arr.ndim == 3 else arr[..., None]
+    h, w, c = a.shape
+    raw = b"".join(b"\x00" + a[y].astype(np.uint8).tobytes() for y in range(h))
+    chunk = lambda t, d: struct.pack(">I", len(d)) + t + d + struct.pack(">I", zlib.crc32(t + d) & 0xFFFFFFFF)
+    ctype = {1: 0, 3: 2, 4: 6}[c]
+    open(path, "wb").write(b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", w, h, 8, ctype, 0, 0, 0))
+                           + chunk(b"IDAT", zlib.compress(raw, 6)) + chunk(b"IEND", b""))
 
 def normal_from_height(h, strength):
     gy, gx = np.gradient(h)
@@ -67,19 +80,31 @@ def material(name, out, macro, fine, streak_strength, rough_base, rough_var, hei
     print("%-10s D mean(lin)=%.3f" % (name, lin.mean()))
 
 def leaves(name, out, n_leaves, size_px, elong):
-    """RGBA leaf-cluster card for masked foliage: grey detail (mean 0.5 linear on leaf pixels) + alpha mask."""
+    """RGBA leaf-cluster card for masked foliage: grey detail (mean 0.5 linear on leaf pixels) + alpha mask.
+    Leaves gather in 4-6 lobes around twigs and thin out towards the edge, so the card's square never shows
+    (user 2026-11-08: bushes read as blocks); darker inside the cluster for depth."""
     M = 1024
     yy, xx = np.mgrid[0:M, 0:M]
     lum, alpha = np.zeros((M, M)), np.zeros((M, M), bool)
+    lobes = [(M / 2 + rng.uniform(-0.22, 0.22) * M, M / 2 + rng.uniform(-0.22, 0.22) * M, rng.uniform(0.1, 0.18) * M)
+             for _ in range(rng.integers(4, 7))]
+    for lx, ly, lr in lobes:  # twig from the centre to each lobe, under the leaves
+        for t in np.linspace(0, 1, 160):
+            px, py = int(M / 2 + (lx - M / 2) * t), int(M / 2 + (ly - M / 2) * t)
+            lum[py - 2:py + 2, px - 2:px + 2] = 0.18
+            alpha[py - 2:py + 2, px - 2:px + 2] = True
+    dist = np.hypot(xx - M / 2, yy - M / 2) / (M / 2)
     for _ in range(n_leaves):
-        cx, cy = rng.integers(40, M - 40, 2)
+        lx, ly, lr = lobes[rng.integers(len(lobes))]
+        cx, cy = (np.clip(rng.normal(lx, lr), 30, M - 30), np.clip(rng.normal(ly, lr), 30, M - 30))
         r = rng.uniform(*size_px)
         a = rng.uniform(0, np.pi)
         u = ((xx - cx) * np.cos(a) + (yy - cy) * np.sin(a)) / (r * elong)
         v = (-(xx - cx) * np.sin(a) + (yy - cy) * np.cos(a)) / r
         m = u * u + v * v < 1
-        lum[m] = rng.uniform(0.35, 0.65) * (0.85 + 0.15 * (1 - np.abs(v[m])))  # lighter midrib
+        lum[m] = rng.uniform(0.35, 0.65) * (0.85 + 0.15 * (1 - np.abs(v[m]))) * (0.7 + 0.35 * dist[m])  # midrib, inner shade
         alpha |= m
+    alpha &= dist < 0.97  # nothing reaches the card border
     lum[alpha] += 0.5 - lum[alpha].mean()
     lum[~alpha] = 0.5  # neutral colour under transparent pixels: no dark fringes once mip-mapped
     rgb = (lin_to_srgb(lum) * 255).round().astype(np.uint8)
@@ -118,6 +143,37 @@ def carpet_motif(yy, xx):
     rings = (np.sin(d * np.pi * 10) > 0.3).astype(float)
     cross = ((u < 10) | (v < 10)).astype(float) * 0.6
     return np.clip(rings * 0.7 + cross, 0, 1)
+
+
+def fabric(name, out):
+    """Fine woven upholstery with worn patches; threads repeat below 1 cm on the 2 m tile."""
+    yy, xx = np.mgrid[0:N, 0:N]
+    warp = np.sin(xx * 2 * np.pi / 4)
+    weft = np.sin(yy * 2 * np.pi / 8)
+    weave = warp * weft
+    wear = periodic_noise(0.02)
+    lum = 0.5 + 0.028 * weave + 0.06 * (wear - wear.mean())
+    save(os.path.join(out, "T_%s_D.png" % name), (lin_to_srgb(lum) * 255).round().astype(np.uint8))
+    save(os.path.join(out, "T_%s_N.png" % name), normal_from_height(weave * 0.04, 0.8))
+    rough = np.clip(0.87 + 0.08 * (wear - 0.5), 0, 1)
+    orm = np.stack([np.full((N, N), 255, np.uint8), (rough * 255).astype(np.uint8), np.zeros((N, N), np.uint8)], -1)
+    save(os.path.join(out, "T_%s_ORM.png" % name), orm)
+
+
+def veneer(name, out):
+    """Directional cabinet veneer: long grain and narrow pores, with faded varnish."""
+    yy, xx = np.mgrid[0:N, 0:N]
+    phase = xx * 52 * np.pi / N + 0.7 * np.sin(yy * 2 * np.pi / N) + 0.25 * np.sin(yy * 6 * np.pi / N)
+    grain = np.sin(phase) * 0.5 + np.sin(phase * 3) * 0.2
+    pores = np.maximum(0, np.cos(phase * 9) - 0.86) * 2
+    wear = periodic_noise(0.015)
+    lum = 0.5 + 0.075 * grain - 0.1 * pores + 0.035 * wear
+    lum += 0.5 - lum.mean()
+    save(os.path.join(out, "T_%s_D.png" % name), (lin_to_srgb(lum) * 255).round().astype(np.uint8))
+    save(os.path.join(out, "T_%s_N.png" % name), normal_from_height(grain * 0.04 - pores * 0.1, 1.2))
+    rough = np.clip(0.6 + 0.16 * (wear - 0.5) + pores * 0.15, 0, 1)
+    orm = np.stack([np.full((N, N), 255, np.uint8), (rough * 255).astype(np.uint8), np.zeros((N, N), np.uint8)], -1)
+    save(os.path.join(out, "T_%s_ORM.png" % name), orm)
 
 def planks_motif(yy, xx):
     """Floor boards 12.8 cm wide, staggered butt joints (stand-in for herringbone parquet, see decision log)."""
@@ -285,14 +341,29 @@ def seed(name):
 if __name__ == "__main__":
     out = sys.argv[1]
     os.makedirs(out, exist_ok=True)
+    only = os.environ.get("KDK_TEX_ONLY")  # e.g. LeavesBroad_A,LeavesNeedle_A: regenerate just these
+    if only:
+        for nm in only.split(","):
+            seed(nm)
+            {"LeavesBroad_A": lambda: leaves("LeavesBroad_A", out, 900, (9, 22), 1.6),
+             "Fabric_A": lambda: fabric("Fabric_A", out),
+             "Veneer_A": lambda: veneer("Veneer_A", out),
+             "LeavesWillow_A": lambda: leaves("LeavesWillow_A", out, 350, (6, 13), 3.2),
+             "LeavesAlder_A": lambda: leaves("LeavesAlder_A", out, 500, (10, 19), 1.15),
+             "LeavesNeedle_A": lambda: leaves("LeavesNeedle_A", out, 2200, (3, 6), 5.0)}[nm]()
+        sys.exit(0)
     seed("Plaster_A"); material("Plaster_A", out, macro=0.004, fine=0.25, streak_strength=0.2, rough_base=0.82, rough_var=0.2, height_strength=6, macro_weight=0.3, contrast=0.06)
     seed("Concrete_A"); material("Concrete_A", out, macro=0.008, fine=0.4, streak_strength=0.2, rough_base=0.88, rough_var=0.15, height_strength=10)
     seed("Ground_A"); ground_dirt("Ground_A", out)
     seed("PaintWood_A"); material("PaintWood_A", out, macro=0.01, fine=0.6, streak_strength=0.1, rough_base=0.7, rough_var=0.25, height_strength=3)
-    seed("LeavesBroad_A"); leaves("LeavesBroad_A", out, 520, (9, 22), 1.6)   # birch / shrub
-    seed("LeavesNeedle_A"); leaves("LeavesNeedle_A", out, 1400, (3, 6), 5.0)  # larch tufts
+    seed("LeavesBroad_A"); leaves("LeavesBroad_A", out, 900, (9, 22), 1.6)   # birch / shrub
+    seed("LeavesNeedle_A"); leaves("LeavesNeedle_A", out, 2200, (3, 6), 5.0)  # larch tufts
     seed("Wallpaper_A"); pattern_detail("Wallpaper_A", out, wallpaper_motif)
     seed("Carpet_A"); pattern_detail("Carpet_A", out, carpet_motif, grain=0.6)
+    seed("Fabric_A"); fabric("Fabric_A", out)
+    seed("Veneer_A"); veneer("Veneer_A", out)
+    seed("LeavesWillow_A"); leaves("LeavesWillow_A", out, 350, (6, 13), 3.2)
+    seed("LeavesAlder_A"); leaves("LeavesAlder_A", out, 500, (10, 19), 1.15)
     seed("Planks_A"); pattern_detail("Planks_A", out, planks_motif)
     seed("GrassBlades_A"); grass("GrassBlades_A", out)
     seed("Grime_A"); grime("Grime_A", out)

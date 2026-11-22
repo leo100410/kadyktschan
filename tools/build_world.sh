@@ -16,14 +16,22 @@ T=assets/terrain/terrain_kadykchan_8km.obj
 # horizon: needs the N62 tiles too (Copernicus_DSM_COG_10_N62_00_E14{6,7}_00_DEM.tif) for 30 km to the south
 $PYTHON -I tools/research/dem_ring_obj.py assets/terrain/terrain_backdrop_60km.obj 30000 300 3950 "$DEM_DIR"/*.tif
 python3 -I tools/research/lines_to_obj.py design/research/data/blockout-2026-11-07.json roads assets/terrain/roads_kadykchan.obj $T
+python3 -I tools/research/lines_to_obj.py design/research/data/blockout-2026-11-07.json tracks assets/terrain/tracks_kadykchan.obj $T
 python3 -I tools/research/lines_to_obj.py design/research/data/blockout-2026-11-07.json rivers assets/terrain/rivers_kadykchan.obj $T
 $PYTHON -I tools/asset-pipeline/gen_textures.py assets/textures
+$PYTHON tools/asset-pipeline/road_wear.py assets/textures
+python3 tools/research/fetch_surfaces.py
+python3 -I tools/research/verge_details.py
 $PYTHON -I tools/asset-pipeline/gen_audio.py assets/audio
 blender --background --factory-startup --python tools/asset-pipeline/build_t5_kit.py -- "$PWD"
 blender --background --factory-startup --python tools/asset-pipeline/build_buildings.py -- "$PWD"
 python3 -I tools/research/lines_to_obj.py design/research/data/blockout-2026-11-07.json paths assets/terrain/paths_kadykchan.obj $T assets/buildings/buildings_manifest.json
 $PYTHON -I tools/research/scatter_vegetation.py design/research/data/blockout-2026-11-07.json assets/vegetation/scatter.json "${DEM[@]}"
 rm -f assets/vegetation/SM_Veg_*.fbx
+if [[ -f assets/power/site.json ]]; then
+  python3 tools/research/power_update.py
+  blender --background --factory-startup --python tools/asset-pipeline/build_power_station.py -- "$PWD"
+fi
 blender --background --factory-startup --python tools/asset-pipeline/build_vegetation.py -- "$PWD"
 # UE 5.8 on macOS 27 crashes while quitting (Slate teardown) after saving; -unattended suppresses the dialog
 for step in build_materials build_blockout place_ground place_buildings place_vegetation place_audio apply_atmosphere; do
@@ -31,3 +39,11 @@ for step in build_materials build_blockout place_ground place_buildings place_ve
   echo "$step: $(tail -1 tools/editor/${step}_report.txt)"
   grep -q "RESULT OK" tools/editor/${step}_report.txt || { cat tools/editor/${step}_report.txt; exit 1; }
 done
+
+if [[ -f assets/power/site.json ]]; then
+  python3 tools/research/town_map_data.py design/research/data/blockout-2026-11-07.json assets/buildings/buildings_manifest.json Content/Kadykchan/Data/TownMap.json
+  python3 tools/research/story_data.py
+  "$UE" "$P" -ExecutePythonScript="$PWD/tools/editor/refresh_power_roads.py" -unattended > /dev/null 2>&1 || true
+  pkill -f CrashReportClient || true
+  [[ "$(tail -1 tools/editor/refresh_power_roads_report.txt)" == 'RESULT OK' ]] || exit 1
+fi

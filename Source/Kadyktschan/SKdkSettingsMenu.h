@@ -11,6 +11,9 @@ public:
 	SLATE_BEGIN_ARGS(SKdkSettingsMenu) {}
 		/** Called when the player closes the menu (button or Esc / M). */
 		SLATE_EVENT(FSimpleDelegate, OnClose)
+		/** Called after the language was switched; the owner rebuilds the menu in the new language. */
+		SLATE_EVENT(FSimpleDelegate, OnLanguage)
+		SLATE_EVENT(FSimpleDelegate, OnFurnishingMap)
 	SLATE_END_ARGS()
 
 	void Construct(const FArguments& InArgs);

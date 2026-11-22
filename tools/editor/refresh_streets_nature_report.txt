@@ -1,0 +1,8 @@
+Backup: /Users/leolange/UnrealProjects/Kadyktschan/Saved/StreetsNatureAssetBackups/20261109-173736-776050
+Roads_Blockout <- assets/terrain/roads_kadykchan.obj (MI_Road, collision True)
+Paths_Footpaths <- assets/terrain/paths_kadykchan.obj (MI_Path, collision False)
+placed Tracks_Dirt
+Tracks_Dirt <- assets/terrain/tracks_kadykchan.obj (MI_Path, collision False)
+Ground_VergeDetails <- assets/terrain/verge_details.obj (MI_VergeScan, collision False)
+placed 0 vegetation cells (0 quads), 28 instanced layers (196875 instances)
+RESULT OK

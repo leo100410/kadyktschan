@@ -26,6 +26,7 @@ class Part:
 
     def __init__(self, name):
         self.name, self.verts, self.faces, self.face_mat, self.mats = name, [], [], [], []
+        self.smooth_faces = set()
 
     def box(self, x0, x1, y0, y1, z0, z1, mat):
         if mat not in self.mats:
@@ -38,6 +39,62 @@ class Part:
             self.faces.append(tuple(b + i for i in f))
             self.face_mat.append(self.mats.index(mat))
 
+    def bevel_box(self, x0, x1, y0, y1, z0, z1, mat, b):
+        """Box with chamfered edges and corners (6 faces, 12 edge strips, 8 corner triangles): furniture with soft
+        edges instead of hard cubes (user 2026-11-08: "die Inneneinrichtung sieht viel zu eckig aus")."""
+        b = min(b, (x1 - x0) / 2.5, (y1 - y0) / 2.5, (z1 - z0) / 2.5)
+        if b < 0.002:
+            return self.box(x0, x1, y0, y1, z0, z1, mat)
+        if mat not in self.mats:
+            self.mats.append(mat)
+        lo, hi = (x0, y0, z0), (x1, y1, z1)
+        c = [(lo[a] + hi[a]) / 2 for a in range(3)]
+        base = len(self.verts)
+        idx = {}
+        for i in (0, 1):
+            for j in (0, 1):
+                for k in (0, 1):
+                    corner = (hi[0] if i else lo[0], hi[1] if j else lo[1], hi[2] if k else lo[2])
+                    for ax in range(3):  # the corner point that belongs to the face normal to ax
+                        pt = list(corner)
+                        for o in range(3):
+                            if o != ax:
+                                pt[o] += -b if (i, j, k)[o] else b
+                        idx[(i, j, k, ax)] = len(self.verts)
+                        self.verts.append(tuple(pt))
+        m = self.mats.index(mat)
+        def poly(ids):
+            pts = [self.verts[v] for v in ids]
+            cen = [sum(p[a] for p in pts) / len(pts) for a in range(3)]
+            n = [0.0, 0.0, 0.0]
+            for q in range(len(pts)):
+                p0, p1 = pts[q], pts[(q + 1) % len(pts)]
+                n[0] += (p0[1] - p1[1]) * (p0[2] + p1[2]); n[1] += (p0[2] - p1[2]) * (p0[0] + p1[0]); n[2] += (p0[0] - p1[0]) * (p0[1] + p1[1])
+            if sum(n[a] * (cen[a] - c[a]) for a in range(3)) < 0:
+                ids = ids[::-1]
+            self.faces.append(tuple(ids)); self.face_mat.append(m)
+        for ax in range(3):                         # the six faces
+            o1, o2 = [a for a in range(3) if a != ax]
+            for side in (0, 1):
+                ring = []
+                for u, v in ((0, 0), (1, 0), (1, 1), (0, 1)):
+                    key = [0, 0, 0]; key[ax] = side; key[o1] = u; key[o2] = v
+                    ring.append(idx[tuple(key) + (ax,)])
+                poly(ring)
+        for ax in range(3):                         # edge strips along ax, between the faces of the other two axes
+            o1, o2 = [a for a in range(3) if a != ax]
+            for s1 in (0, 1):
+                for s2 in (0, 1):
+                    q = []
+                    for along in (0, 1):
+                        key = [0, 0, 0]; key[ax] = along; key[o1] = s1; key[o2] = s2
+                        q.append((tuple(key) + (o1,), tuple(key) + (o2,)))
+                    poly([idx[q[0][0]], idx[q[1][0]], idx[q[1][1]], idx[q[0][1]]])
+        for i in (0, 1):                            # corner triangles
+            for j in (0, 1):
+                for k in (0, 1):
+                    poly([idx[(i, j, k, 0)], idx[(i, j, k, 1)], idx[(i, j, k, 2)]])
+
     def build(self):
         me = bpy.data.meshes.new(self.name)
         me.from_pydata(self.verts, [], self.faces)
@@ -45,9 +102,14 @@ class Part:
         uv = me.uv_layers.new(name="UVMap")
         for poly in me.polygons:
             poly.material_index = self.face_mat[poly.index]
+            poly.use_smooth = poly.index in self.smooth_faces
             sc = MAT_UV.get(self.mats[self.face_mat[poly.index]], UV_SCALE)
             n = poly.normal
             axis = max(range(3), key=lambda i: abs(n[i]))  # box projection on the dominant axis
+            name = self.mats[self.face_mat[poly.index]]
+            if name.startswith("Pic_"):
+                pic_uv(me, uv, poly, axis, n[axis] > 0, int(name.split("@")[1]) if "@" in name else 0)
+                continue
             for li in poly.loop_indices:
                 co = me.vertices[me.loops[li].vertex_index].co
                 u, v = {0: (co.y, co.z), 1: (co.x, co.z), 2: (co.x, co.y)}[axis]
@@ -62,6 +124,24 @@ class Part:
         ob = bpy.data.objects.new(self.name, me)
         bpy.context.scene.collection.objects.link(ob)
         return ob
+
+
+def pic_uv(me, uv, poly, axis, positive, turn=0):
+    """A story picture (material Pic_<Name>) fills its face once, upright and unmirrored as seen from the front:
+    on a wall the image's right runs to the viewer's right, on a table its top points to +y; Pic_<Name>@90/180/270
+    turns a lying picture so its top points to +x / -y / -x (towards whoever reads it)."""
+    cos = [me.vertices[me.loops[li].vertex_index].co for li in poly.loop_indices]
+    # (horizontal coordinate as seen by the viewer, its sign), vertical coordinate
+    right, up = {0: ((1, 1 if positive else -1), 2), 1: ((0, -1 if positive else 1), 2), 2: ((0, 1 if positive else -1), 1)}[axis]
+    (ra, rs), ua = right, up
+    lo_r, hi_r = min(c[ra] for c in cos), max(c[ra] for c in cos)
+    lo_u, hi_u = min(c[ua] for c in cos), max(c[ua] for c in cos)
+    for li, c in zip(poly.loop_indices, cos):
+        u = (c[ra] - lo_r) / ((hi_r - lo_r) or 1.0)
+        u, v = (u if rs > 0 else 1.0 - u), (c[ua] - lo_u) / ((hi_u - lo_u) or 1.0)
+        if axis == 2 and turn:
+            u, v = {90: (1.0 - v, u), 180: (1.0 - u, 1.0 - v), 270: (v, 1.0 - u)}[turn]
+        uv.data[li].uv = (u, v)
 
 
 def panel_with_opening(p, w, h, ox, ow, oz0, oz1, mat):
@@ -148,7 +228,10 @@ def entrance(p, leaf):
     rise_total = G["pile"]["crawl_height"] + G["plinth_band"]
     steps = 6
     p.box(dx - 0.3, dx + dw + 0.3, -1.2, 0.0, -0.2, 0.0, "Concrete")                    # landing
-    for k in range(steps - 1):  # 6 risers: landing + 5 steps down to the ground
+    # 6 risers down to the nominal ground, then 6 more below it: where the terrain falls away from the house the
+    # flight keeps going instead of ending in a 1 m block (user 2026-11-07: "Weg blockiert"); on level ground the
+    # extra steps sit under the terrain
+    for k in range(steps - 1 + 6):
         y1 = -1.2 - 0.3 * k
         # solid down to BURY: on sloping ground the steps must not hang in the air
         p.box(dx - 0.1, dx + dw + 0.1, y1 - 0.3, y1, -rise_total - BURY, -rise_total * (k + 1) / steps, "Concrete")

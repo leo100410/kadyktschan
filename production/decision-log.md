@@ -142,3 +142,306 @@ zurückgenommen werden kann.
 ## 2026-11-07 — Phase-3-Grafik freigegeben, erster Commit, Start Mechanik
 - Nutzer: „mache 1 und 2 beides selbstständig“, also Grafikteil von Phase 3 freigeben, ersten Commit anlegen und mit dem Notizbuch-Prototyp beginnen.
 - Commit-Autor über `git -c` nur für diesen Commit gesetzt (im Repo ist kein `user.name` konfiguriert); kein Push.
+- **Notizbuch-Prototyp als HTML, nicht in UE:** Die Hypothese betrifft Logik und Fairness der Thesen, nicht Gefühl oder Grafik. Eine Browser-Seite lässt sich in Minuten ändern und an Testpersonen weitergeben. Riskanteste Annahme: Feedback „X von N stimmen“ ohne Kosten führt zum Durchprobieren. Zwei Thesen, 9 Funde, Ablenker. Kyrillische Namen mit deutschen Lesehilfen, damit die Sprache nicht das Ergebnis verfälscht. Familie, Wohnung 14 und Stollen 3 sind FIKTION und keiner realen Adresse zugeordnet (Ethik-Regel).
+
+## 2026-11-07 — Story-Innenräume (Nutzer: lieber wenige Räume mit detaillierter, zur Story passender Einrichtung)
+- **Drei Orte statt vieler Grundeinrichtungen.** Grundlage ist die Geschichte aus dem Notizbuch-Prototyp (FIKTION): Walja und Lida fahren im Oktober 2003 mit dem Bus weg, Pjotr bleibt und hält Kessel 2 durch den Winter 2003/04 am Laufen, und der Funkamateur in der Telefonzentrale nimmt das auf Band auf.
+  1. **Wohnung der Familie Gorbunow** im Satelliten-Haus `PLA_SAT_S_Block` (ohne echte Adresse, nahe ул. Ленина), damit die Familie keiner realen Adresse zugeordnet ist (Ethik-Regel). Ein Zimmer für drei: Ehebett mit nackter Matratze, Wandteppich, Nachttisch mit herausgezogener Schublade und Brief, offener leerer Schrank mit Kinderschuh, Spiegel mit Foto dahinter, Lidas Bett mit Schulranzen, Heften und Kinderzeichnung. Küche für eine Person: ein Teller, eine Tasse, voller Aschenbecher, Konservendosen-Turm, halb zugeklebtes Fenster, Kalender mit rot markiertem Freitag, Drahtfunk-Lautsprecher. Flur: Grubenhelm am Haken, leere Haken, Filzstiefel, Briefstapel hinter der Tür, Hörer neben dem Telefon. Nachbarwohnung bewusst fast leer (Kontrast).
+  2. **Kesselhaus** im Werksgebäude `PLA_OSM_170991713` (dort steht schon der Schornstein): Kessel 1 kalt, die Tür liegt am Boden; Kessel 2 mit Kohlehalde, Schaufel und Schubkarre. In Pjotrs Ecke: Eisenpritsche, Kiste als Tisch, Kessel, Tasse, Petroleumlampe, Logbuch, Feldtelefon zur Telefonzentrale, Kalender mit durchgestrichenen Tagen, Familienfoto, Wattejacke, Filzstiefel, Brennholz, Werkbank.
+  3. **Telefonzentrale** in `PLA_Shkolnaya_8` (Dossier: Haus unbekannt, ANNAHME): Relaishalle mit drei Gestellreihen, abgenommenen Blechen und hängenden Kabeln. Funkraum mit Sender, Empfänger, Tonbandgerät mit Spulen, Morsetaste, Mikrofon, Kopfhörer, Weltkarte mit QSL-Karten und Antennenkabel zum Fenster. Dazu ein Regal mit nummerierten Tonbandkartons, in dem ein Karton fehlt (Band 41).
+- Runde Formen (Kessel, Rohre, Spulen, Tassen, Brennholz) als echte Zylinder (`story_rooms.cyl/hcyl`), passend zu „weniger eckig“. Nur vorhandene Materialien, daher keine neuen `SLOT_MI`-Einträge.
+- Die Pflanzenpositionen dieser drei Häuser im Manifest haben sich verschoben (anderer Zufallsverlauf). Die Vegetation wurde nicht neu gestreut, die alten Positionen liegen weiter auf denselben Dächern und Rändern.
+- Der Prototyp nennt „Wohnung 14, dritter Stock“; im Spiel liegt die Wohnung im Erdgeschoss, weil nur Erdgeschoss-Ausschnitte gebaut werden. Das wird beim Story-Design angeglichen.
+
+## 2026-11-07 — Innenräume begehbar, Karte im Spiel, Taschenlampe
+
+- **Anlass (Nutzer):** „in das Haus 1 komme ich nicht rein weil der Weg blockiert ist“, Karte ins Spiel, Taschenlampe, Häuser innen dunkel.
+- **Ursachen gefunden (Code gelesen, Gegenstände nachgemessen):**
+  1. Treppenhaus (`interiors.stairwell`, auch Lenina 8): Treppe an der linken Wand bis nach hinten, Zwischenpodest quer über die Rückseite, Schutthaufen in der Mitte. Die beiden Wohnungstüren hinten links und rechts waren nicht erreichbar (rechts blieben 32 cm, die Spielfigur braucht 68 cm).
+     **Neu:** Die Treppe beginnt hinten und steigt zur Fassade. Der Schutt liegt auf den oberen Stufen, die Briefkästen hängen an der rechten Wand. Rechte Hälfte und Rückseite sind frei.
+  2. Küche (Gorbunow und Lenina 8): Der Kühlschrank stand direkt hinter der Küchentür.
+     **Neu:** Die Tür liegt bei -1,4..-0,6, Herd und Kühlschrank stehen an der Treppenhauswand.
+  3. Kesselhaus: Der Kohlehaufen versperrte den einzigen Weg zu Pjotrs Ecke. Er liegt jetzt in der Halle neben Kessel 2.
+  5. Zimmertür (Gorbunow und Lenina 8): Die Badwand bei x = -4,2 lief mitten durch die Türöffnung -4,6..-3,8, vom Flur blieben 40 cm.
+     **Neu:** Die Tür liegt bei -4,05..-3,25. Lidas Bett steht jetzt am Fenster, die Fotos hängen neben der Tür. Das Sofa in Lenina 8 ist kürzer.
+  6. **Hauptursache:** Die Eingangstreppe aller Häuser endete auf der nominellen Bodenhöhe des Hauses. Wo das Gelände vor dem Haus abfällt, blieb ein etwa 1 m hoher Block. Gefunden mit dem Lauftest am Kesselhaus, Belegbild `2026-11-08-walk-kessel.png`.
+     **Neu:** `build_t5_kit.entrance` legt 6 zusätzliche Stufen unter die Bodenlinie (insgesamt 11 × 27,5 cm). Auf ebenem Boden liegen sie unter dem Gelände. Das betrifft alle Häuser.
+  4. Vor den Türen der eingerichteten Häuser standen Bäume und Schutt (Telefonzentrale: Birke direkt in der Tür). `scatter.json` war älter als die Eingänge im Manifest. Die Basis-Pflanzen der Heldengebäude umgingen außerdem die Eingangs-Freihaltung.
+     **Fix:** `scatter_vegetation.py` hält jetzt auch bei Basis-Pflanzen 8 m vor jedem Eingang frei.
+     **Neu:** Aus `scatter.json` habe ich einmalig Birken, Büsche, Schutt und Trümmer im 8-m-Feld vor den 6 eingerichteten Häusern entfernt: 16 Birken, 7 Büsche, 11 Schutt, 37 Trümmer. Dachpflanzen, Bänke und die Büste bleiben. Ein kompletter Neulauf ist nicht möglich, weil die DEM-Kacheln auf diesem Mac fehlen.
+- **Adresse der Familie:** Laut Nutzer ist es egal, ob das Haus eine echte Adresse hat. Die Wohnung bleibt trotzdem im Block PLA_SAT_S_Block, ohne Umbau. Das ist ein bestehendes Haus von Satellitenbildern, das in OSM ohne Adresse eingetragen ist. Es wurde kein neues Haus gebaut.
+- **Karte (K oder Tab):** Slate-Overlay `SKdkTownMap`, das Spiel läuft weiter.
+  - **Inhalt:** Grundrisse, Straßen, Fluss, die 6 eingerichteten Häuser nummeriert und eingefärbt (rot Story, blau Phase 3), ein Pfeil für Spielerposition und Blickrichtung, Maßstab 100 m.
+  - **Daten:** `Content/Kadykchan/Data/TownMap.json` aus `tools/research/town_map_data.py`. Wird als UFS-Datei mit ins Paket gepackt.
+- **Taschenlampe (L):** Spotlicht an der Kamera.
+  - **Werte:** 1200 lm, warm, Kegel 12°/28°, Reichweite 25 m, wirft Schatten, beim Start aus.
+- **Prüf-Hooks (nur Kommandozeile):** `-KdkStart=N,E,Yaw`, `-KdkWalk=N,E;…` (protokolliert „reached“ oder „stuck“), `-KdkTorch`, `-KdkMap`.
+
+## 2026-11-08 — Großes Update über Nacht (Nutzer: Vegetation, Gelände, Details, Innenräume am Start, Stollen)
+
+Auftrag des Nutzers vor dem Schlafen: „mache … ohne weitere Aufforderung weiter … großes Update“.
+Referenz: das Luftbild der Nutzerin (Image #20). Darauf ist das Tal dicht bewaldet, im Ort steht überall gelbgrünes Jungholz, zwischen den Blöcken wenig freier Boden, die Hügel tragen dunklen Wald.
+
+- **Vegetation als Instanzen**
+  - **Technik:** Neue C++-Klasse `AKdkFoliageField`, die je Art und Variante ein Hierarchical-Instanced-Static-Mesh-Bauteil aus `Content/Kadykchan/Data/Foliage/*.txt` füllt. Dazu ein Automation-Test `Kadyktschan.Foliage.ParseSkipsMalformedLines`.
+  - **Warum:** Das Zusammenführen pro Zelle skaliert nicht auf 200.000 Pflanzen.
+  - **Formen:** Neue Vorlagen mit 3 LODs: Lärche mit Astetagen, junge Lärche, Weidenbusch mit mehreren Stämmen, Birke, Zwergstrauch. LOD1 und LOD2 haben weniger, aber größere Karten.
+  - **Grenzen:** Grasbüschel und Requisiten bleiben in Zellen zusammengeführt. Kein Nanite für Laub (art bible 8.7), keine Kollision, damit das Dickicht den Ort nicht zusperrt.
+- **Dichte**
+  - **Wald:** 110.000 Lärchen von 250 m bis 3,8 km, flächengleichmäßig verteilt.
+  - **Ort und Ortsrand:** etwa 85.000 Weiden und Junglärchen in Haufen.
+  - **Höfe:** 2.150 Birken.
+  - **Nachrechnung:** `scatter_vegetation.py` läuft ohne die fehlenden DEM-Kacheln über die Gelände-OBJ (`dem_to_obj.load_obj`). Der Abgleich mit der alten Verteilung ergibt 0,0 m im Mittel und 0,25 m maximal.
+- **Farben** (`palette_2011.json`):
+  - Boden olivgrün statt beige.
+  - Ab etwa 1 km geht der Boden in dunklen Taiga-Boden über (`ColorForest`, `ForestAmount`).
+  - Jede Laub-Instanz ist zufällig gelber oder dunkler (`PerInstanceRandom`, `Variation`).
+- **Blätterkarten:** Die Blätter sitzen jetzt in 4–6 Büscheln an Zweigen und dünnen zum Rand aus. Vorher war das Kartenquadrat als Block sichtbar. `gen_textures.py` läuft dafür mit Blenders Python, mit einem eigenen PNG-Schreiber als Ersatz.
+- **Details im Ort**
+  - Schutt, Steine und Haufen sind unregelmäßige, gekippte Brocken (`rock`) mit Bewehrungsstahl.
+  - Neu: 9 Ruinen abgerissener Plattenbauten. Stehende Wandplatten mit Fensterlöchern, Deckenplatten, Trümmerberg.
+  - Neu: 19 Trafo- und Pumpenhäuschen an den Straßen.
+  - Alle Positionen sind ANNAHME.
+- **Innenräume am Start**
+  - **ул. Ленина 8:** Story-Wohnung von Antonina Fjodorowna. Nachbarwohnung geplündert.
+  - **ул. Ленина 7:** Wohnung von Brigadier Orlow, Nachbarwohnung mit eingestürzter Decke.
+  - Story in `design/narrative/story-places.md`, Kanon-Status Provisional.
+  - Der Notizbuch-Prototyp ist noch nicht angepasst.
+- **Stollen 3 (Nordhang), begonnen** – FIKTION, Lage ANNAHME
+  - **Lage:** steilster Hang nordwestlich, 540 m vom Kesselhaus.
+  - **Gelände:** `mine_site.py` schneidet 5 × 5 Zellen aus dem 30-m-Gelände und setzt ein 0,5-m-Stück mit Einschnitt ein. Höhen auf den Originaldreiecken, damit die Naht bleibt.
+  - **Bauwerk:** `build_mine.py` baut:
+    - Portal mit Stützmauern
+    - offenes Gittertor
+    - 52 m Stollen mit Holz- und Stahlausbau
+    - Gleis, Loren, Halde, Lampenhaus, Strommasten
+    - einen Bruch am Ende
+  - **Platzierung:** `place_mine.py`.
+  - **Karte im Spiel:** Ein „Stollen 3“-Marker ist dazugekommen.
+- **Prüfung (2026-11-08, ~03:25)**
+  - **Lauftest im Spiel (`-KdkWalk`):** Alle 13 Wege kommen durch, darunter Antonina, Orlow und 40 m Stollen bis vor den Bruch.
+    - Im Stollen hat der Test drei echte Fehler gefunden, alle behoben: eine Geländewand im Stollenmund, ein schräges Dreieck und Schienen 17 cm über dem Boden.
+    - Toleranz der Wegpunkte im Test: 60 cm.
+  - **Automation:** 5/5 bestanden.
+  - **Belegbilder:** `production/qa/evidence/2026-11-08-*.png`
+  - **Taschenlampe:** 800 lm statt 1200 lm, weil die Felswände auf Armlänge überstrahlt waren. Neues Material `MI_Ground_Rock`.
+  - **Karte:** zeigt 8 Orte, der Ausschnitt schließt Orte außerhalb des Ortes ein. Die Beschriftungen am Startpunkt überlappen sich noch.
+
+## 2026-11-08 (Vormittag) – Rückmeldung des Nutzers: Lampe, Wohnungen, Story-Führung, Schweben, Blinken
+
+Nutzer: „lampe ist zu hell … gelblich, größerer Kegel aber dunkler“; „in den Wohnungen ist es kaum möglich sich zu
+bewegen … Einrichtung macht keinen Sinn … viel zu einfach“; „man versteht die Story nicht … Missionsmarker und
+interaktive Gegenstände“; „in einer Wohnung steht einfach eine Treppe im Raum“; „überall fliegende Strukturen“;
+„die Schatten blinken“ (Video). Claude entscheidet die Technik (Memory „Claude decides tech“).
+
+- **Schattenblinken – Ursache gemessen, nicht geraten**
+  - **Aufzeichnung:** Die Sonne (`AKdkSkyCycleActor`) dreht alle 0,5 s ein Stück weiter. Jeder Schritt verwirft die gespeicherten Seiten der virtuellen Schattenkarte. Im Neuberechnungs-Bild fehlen dann viele Baum- und Buschschatten (Video des Nutzers: Blinker bei 0,93 / 1,93 / 2,46 s).
+  - **Nachgestellt:** Vollbild, 40 m Flughöhe, Blick nach unten → 34 Blinker in 12 s, immer paarweise im 0,5-s-Takt. Mit angehaltener Sonne (`-KdkSkySpeed=0`) 0 Blinker. `r.Shadow.Virtual.NonNanite.UseHZB=0` half nicht (48).
+  - **Fix:** `r.Shadow.Virtual.Cache=0` (Config/DefaultEngine.ini) → 0 Blinker in 12 s, weiterhin 60 FPS. Test: Skript `flicker_test.sh` (Fenster-Aufnahme + Bilddifferenz).
+  - **Neue Dev-Hooks:** `-KdkStart` mit optionalem Pitch, Schwebehöhe und Start-Höhe für die Bodensuche; `-KdkSkySpeed=`.
+- **Taschenlampe:** 220 lm statt 800 lm, Farbe (1, 0.74, 0.42) wie eine alte Glühbirne mit schwacher Batterie, Kegel 16°/40° statt 12°/28°.
+- **Schwebende Objekte**
+  - **Ursache:** Feste Objekte standen auf der Geländehöhe ihrer Mitte. Am Hang hing die Talseite in der Luft.
+  - **Fix:** `scatter_vegetation.gfoot` setzt Häuschen, Ruinen, Garagen, Tanks, Autos, Haltestellen usw. auf den tiefsten Punkt ihrer Grundfläche. Die Hangseite sinkt ein.
+  - Häuschenwände reichen 1 m in den Boden. Ruinen bekommen ein Streifenfundament (−1,5 m).
+  - Die Stützmauern am Stollen sind jetzt durchgehend schräge Wände entlang der Geländelinie statt 1-m-Treppenstufen.
+- **Wohnungen neu (interiors.py, story_rooms.py, furniture.py)**
+  - **Tiefe:** Die drei Story-Abschnitte reichen jetzt durch den ganzen Block, 4 Achsen bis zur Rückfassade (`interiors.DEEP`). Pro Wohnung doppelte Fläche.
+  - **Grundriss:**
+    - vorne ein Wohnzimmer über beide Fenster (6 × 4,1 m)
+    - in der Mitte Flur, Bad und WC
+    - hinten Schlafzimmer und Küche
+    - Türen 0,8–0,9 m
+    - Innenwände treffen die Fassade nur zwischen zwei Fenstern
+  - **Treppenhaus:** Vorraum mit Briefkästen und beiden Wohnungstüren. Ein Lauf führt zum Zwischenpodest an der Rückwand, darüber ist der Schacht offen (keine Decke über den hinteren Treppenzellen). Der Rücklauf ist in der Mitte eingestürzt, die Trümmer liegen darunter. So bleiben die oberen Etagen unerreichbar.
+  - **Möbel:** echte Formen statt Kästen. Sofa mit Lehnen und Kissen, Bett mit Kopf- und Fußteil, Kleiderschrank mit Türen und Griffen, Küchenzeile mit Hängeschränken, Herd mit Backofentür und Knöpfen, ZIL-Kühlschrank, Röhrenfernseher, Bücherregal, Vorhänge, Läufer, Bad und WC.
+  - **Schutt:** unregelmäßige Brocken (`chunk`) statt weißer Würfel.
+  - Alles ANNAHME (Typenserie nicht dokumentiert).
+- **Story im Spiel (FIKTION, Kanon weiter Provisional)**
+  - **Ablauf:** 6 Aufgaben mit 16 Funden: Antonina → Orlow → Gorbunow → Kesselhaus → Telefonzentrale → Stollen 3.
+  - **Bedienung:**
+    - E zeigt einen Fund an (Text mit russischem Original und Übersetzung).
+    - Oben links steht die Aufgabe.
+    - Ein Marker mit Entfernung zeigt zum nächsten ungelesenen Fund. Ist der Fund weiter als 30 m entfernt, zeigt er zum Hauseingang.
+    - Gelbe Ringe markieren die Funde in Sichtweite.
+    - Ist eine Aufgabe erledigt, erscheint „Neue Erkenntnis“ mit der nächsten Aufgabe.
+    - N öffnet das Notizbuch.
+  - **Daten:** Texte und Reihenfolge stehen in `tools/research/story_data.py` und werden zu `Content/Kadykchan/Data/Story.json`. Die Positionen kommen aus den Gebäude- und Stollen-Skripten (`S.clue`).
+  - **Code:** `FKdkStory` mit 3 Automation-Tests (`Kadyktschan.Story.*`), Anzeige `SKdkStoryHud`.
+  - **Ende:** Der Vorschlag aus `story-places.md` ist umgesetzt. Am Bruch hängen die leere Halterung der Ehrentafel und Pjotrs Zettel. Pjotr geht nach Magadan, niemand stirbt. **Der Nutzer muss das noch bestätigen.**
+  - **Bewusst weggelassen:** Speichern des Fortschritts. Funde einer späteren Aufgabe zählen, sobald die Story dort ankommt.
+- **Taste E:** war im Flugmodus „hoch“. Jetzt geht es dort nur mit der Leertaste nach oben, E ist zum Ansehen frei.
+- **Prüfung (2026-11-08, Nachmittag)**
+  - **Lauftests im Spiel:** 19/19 Wege kommen durch. Das sind 3 Story-Wohnungen × Wohnzimmer, Küche, Schlafzimmer und Bad, dazu Treppenhaus bis zum Zwischenpodest, 2 Nachbarwohnungen, Kesselhaus, Telefonzentrale (2 Wege) und Stollen bis vor den Bruch.
+  - **Erster Lauf: 9 echte Blockaden, alle behoben.**
+    - Die offene Kühlschranktür stand in der Küchentür.
+    - Die Badtür war mit 0,8 m zu eng für die Spielfigur (Breite 0,68 m), jetzt 0,95 m.
+    - Im Weg standen außerdem Telefonablage, Kanister, Sessel und Umzugskartons.
+  - **Automation:** 8/8, davon neu 3 Tests unter `Kadyktschan.Story.*`.
+  - **Weidenbusch in Orlows Wohnzimmer:** Die tiefen Wohnungen ragen bis zu 1,5 m über das vereinfachte Blockout-Rechteck hinaus, und ein Weidenbusch direkt vor der Fassade wuchs durchs Fenster bis an den Schreibtisch. Fix: `scatter_vegetation.in_section` hält die eingerichteten Abschnitte plus 2 m frei.
+  - **Bücherregal:** Die Bücher steckten in einem massiven Block. Jetzt hat das Regal eine offene Front.
+  - **Marker:** Draußen zeigt er auf den Hauseingang, drinnen auf den nächsten Fund. „Drinnen“ heißt: deutlich näher am Fund als die Tür.
+  - **Belegbilder:**
+    - `2026-11-08-story-*.png`: Start, Hinweis, Text, Notizbuch, Orlow-Schlüssel, Gorbunow, Kesselhaus, Finale
+    - `2026-11-08-shadow-blink-before.jpg`
+    - Editor-Bilder der Räume, des Häuschens und des Stolleneingangs
+
+## 2026-11-08 (Nachmittag 2) – Nutzer: dramatischere Story, echte Details, Fehler in den Häusern
+
+- **Fehler aus dem Nutzer-Bild (Antoninas Wohnzimmer)**
+  - Der Wandteppich lag 2 cm in der Wand und flackerte. Jetzt hängen alle Wandbilder vor der Wandfläche (−5,92).
+  - Die Kissenpyramide schwebte 12 cm über der Matratze.
+  - Die Griffe der niedrigen Anrichte standen über der Oberkante. Die Griffhöhe richtet sich jetzt nach der Schrankhöhe.
+  - Der weiße Kalender war auf der weißen Wand unsichtbar.
+- **Echte Bilder statt Kästen**
+  - `story_textures.swift` (AppKit, kyrillische Schriften) zeichnet 15 Bilder:
+    - beide Kalender
+    - Brigadefoto: weich gezeichnet, sepia
+    - Schlüsselbrett-Beschriftung
+    - Zettel und Brief
+    - Bescheid der Verwaltung
+    - Schichtbuchseite
+    - Stollenplan
+    - Kesselbuch und Funk-Logbuch
+    - Lidas Zeichnung
+    - Familien- und Witwenfoto
+  - **Material:** Material-Slot `Pic_<Name>` (optional `@90/180/270` für liegende Blätter) → `MI_Pic_<Name>` aus `M_Picture`.
+  - **Bildkoordinaten:** Das Bild füllt die Fläche einmal, aufrecht und nicht gespiegelt (`build_t5_kit.pic_uv`).
+  - **Schlüssel:** echte 3D-Schlüssel mit Ring, Schaft und Bart an Haken über der Beschriftung, der Torschlüssel fehlt.
+- **Story dramatischer** (Details in `design/narrative/story-places.md`)
+  - Räumungsbescheid, ein Winter bei −52 °C, Rettungshubschrauber, Einsturz im Stollen mit Funkstille.
+  - Am Ende überlebt Pjotr und klettert durch den Wetterschacht hinaus.
+  - **Neue Funde:** `gorbunov_order`, `orlow_plan`, `mine_vent`. Entfallen: `gorbunov_table`, ist jetzt Dekoration.
+  - **Stollen:** Wetterschacht (Rahmen, Leiter, Handabdrücke), Feldtelefon mit Kabel in den Einsturz, Zettel als Bild.
+- **Prüfung:** 19/19 Lauftests nach dem Umbau.
+  - **Bilder im Spiel:** lesbar, aufrecht, nicht gespiegelt; liegende Blätter zeigen ihr Bild (Nahaufnahmen `story-page-close`, `story-note-close`).
+  - **Korrektur:** Der Stollenplan hing halb hinter dem Bücherregal und hängt jetzt daneben.
+  - **FBX:** wandelt `@` im Slotnamen in `_` um, `place_*` kennt beide Schreibweisen.
+
+## 2026-11-09 – Nutzer: Englisch, Hauptmenü mit Titelbild, Einrichtung zu eckig
+
+- **Englisch**
+  - Alle Texte stehen als Paar Deutsch/Englisch im Code (`KdkLoc`).
+  - **Schaltet die Sprache um:** Einstellungsmenü, Hauptmenü, Aufgabe, Hinweis, Textfenster, Notizbuch und Karte.
+  - **Story:** Die Story-Texte bekommen `*_en`-Felder (`tools/research/story_data.py`), die Karte bekommt `name_en`.
+  - Die Sprache wird gespeichert (`UKdkGameUserSettings::Language`) und lässt sich in Hauptmenü und Einstellungen umschalten.
+  - **Bewusst nicht** über Unreals Localization-Dashboard: Für zwei Sprachen und einen Entwickler wäre das zu viel Aufwand.
+- **Hauptmenü (`SKdkMainMenu`)**
+  - **Titelbild:** das Bild des Nutzers, schwarzer Balken und FPS-Anzeige entfernt, Lärchen-Silhouetten an den Rändern und Gestrüpp im Vordergrund (`tools/asset-pipeline/title_image.swift` → `Content/Kadykchan/Data/UI/Title.png`).
+  - **Menüpunkte:** Spiel starten, Einstellungen, Sprache, Beenden. Das Spiel ist pausiert, solange das Menü offen ist.
+  - **FPS-Anzeige:** im Menü ausgeblendet.
+  - **Dev-Läufe:** Mit `-KdkStart/Shot/Walk/Story` oder `-KdkNoMenu` startet das Spiel ohne Menü. `-KdkEnglish` stellt einen Lauf auf Englisch. Eine Option `-Lang=` blockierte den Engine-Start.
+- **Einrichtung weniger eckig:** Alle Möbelmaterialien bekommen gefaste Kanten (`Part.bevel_box`, Stärke je Material in `interiors.BEVEL`).
+  - Polster, Kissen und Matratzen sind stark gerundet (4–4,5 cm), Holz, Emaille und Heizkörper leicht (1–2,5 cm).
+  - Wände, Böden und Bilder bleiben scharfkantig.
+- **Prüfung:** Bilder `2026-11-08-story-menu*.png`, `-reader-en`, `-notebook-en`, `-sofa`.
+  - **Aufnahmeskript:** nimmt jetzt nur das Fenster des eigenen Spielprozesses auf (`winid <pid>`), denn ein zweites Spielfenster des Nutzers lief parallel.
+
+## 2026-11-09 — Inneneinrichtung: weichere Formen, Stoff und Furnier (Nutzerauftrag)
+
+- **Auftrag:** Einrichtung weniger eckig und langweilig; fertige Assets ausdrücklich erlaubt.
+- **Entscheidung:** Bestehende Möbel-Bauer überarbeiten, damit Größen und Fundpositionen erhalten bleiben. Gewölbte Polster, gefaltete Decken/Vorhänge, gebogene Stuhllehnen, verjüngte Tischbeine, erkennbare Nähmaschine und gewölbte TV-Bildschirme. Keine externen Assetpakete erforderlich.
+- **Material-Ursache:** Sofa/Vorhänge nutzten Concrete_A, Schrankholz PaintWood_A. Eigene Fabric_A/Veneer_A erzeugt, jeweilige D/N/ORM; Farben bleiben aus der vorhandenen Palette.
+- **Technik:** Markierte gekrümmte Flächen werden weich schattiert und beim Zusammenfügen erhalten. FBX-Import übernimmt Normalen. Runde Möbelteile benutzen jetzt die vorhandene Spiegelung von FlatView.
+- **Übernahme:** tools/rebuild_interiors.sh und tools/editor/refresh_interiors.py für fünf betroffene Häuser; bestehende Assets werden vor dem Import gesichert. Kein vollständiger Welt-Neuaufbau nötig.
+- **Geprüft:** 4 Geometrietests bestanden; alle 14 Gebäude-Fundpositionen vor/nachher gleich; vereinfachte Geometrievorschau angesehen. Beleg: production/qa/evidence/2026-11-09-furniture-geometry-comparison.png.
+- **Status ausdrücklich offen:** Blender scheitert hier vor dem Bauen beim Metal-Start (Exit 139); Unreal-Start ebenfalls nicht verfügbar. Die neuen Möbel sind noch NICHT in die Spiel-uassets importiert, der Import-/Lauftest und die Leistung sind nicht verifiziert. Nutzer hat den Aktualisierungsbefehl fürs normale Terminal erhalten. Details: production/qa/interior-update-2026-11-09.md.
+- **Rückweg:** Ausgangsquellen liegen separat unter /private/tmp/kadyktschan-interior-update/original; vor dem späteren Import gibt es zusätzlich Saved/InteriorUpdateBackups. Kein Commit.
+
+## 2026-11-09 — Material-Import nach Nutzerlauf korrigiert
+- Nutzer führte tools/rebuild_interiors.sh aus: BUILDINGS OK 5; alle fünf Gebäudemeshes und sechs Texturen wurden gespeichert. Danach RESULT FAILED bei der ersten Materialzuweisung.
+- Ursache im installierten Engine-Quellcode bestätigt: UMaterialEditingLibrary::SetMaterialInstanceTextureParameterValue initialisiert bResult mit false und gibt es auch nach erfolgreicher Zuweisung unverändert zurück (MaterialEditingLibrary.cpp:1507). Mein Skript hatte diesen Rückgabewert als Erfolgskriterium verwendet.
+- Korrektur: Textur muss geladen sein; nach dem Setzen wird der tatsächliche Parameterwert mit GetMaterialInstanceTextureParameterValue zurückgelesen und verglichen. Prüfung bleibt erhalten. Noch kein erfolgreicher erneuter Unreal-Lauf. Kein Commit.
+
+- **Bestätigung nach erneutem Nutzerlauf (2026-11-09 ~14:49):** Importbericht RESULT OK, Blender BUILDINGS OK 5. Zwei Nutzerbilder bestätigen die neuen Formen und Holzoberflächen in Antoninas Wohnung. Kein vollständiger Lauf-/Leistungsnachweis. Belege: production/qa/evidence/2026-11-09-user-interior-{kitchen,living}.png.
+
+## 2026-11-09 — Kulturhaus und Wege realistischer (Nutzerauftrag)
+- Nutzer erlaubt weitere fertige Assets für Saal, Umgebung und Wege. Saal-Sitze, Vorhangreste, Putzschutt und Kronleuchter überarbeitet; Mittel-/Quergang freigehalten. Gebäude und Stadtlayout bleiben die bisherigen.
+- Gewählte fertige Oberflächen: Poly Haven gravel_road, forest_floor, wood_floor; offizielle Seiten und CC0-Lizenz geprüft. Jeweils 2K-Diffuse/DirectX-Normal/Roughness. Holz wird matt/entsättigt. PBR-Originale ersetzen keine historischen Referenzfotos. Noch NICHT heruntergeladen.
+- Wege variieren um maximal acht Prozent, bleiben am gerenderten Terrain. 120 kollisionsfreie Bodendetailflächen neben Straßen vorbereitet, keine neuen Bäume oder Gebäude.
+- 5 Möbel-/Saaltests und 3 Umgebungsprüfungen bestanden. Vereinfachte Geometrievorschau angesehen; kein Spielbild. Aktualisierung: tools/rebuild_environment.sh, mit Sicherungen und frischem RESULT-OK-Bericht.
+- Offen: Download scheitert hier an DNS, Blender/Unreal hier nicht nutzbar. Download, Import, Sicht-/Lauftest und Leistung stehen für diesen Ausbau aus. Bericht production/qa/environment-update-2026-11-09.md. Kein Commit.
+
+## Nachtrag: erster Nutzerlauf
+
+Alle neun Poly-Haven-Dateien wurden heruntergeladen; SHA-256 stimmt mit downloads.json überein. Blender meldet BUILDINGS OK 1 und der Kulturhaus-Mesh wurde importiert. Anschließend Abbruch in scanned_surfaces.apply: invalid material pin: Input. Im installierten UE-Quellcode bestätigt: UMaterialGraphNode::GetShortenPinName wandelt Input in NAME_None um (MaterialGraphNode.cpp:610). Die beiden betroffenen Verbindungen verwenden jetzt den ersten Eingang über den leeren Namen. Der Außenbericht übernimmt außerdem kein zwischenzeitliches RESULT OK des Saal-Importers mehr. Erneuter Import und vollständiges RESULT OK stehen aus.
+
+## Erfolgreicher Nutzerlauf, 2026-11-09 ~16:59
+
+Frischer Bericht refresh_environment_report.txt endet mit RESULT OK. Backups: EnvironmentUpdateBackups/20261109-165839-798699 und InteriorUpdateBackups/20261109-165840-520573. Download, Kulturhaus-Import, Scanmaterialien sowie Straßen-, Fußweg- und Wegesrand-Import sind durchgelaufen. Endgültige Darstellung, Begehbarkeit und Leistung im Spiel sind noch nicht durch neue Spielbilder/Lauftests bestätigt.
+
+## 2026-11-09 — Asphalt statt glatter Bänder, differenzierter Bewuchs
+- Nutzer verlangt nach seinem Spielbild ausdrücklich Asphalt, weiße Linien, Risse und Verwahrlosung; zwei Luftbilder als Vegetationsreferenz. Hauptstraßen erhalten Poly Haven Asphalt 02 (offizielle CC0-Seite geprüft), 14 OSM-Tracks bleiben unbefestigt. Eigene RoadWear-Masken für große Schäden und verblasste Markierungen; Markierungen sind eine nutzergewünschte Annahme.
+- Drei zusätzliche Wuchsformen, neue Blattatlanten und Palette für verschiedene Buschhöhen; mehr niedriger Bewuchs in Gruppen, breitere Lärchenkronen. 876 niedrige Pflanzen rücken unter Gebäude-/Fluss-/Eingangsschutz an Straßenränder. Im Offline-Entwurf 200314 → 196875 Pflanzen, 19 → 28 Layer; Gras, Gebäude und Requisiten bleiben erhalten.
+- 8 relevante Prüfungen bestanden, reale Straßen- und Verteilungsdaten offline geprüft, Material-/Geometrievorschauen angesehen. Noch NICHT in Unreal importiert oder im Spiel gesehen. Neue Downloads/Editorstart hier weiter nicht möglich.
+- Neuer gezielter Aktualisierungsbefehl tools/rebuild_streets_nature.sh mit Quell-/Asset-Sicherungen. Details und Grenzen: production/qa/streets-nature-update-2026-11-09.md. Kein Commit.
+
+## Erfolgreicher Nutzerlauf – 2026-11-09 ~17:38
+
+refresh_streets_nature_report.txt endet mit RESULT OK (Backup StreetsNatureAssetBackups/20261109-173736-776050). NATURE MESHES OK 28, zwölf Scans vorhanden. Asphaltstraße MI_Road, unbefestigte Tracks und Fußwege MI_Path sowie Wegesrandflächen übernommen. 28 instanzierte Layer mit 196875 Pflanzen gespeichert; Gras-/Requisitenzellen wurden nicht ersetzt. Neue Spielbilder, Laufprüfung und Bildrate bleiben offen.
+
+
+### 2026-11-09 — Maus und Trackpad: macOS-Eingabeweg
+- Nutzer: Kamerabewegung fehlt; erneutes Einstecken hilft nur der externen Maus. Fehler bestand vor dem Straßen-/Vegetationsupdate.
+- Codeprüfung: UE 5.8 nutzt standardmäßig `Slate.MacUseNewMouseControllerMovement=1` (GCMouse im High-Precision-Modus). `ProcessMouseMovedEvent` ignoriert dabei normale AppKit-Bewegungen, außer während der Wiederzuordnung. Das passt zum Fehlerbild, ist noch kein bestätigter Hardware-Nachweis.
+- Änderung: `Config/Mac/MacEngine.ini` setzt den vorhandenen Startschalter auf 0. Dadurch läuft relative Bewegung über AppKit für Maus und Trackpad. Keine Engine-Änderung, keine Änderung der persönlichen Einstellungen.
+- Prüfung: INI-Wert, vorhandener Engine-Schalter, AppKit-Fallback und Ladefolge vor Plattforminitialisierung geprüft. Kein C++-Build notwendig. Hardwaretest ausstehend; hier kein funktionierender interaktiver Unreal-Start.
+- Abnahme: Spiel vollständig beenden und neu öffnen; Maus bereits vor dem Start anschließen. Nach Spielstart Maus und Trackpad einzeln prüfen, anschließend Einstellungen öffnen/schließen und nach App-Wechsel erneut prüfen. Empfindlichkeit kann sich mit dem Eingabeweg ändern.
+
+
+### 2026-11-09 — Auftrag: Straßen beruhigen, Hindernisse beseitigen, Notstrom als Startmission
+Ursachen anhand Generatoren gefunden: kombinierte Breiten-/Randwellen plus breite Opacity-Maske; Heizungsrohre wurden nur gegen Fassaden statt gegen alle Straßen geprüft. Breitenwellen auf Zentimeter reduziert, Randmaske eingegrenzt und Rohre an Kreuzungen getrennt.
+Neues, ausdrücklich vom Nutzer gewünschtes fiktives Elektrizitätswerk nahe dem Start (E340/N75) mit Diesel-Notstromkreis und drei geordneten E-Interaktionen. Erst Abschluss schaltet warmgelbe Straßen-/Wohnungslampen frei. Langsame individuelle Aussetzer und dauerhaft defekte Leuchten; maximal 16 nahe Lichtquellen. Kein historischer Kraftwerksstandort behauptet. Vorhandene Story folgt auf die neue Aufgabe; Karte erweitert.
+Quelländerungen vorbereitet, noch nicht in Unreal importiert. Zehn Offline-Tests und fünf native Zustandsprüfungen bestanden. C++-Gesamtbuild vor Kompilierung durch Sandbox-Zugriff auf UBT-Trace blockiert. Installation über tools/rebuild_power_roads.sh im normalen Terminal; keine Spielabnahme oder Leistung behauptet. Details und Abnahme: production/qa/power-roads-update-2026-11-09.md. Keine Git-Befehle, keine persönlichen Einstellungen überschrieben.
+
+
+### 2026-11-09 — Elektrizitätswerk-Update erfolgreich gebaut und importiert
+Nutzer führte tools/rebuild_power_roads.sh aus. Protokolle geprüft: C++ Result: Succeeded (9,71 s), POWER MESH OK 2149, VEGETATION OK (14 Gras-/17 Requisitenzellen, 28 instanzierte Schichten, 196822 Pflanzen), refresh_power_roads_report.txt endet RESULT OK. Straßen und Zugangswege importiert, Werk und Lichtmaterial gespeichert. Assetbackup: Saved/PowerRoadAssetBackups/20261109-180600-278644. Spielabnahme von Mission, Straßen, Licht und Leistung weiterhin offen; UE-Automation nicht ausgeführt.
+
+
+### 2026-11-09 — Lampensichtweite und Dämmerung korrigiert
+Nutzer meldet späte Lampenbeleuchtung sowie hellen Boden bei Dämmerung 100 %. Ursache im Code: AKdkTownPower aktivierte nur 16 nächste Lichtquellen innerhalb 100 m; AKdkSkyCycle dimmte das direkte Sonnenlicht, ließ die SkyLight-Intensität aber unverändert.
+Änderung: Entfernungs-/Anzahlabschaltung entfernt, alle funktionierenden Leuchten folgen dem Stromzustand; normale Sichtfeld-/Größenprüfung des Renderers bleibt. r.MinScreenRadiusForLights von Engine-Standard 0,03 auf 0,01 reduziert. Keine Vergrößerung des physikalischen Lichtkegels oder Leuchtradius. Bei voller Dämmerung Sonne -4 Grad, direkte Intensität 3 %, Himmelslicht 4 %, Nebelluminanz 15 % des geladenen Tageswerts. Regler 0 bzw. Dämmerung aus stellt gespeicherte Tages-Basiswerte wieder her. Helligkeitsregler bleibt erhalten.
+Prüfung: originale EvaluateSkyCycle-Funktion mit clang++ separat kompiliert, Tageswerte, Dämmerung, Zwischenwerte, Clamping und Rückkehr geprüft. UE-Automation SkyCycle.DuskDimsSunAndAmbient ergänzt; noch nicht ausgeführt. Entfernung/Anzahlabschaltung und gemeinsamer Zustand für Leuchtkörper/Lichtquelle statisch geprüft. UE-APIs gegen installierte Header geprüft.
+Vollständiger UE-Build und Spielprüfung offen (bekannte Sandbox-Sperre für UBT-Trace). tools/play.sh kompiliert beim nächsten normalen Start automatisch; kein erneuter Asset-/Vegetationsimport nötig. Mehr gleichzeitig sichtbare Lichter können Bildrate kosten; tatsächliche Leistung und Dämmerung im Spiel noch prüfen. Keine Git-Befehle und keine persönlichen GameUserSettings geändert.
+
+
+### 2026-11-09 — Wohnhäuser mehrgeschossig, Wald und Höfe detailliert
+Nutzer wünscht dichteres Stadtumfeld und Wald, mehr ausgestattete Häuser mit mehreren möblierten Etagen, erkennbare Sperren vor unfertigen Bereichen und nachvollziehbare Einrichtung statt Stückzahl.
+Vorbereitet: fünf bestehende Wohnhäuser (Lenina 7/8 EG–2. OG; Gorbunow und Schkolnaja 4/6 EG–1. OG), 24 Wohnungen mit sechs Haushaltsprofilen und erhaltenen Storyräumen. Vollständige Treppen, korrigierte Deckenöffnungen und Kopffreiheit, sichtbare Sperren an unfertigen Zugängen. Keine zusätzlichen Wohngebäude erfunden. Waldprobe rund 80.000 zusätzliche große Lärchen plus Unterwuchs, 71 Hofgruppen; Straßen/Zugänge/Stollen/Elektrizitätswerk frei. Neue Lampenpositionen aus den echten Leuchten exportiert, Spiegelung korrigiert.
+Teilneubau aktualisiert nun das Manifest unter Erhalt anderer Häuser; zentrale Materialzuordnung und Glasimport ergänzt. Bestehende BUILDINGS-OK-Zählung kompatibel gehalten. Neues Update: tools/rebuild_neighbourhood.sh.
+Offline: 18 unterschiedliche Tests sowie vollständige Gebäudezusammensetzung mit Treppen-/Deckenprüfung. Bestehende Story-Fundpositionen unverändert. Noch KEIN echter Blender-Export/Unreal-Import, kein Ingame-Lauftest und keine Leistungsmessung. Nächster Schritt: Nutzer führt Update bei geschlossenem Spiel/Editor aus; danach Saved/NeighbourhoodLogs und tools/editor/refresh_neighbourhood_report.txt prüfen.
+Details: design/art/neighbourhood-interiors.md; production/qa/neighbourhood-update-2026-11-09.md; schematischer Grundrissbeleg production/qa/evidence/2026-11-09-residential-floorplans.svg (kein Spielbild). Keine Git-Aktionen oder Änderung persönlicher Einstellungen.
+
+
+### 2026-11-10 — Nachweis des vorherigen Wohnhaus-/Waldimports
+Vor der Kartenkorrektur aktuelle Protokolle geprüft: NeighbourhoodLogs/build.log Result: Succeeded; verification.txt RESULT OK (24 Wohnungen, 190723 Lärchen, 71 Hofgruppen). refresh_neighbourhood_report.txt RESULT OK, 292188 instanzierte Pflanzen, Assetbackup 20261109-222439-980075. Der Ausbau ist also bereits importiert; das aktuelle Nutzerbild bestätigt die zusätzlichen Kartenorte. Spielabnahme aller Wohnungen/Leistung weiterhin nicht vollständig erfolgt.
+
+
+### 2026-11-10 — Kartenbeschriftung, Einrichtungskarte und Fernwald vorbereitet
+Nutzerbild: schwebende/überlappende Namen; Wunsch nach genauer Einrichtungskarte in den Einstellungen und dichterem Wald auch aus der Ferne. Stadtkarte erhält nummerierte, kollisionsfrei angeordnete Markierungen mit Verbindungslinien und fester Namensliste. Einrichtungskarte als eigener pausierter Menübildschirm: fünf Häuser, offene Eingänge, Etagen und linke/rechte Haushalte; Zurück/Esc führt in die Einstellungen. Kartendaten aus realem Manifest; Orlows bisher falsch angenommener Eingang korrigiert und Story-Eingang synchronisiert.
+Wald: höhere Blattflächenabdeckung der Fernmodelle, längere Sichtweite für Birken/junge Lärchen/Weiden/Erlen, spätere Mindestbildgrößen-Abschaltung und Alpha-Flächenerhalt in den vier Blatttexturen. Lärchen ohne feste Abschaltdistanz wie zuvor. Kein erneutes Verdichten oder Umbauen der Häuser.
+C++-Syntaxprüfung mit echten UE-Headern für drei geänderte Implementierungen und Kartentests erfolgreich. Native Markerfunktion mit 5/11/30 Punkten geprüft; vier neue Offline-Tests und drei Nature-Regressionstests bestanden. Vollständiger Build/Link, Blender-Export, Import und Spielansicht offen. Nutzer führt tools/rebuild_map_forest.sh bei geschlossenem Spiel/Editor aus; danach Saved/MapForestLogs und tools/editor/refresh_map_forest_report.txt prüfen. QA: production/qa/map-forest-fix-2026-11-10.md. Mehr Fernvegetation kann Leistung kosten; noch nicht gemessen. Keine Git-Befehle, persönliche Einstellungen erhalten.
+
+
+### 2026-11-11 — Dokumentation und Übergabeeinstieg aktualisiert
+Nutzer fragt nach vollständiger Dokumentation für Claude Code. Entscheidungslog, aktive Chronik und QA-Berichte waren vorhanden; HANDOFF.md hatte jedoch weiterhin veraltete Status-/Auftragsangaben vom 2026-11-07. Aktuelle Übergabe production/session-state/handoff-2026-11-11.md erstellt und an den Anfang von HANDOFF.md sowie in CLAUDE.md verlinkt. Historie erhalten, überholte Einschränkungen von aktuellen Nutzeraufträgen unterschieden.
+Aktuelle MapForest-Protokolle geprüft: C++ Succeeded, NATURE MESHES OK 28, Import RESULT OK (Backup 20261110-082516-873887), 292188 Instanzen. Das Update ist importiert; vollständige Spielabnahme und Bildratenmessung weiterhin offen. Keine Gameplay-/Assetänderung in diesem Dokumentationsschritt, keine Git-Befehle.
+
+
+### 2026-11-11 — Shooter-Modus „Einsatz“ (Plan freigegeben, umgesetzt)
+Nutzerauftrag: Shooter-Modus mit Gegnern, Leben über die Videokamera, Wohnungen mit Funktion, Bodycam-Gefühl, passende Hindernisse; Story bleibt. Nutzerentscheidung: Gegner = bewaffnete Plünderer + Maschinen (später evtl. eigene Maschinen bauen), Runde = Einsatz mit Aufträgen und Abholung. Design: design/gdd/shooter-mode.md.
+- Gleiche Welt statt eigener Karte: AKdkShooterDirector erzeugt Hindernisse, Funde, Gegner und Navigationsbereich zur Laufzeit als eigene Komponenten und entfernt sie danach. Die Story-Karte und der Story-Fortschritt bleiben unberührt.
+- Navigationsnetz nur zur Laufzeit (RecastNavMesh Dynamic) im Spielbereich; das Begrenzungsvolumen bekommt einen Box-Körper statt Editor-Pinselgeometrie. Erster Test: 0/24 Wohnungen erreichbar (19-cm-Raster und 34-cm-Radius fraßen Treppen und Türen auf) → 12 cm / 24 cm: 15/24, Aufbau 4–6 s. Schkolnaja 4/6: Außentreppen weiter nicht im Netz, Ursache offen (bekannte Grenze).
+- Leben = Bildqualität: Verpixelung, Unschärfe (Tiefenschärfe mit großem virtuellen Sensor, weil 100°-Weitwinkel sonst alles scharf hält) und Kamerastärke wachsen ab den Reglerwerten des Nutzers; seine gespeicherten Einstellungen werden nie geändert.
+- Funde nach Haushalt (residential.HOUSES): Verbandszeug/Verbandskasten/Munition/Weste; Verband bei vollem Leben bleibt liegen.
+- Hindernisse aus vorhandenen Blender-Bauteilen (build_vegetation: Autowrack, Schrott, Schutt) plus neue: Plattenstapel, Betonzaun, LKW, Bus, Barrikade, Kabeltrommeln. Straßenslalom alle 17 m, Höfe im 20-m-Raster, Türen 5 m frei.
+- Balance nach erstem Spieltest: Startpunkt lag neben Gegnern (Tod nach 5 s) → 55 m sicherer Radius; Plünderer 22 → 14 Schaden; Geschütz 16×6 → 11×5 (Warnton muss Zeit für Deckung lassen).
+- Gegner-Optik ANNAHME: UE-Mannequin mit unbewaffneter Animation und angehängtem Gewehr (shortcut, im Code markiert), bis eigene Plünderer-Modelle kommen.
+- Ethik: keine realen Personen, kein Story-Bezug, kein Blut. Das Konzept („Deduktion ohne Kampf“) gilt weiter für den Story-Modus; der Einsatz ist ein getrennter Modus auf Nutzerwunsch.
+- Nachtrag nach Nutzertest (11.11.): klares Bild bei vollem Leben (Reglerwerte der Story gelten im Einsatz nicht, Fischauge entfernt); Fadenkreuz mit Streuungsabstand; Treffer- und Ausschaltmarker mit Klick; Deckung mit Q nach RDR2-Vorbild (niedrige Deckung: ducken, Rechtsklick taucht auf). Desktop-Build schlug fehl, weil die Unity-Bündelung zwei Dateien mit gleichnamigen Farbkonstanten zusammenlegte → bUseUnity = false im Build.cs.
+- Zweiter Nutzertest (11.11.): Unschärfe beim Zielen war ein Fehler (enger Bildwinkel = längere Brennweite, schon kleiner Schaden machte alles unscharf) → Unschärfe ∝ D², Sensor mit tan(FOV/2) skaliert, pro Frame gesetzt. Regeneration Leben 1,5/s, Sicht 12/s nach 5 s; Treffer setzt Sicht auf Leben. Stirnlampen für Plünderer, Trefferrichtungs-Bögen (Fortnite), rote Aura, lautere geschichtete Schüsse mit Echo. Deckung neu: Kamera unter die Kante, Zielen schaut darüber bzw. seitlich vorbei; Gegner prüfen Kopf (Kamera) und Brust. Deckungsprüfung in drei Höhen (Plattenstapel haben Lücken).
+- Dritter Nutzertest (11.11.): Gegnerlogik „grauenhaft“ (sehen und schießen sofort von weit weg, bleiben stehen). Neu: entfernungsabhängiges Bemerken, Feuer nur bis 32 m, Kampfstellen 12–26 m (Deckung mit Spähpunkt bevorzugt, verteilt), Verstecken/Herausschauen bzw. Seitschritte, Stellungswechsel mit Flankieren, höchstens zwei gleichzeitige Schützen, Suche bei Sichtverlust; Drohnen Zickzack bis 5–12 m. Kontakttest: Bemerken auf 41–51 m, Deckungen 13–18 m, ungedecktes Stehen verloren nach 26 s / 12 Treffern.
+- Dynamische Grafik im Einsatz (Nutzerwunsch 11.11.): 4 Stufen (Auflösung, dann Schatten/Pflanzen, Reflexionen/Effekte/GI ≥ 1, Sichtweite), Ziel 45 FPS aus Shooter.json. Fehler im ersten Test: Die Engine speichert beim Beenden die aktuellen Grafikwerte → GameUserSettings.ini des Nutzers bekam Schatten 1 / Pflanzen 2. Sofort auf die beim Sitzungsbeginn gelesenen Werte (2 / 3) zurückgesetzt; UKdkGameUserSettings::SaveSettings schreibt seither während einer abgesenkten Stufe die Originalwerte. Zweiter Test: Datei unverändert.
+- Nutzer 11.11.: Grafikstufen senken jetzt auch die Einstellungen ab Stufe 1 (relativ zu den eigenen, mit Untergrenzen; Schatten nie aus). Gegner, die treffen, werden 2 s markiert. Test: Stufe 1/2 mit Einstellungen, Einstellungsdatei unverändert, Markierung sichtbar.
+- Nutzer 11.11.: „es wird nur alles unscharf und die Settings ändern sich nicht“. Ursache: die gespeicherten Grafikstufen sind mit Spieleinstellungs-Priorität geladen, Scalability::SetQualityLevels schreibt ohne bForce mit niedrigerer Priorität und wurde ignoriert; nur die Auflösung (eigener Weg) sank. Jetzt bForce, aktive Werte zurückgelesen und protokolliert; Auflösung erst ab Stufe 3 (0,85/0,75).

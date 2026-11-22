@@ -1,0 +1,5 @@
+Backup: /Users/leolange/UnrealProjects/Kadyktschan/Saved/NeighbourhoodAssetBackups/20261109-222439-980075
+Backup: /Users/leolange/UnrealProjects/Kadyktschan/Saved/InteriorUpdateBackups/20261109-222440-790448
+placed 31 vegetation cells (264324 quads), 28 instanced layers (292188 instances)
+Five residential houses, upper floors, barriers and courtyard/woodland geometry imported.
+RESULT OK

@@ -7,6 +7,9 @@ public class Kadyktschan : ModuleRules
 	public Kadyktschan(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+		// each .cpp on its own: several Slate files keep file-local colours (Ink, Muted) under the same names, and a
+		// unity batch that merges them fails to compile (desktop start 2026-11-11)
+		bUseUnity = false;
 
 		PublicDependencyModuleNames.AddRange(new string[] {
 			"Core",
@@ -15,11 +18,13 @@ public class Kadyktschan : ModuleRules
 			"InputCore",
 			"EnhancedInput",
 			"AIModule",
+			"NavigationSystem",
 			"StateTreeModule",
 			"GameplayStateTreeModule",
 			"UMG",
 			"Slate",
-			"SlateCore"
+			"SlateCore",
+			"Json"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });

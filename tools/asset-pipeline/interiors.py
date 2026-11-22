@@ -5,148 +5,261 @@ direction of the entrance edge, the stairwell occupies x 0..AX), y inward from t
 face, z from the ground-floor level. Layout and furniture are ANNAHME: the type-series floor plans
 are not documented (dossier question 2); props follow the V5 list and 1970s-80s catalogue shapes.
 
-Flat A lies at x -2AX..0, flat B mirrored at x AX..3AX. Same plan, different lives (V5 rule).
+2026-11-08 rework (user: "in den Wohnungen ist es kaum möglich sich zu bewegen", "in einer Wohnung steht einfach
+eine Treppe im Raum"): the section runs through the whole block (4 axes deep, front to back facade), so each flat
+has twice the floor area, and the stairwell is a real one: vestibule, flat doors left and right, a flight up to a
+half landing at the back and a broken return flight to the first floor (the shaft above it is open).
+
+Flat A lies at x -2AX..0, flat B mirrored at x AX..3AX. Plan of flat A (metres, see FLAT): living room across the
+front (both front windows), a hall band in the middle with bath and WC, bedroom and kitchen at the back facade.
+Interior walls meet the facades only at x = -AX, between two windows.
 """
 import random
 
+import furniture as fu
+
 WALL = 0.16          # interior wall thickness
 PANEL = 1.5          # oil-paint panel height (art bible 4.3)
+DEEP = 4             # axes from the front to the back facade in the furnished sections
+# edge rounding per material (metres; capped at 40 % of the thinnest side): upholstery puffy, wood and enamel soft
+BEVEL = {"Sofa": 0.045, "Carpet": 0.012, "Furniture": 0.012, "Wood": 0.01, "Enamel": 0.025, "Radiator": 0.012,
+         "BlackPlastic": 0.008, "Metal": 0.004, "Mural_Red": 0.008, "CurtainRed": 0.02, "Paper": 0.04}  # Paper: pillows
+
+# flat A plan (x along the facade, y inward); the back facade's inner face is at depth - T
+FRONT, BATH_SPLIT, BACK = 4.4, 6.0, 7.4      # living room | hall band (bath, WC) | bedroom + kitchen
+DOOR_FLAT = (4.6, 5.5)                        # flat doors in the stairwell walls
+DOOR_LIVING = (-2.2, -1.3)                    # hall -> living room (wall y = FRONT)
+DOOR_BATH, DOOR_WC = (4.56, 5.5), (6.15, 7.25)  # hall -> bath / WC (wall x = -4); 0.8 m was too tight (walk check)
+DOOR_BED, DOOR_KITCHEN = (-3.9, -3.1), (-1.6, -0.7)   # hall -> bedroom / kitchen (wall y = BACK)
+STAIR_FOOT = 6.6                              # first step of the flight up (stairwell, along x 0.15..1.4)
 
 
 def section(part, AX, ST, T, seed):
     rnd = random.Random(seed)
-    ceil = ST - 0.22
-    depth = 2 * AX                    # facade to spine
-    y0, y1 = T, depth - 0.08          # inner face of the facade .. spine face
-    S = Section(part, ceil, rnd)
-
-    # party walls and the spine closing the section (generic walls are skipped here; the generic spine has
-    # gaps at the cell edges that let daylight through)
-    for x in (-2 * AX, 3 * AX):
-        S.wall_x(x, y0, y1, "Lime", "Lime")
-    S.wall_y(depth, -2 * AX - 0.08, 3 * AX + 0.08, "Paint_Mint", "Lime")
-    # stairwell walls with flat doors at the back (hall side)
-    for x in (0.0, AX):
-        S.wall_x(x, y0, y1, "Paint_Mint", "Lime", doors=[(depth - 1.6, depth - 0.7)])
-    stairwell(S, AX, y0, y1)
-    flat(S, AX, y0, y1, mirror=False, life="family")
-    flat(S, AX, y0, y1, mirror=True, life="widow")
+    S = Section(part, ST - 0.22, rnd)
+    y0, y1 = T, DEEP * AX - T
+    stairwell(S, AX, ST, y0, y1)
+    furnish_generic(flat_shell(S, AX, y0, y1, False, "Wallpaper_Rose", "Wallpaper_Green"), "family")
+    furnish_generic(flat_shell(S, AX, y0, y1, True, "Wallpaper_Green", "Wallpaper_Rose"), "widow")
 
 
 class Section:
     def __init__(self, part, ceil, rnd):
         self.p, self.ceil, self.rnd = part, ceil, rnd
+        self.clues = {}
+        self.lights = []
 
     def box(self, x0, x1, y0, y1, z0, z1, mat):
-        self.p.box(min(x0, x1), max(x0, x1), min(y0, y1), max(y0, y1), z0, z1, mat)
+        """Furniture materials get rounded (chamfered) edges, upholstery the softest; walls, floors and papers stay
+        sharp (user 2026-11-08: "viel zu eckig")."""
+        b = BEVEL.get(mat, 0.0)
+        if b and hasattr(self.p, "bevel_box"):
+            self.p.bevel_box(min(x0, x1), max(x0, x1), min(y0, y1), max(y0, y1), z0, z1, mat, b)
+        else:
+            self.p.box(min(x0, x1), max(x0, x1), min(y0, y1), max(y0, y1), z0, z1, mat)
 
-    def _wall(self, a0, a1, c0, c1, lower, upper, doors, along_x):
-        """Wall from a0..a1 along one axis, thickness c0..c1 on the other; doors = [(a_from, a_to)]."""
+    def cyl(self, cx, cy, z0, z1, r, mat, r1=None):
+        fu.cyl(self, cx, cy, z0, z1, r, mat, r1)
+
+    def hcyl(self, axis, a0, a1, c, z, r, mat):
+        fu.hcyl(self, axis, a0, a1, c, z, r, mat)
+
+    def chunk(self, x, y, z, sx, sy, sz, mat, tilt=0.3):
+        fu.chunk(self, x, y, z, sx, sy, sz, mat, tilt)
+
+    def clue(self, name, x, y, z):
+        """Where an interactive find lies (section space); build_buildings.py writes it to the manifest in world
+        metres and tools/research/story_data.py puts it into Story.json."""
+        self.clues[name] = (x, y, z)
+
+    def _wall(self, a0, a1, c0, c1, lower, upper, doors, along_x, other=None):
+        """Wall from a0..a1 along one axis, thickness c0..c1 on the other; doors = [(a_from, a_to)]; other = (lower,
+        upper) for the far face (c1 side) when the two rooms are finished differently."""
         cuts = sorted(doors or [])
         spans, a = [], a0
         for d0, d1 in cuts:
             spans.append((a, d0)); a = d1
         spans.append((a, a1))
+        layers = [(c0, c1, lower, upper)] if not other else [(c0, (c0 + c1) / 2, lower, upper), ((c0 + c1) / 2, c1) + tuple(other)]
         for s0, s1 in spans:
             if s1 - s0 < 0.01:
                 continue
-            for z0, z1, m in ((0.0, PANEL, lower), (PANEL, self.ceil, upper)):
-                if along_x:
-                    self.box(s0, s1, c0, c1, z0, z1, m)
-                else:
-                    self.box(c0, c1, s0, s1, z0, z1, m)
+            for k0, k1, lo, up in layers:
+                for z0, z1, m in ((0.0, PANEL, lo), (PANEL, self.ceil, up)):
+                    if along_x:
+                        self.box(s0, s1, k0, k1, z0, z1, m)
+                    else:
+                        self.box(k0, k1, s0, s1, z0, z1, m)
         for d0, d1 in cuts:  # lintel above each door (doors 2.05 m)
             if along_x:
                 self.box(d0, d1, c0, c1, 2.05, self.ceil, upper)
             else:
                 self.box(c0, c1, d0, d1, 2.05, self.ceil, upper)
 
-    def wall_x(self, x, y0, y1, lower, upper, doors=None):
-        self._wall(y0, y1, x - WALL / 2, x + WALL / 2, lower, upper, doors, along_x=False)
+    def wall_x(self, x, y0, y1, lower, upper, doors=None, other=None):
+        """Wall in the plane x; 'lower, upper' face -x, 'other' (optional) faces +x."""
+        self._wall(y0, y1, x - WALL / 2, x + WALL / 2, lower, upper, doors, along_x=False, other=other)
 
-    def wall_y(self, y, x0, x1, lower, upper, doors=None):
-        self._wall(min(x0, x1), max(x0, x1), y - WALL / 2, y + WALL / 2, lower, upper, doors, along_x=True)
+    def wall_y(self, y, x0, x1, lower, upper, doors=None, other=None):
+        """Wall in the plane y; 'lower, upper' face -y, 'other' (optional) faces +y."""
+        self._wall(min(x0, x1), max(x0, x1), y - WALL / 2, y + WALL / 2, lower, upper, doors, along_x=True, other=other)
 
     def debris(self, x0, x1, y0, y1, n):
-        """Fallen plaster and ceiling pieces (art bible 6: eingefallene Decken)."""
-        for _ in range(n):
+        """Fallen plaster flakes (art bible 6: eingefallene Decken) and a few broken chunks."""
+        for k in range(n):
             x, y = self.rnd.uniform(x0, x1), self.rnd.uniform(y0, y1)
-            w, d = self.rnd.uniform(0.05, 0.4), self.rnd.uniform(0.05, 0.35)
-            self.box(x, x + w, y, y + d, 0.0, self.rnd.uniform(0.01, 0.05), "Lime")
+            if k % 6 == 0:
+                self.chunk(x, y, 0.0, self.rnd.uniform(0.08, 0.25), self.rnd.uniform(0.06, 0.2), self.rnd.uniform(0.03, 0.09), "Lime")
+            else:
+                w, d = self.rnd.uniform(0.05, 0.3), self.rnd.uniform(0.05, 0.25)
+                self.box(x, x + w, y, y + d, 0.0, self.rnd.uniform(0.008, 0.025), "Lime")
 
 
-def stairwell(S, AX, y0, y1):
-    # floor: worn concrete; mailboxes on the wall; first flight to the half landing, blocked by collapsed debris
-    S.box(0.08, AX - 0.08, y0, y1, 0.0, 0.01, "Concrete")
-    for k in range(5):  # mailbox row (почтовые ящики), sheet metal
-        S.box(0.1, 0.32, 1.0 + k * 0.34, 1.3 + k * 0.34, 1.25, 1.6, "Metal")
-    steps, rise = 9, 1.3 / 9
-    for k in range(steps):
-        S.box(0.2, 1.4, 2.4 + k * 0.28, 2.4 + (k + 1) * 0.28, 0.0, rise * (k + 1), "Concrete")
-    S.box(0.2, AX - 0.2, 2.4 + steps * 0.28, y1, 0.0, 1.3, "Concrete")          # half landing
-    S.box(1.5, 1.55, 2.4, 2.4 + steps * 0.28, 0.0, 2.2, "Metal")               # railing post line
-    for k in range(6):  # rubble heap where the second flight came down
-        S.box(1.6 + S.rnd.uniform(0, 0.6), 2.6, 2.6 + k * 0.4, 3.0 + k * 0.4, 0.0, S.rnd.uniform(0.2, 0.9), "Concrete")
-    S.debris(0.2, AX - 0.2, y0, 2.3, 25)
+class FlatView:
+    """Section seen through a mirror for flat B (x -> AX - x); boxes and round parts stay exact under the mirror."""
+
+    def __init__(self, S, AX, mirror):
+        self.S, self.p, self.rnd, self.ceil, self.mirror = S, S.p, S.rnd, S.ceil, mirror
+        self.X = (lambda x: x) if not mirror else (lambda x: AX - x)
+
+    def box(self, x0, x1, y0, y1, z0, z1, mat):
+        self.S.box(self.X(x0), self.X(x1), y0, y1, z0, z1, mat)
+
+    def cyl(self, cx, cy, z0, z1, r, mat, r1=None):
+        self.S.cyl(self.X(cx), cy, z0, z1, r, mat, r1)
+
+    def hcyl(self, axis, a0, a1, c, z, r, mat):
+        if axis == "x":
+            a0, a1 = sorted((self.X(a0), self.X(a1)))
+        else:
+            c = self.X(c)
+        self.S.hcyl(axis, a0, a1, c, z, r, mat)
+
+    def chunk(self, x, y, z, sx, sy, sz, mat, tilt=0.3):
+        self.S.chunk(self.X(x), y, z, sx, sy, sz, mat, tilt)
+
+    def clue(self, name, x, y, z):
+        self.S.clue(name, self.X(x), y, z)
+
+    def wall_x(self, x, y0, y1, lower, upper, doors=None, other=None):
+        if self.mirror and other:  # the faces swap sides under the mirror
+            (lower, upper), other = other, (lower, upper)
+        self.S.wall_x(self.X(x), y0, y1, lower, upper, doors, other)
+
+    def wall_y(self, y, x0, x1, lower, upper, doors=None, other=None):
+        a, b = sorted((self.X(x0), self.X(x1)))
+        self.S.wall_y(y, a, b, lower, upper, [tuple(sorted((self.X(d0), self.X(d1)))) for d0, d1 in (doors or [])], other)
+
+    def debris(self, x0, x1, y0, y1, n):
+        a, b = sorted((self.X(x0), self.X(x1)))
+        self.S.debris(a, b, y0, y1, n)
+
+    def place(self, x, y, rot=0):
+        return fu.Place(self, x, y, rot)
 
 
-def flat(S, AX, y0, y1, mirror, life):
-    """One flat: room (facade, outer axis), kitchen (facade, stair axis), hall + bath at the back."""
-    X = (lambda x: x) if not mirror else (lambda x: AX - x)
-    def box(x0, x1, ya, yb, z0, z1, m):
-        S.box(X(x0), X(x1), ya, yb, z0, z1, m)
-    front = 3.6                                  # front zone depth from the facade
-    wp = "Wallpaper_Rose" if life == "family" else "Wallpaper_Green"
-    floor_room = "FloorBoards" if life == "family" else "Linoleum"
-    # floors
-    box(-2 * AX + 0.08, -AX - 0.08, y0, front, 0.0, 0.012, floor_room)
-    box(-AX + 0.08, -0.08, y0, front, 0.0, 0.012, "Linoleum")
-    box(-2 * AX + 0.08, -0.08, front, y1, 0.0, 0.012, "Linoleum")
-    # walls: room | kitchen, front zone | back zone (doors to room and kitchen), bathroom wall
-    S.wall_x(X(-AX), y0, front, wp, wp)
-    S.wall_y(front, X(-2 * AX), X(0.0), wp, wp, doors=[tuple(sorted((X(-4.6), X(-3.8)))), tuple(sorted((X(-1.6), X(-0.8))))])
-    S.wall_x(X(-4.2), front, y1, "Paint_OilBlue", "Lime", doors=[(front + 0.7, front + 1.5)])
-    # --- room: wall unit, wall carpet over the sofa, table, radiator under the window, TV, photos
-    wall_unit(box, -2 * AX + 0.1, y0 + 0.3, y0 + 2.9)                                    # Schrankwand
-    box(-AX - 0.1, -AX - 0.12, y0 + 0.7, y0 + 2.7, 0.9, 2.3, "Carpet")                   # Teppich an der Wand
-    box(-AX - 0.95, -AX - 0.1, y0 + 0.8, y0 + 2.7, 0.0, 0.45, "Sofa")                    # sofa / bed
-    box(-AX - 0.3, -AX - 0.1, y0 + 0.8, y0 + 2.7, 0.45, 0.85, "Sofa")
-    box(-4.9, -4.1, y0 + 1.4, y0 + 2.2, 0.72, 0.76, "Furniture")                         # table top
-    for lx, ly in ((-4.85, 1.45), (-4.15, 1.45), (-4.85, 2.15), (-4.15, 2.15)):
-        box(lx - 0.02, lx + 0.02, y0 + ly - 0.02, y0 + ly + 0.02, 0.0, 0.72, "Furniture")
-    if life == "family":
-        for cx in (-4.75, -4.25):                                                        # two chairs
-            box(cx - 0.2, cx + 0.2, y0 + 2.3, y0 + 2.7, 0.42, 0.46, "Furniture")
-            box(cx - 0.2, cx + 0.2, y0 + 2.66, y0 + 2.7, 0.46, 0.95, "Furniture")
+def stairwell(S, AX, ST, y0, y1, connects_up=True, has_lower=False):
+    """Two full flights with a half landing; the last furnished floor ends in a visible locked barrier."""
+    H, steps, go = ST/2, 9, 0.28
+    rise, top = H/steps, STAIR_FOOT+steps*go
+    S.box(0.08, AX-0.08, y0, STAIR_FOOT if has_lower else y1, 0, 0.01, "Concrete")
+    for x, other in ((0.0, ("Paint_Mint", "Lime")), (AX, None)):
+        S.wall_x(x,y0,y1,"Paint_Mint","Lime",doors=[DOOR_FLAT],other=other)
+    for k in range(5):
+        y=1.0+k*.34
+        S.box(AX-.3,AX-.1,y,y+.3,1.2,1.55,"Metal")
+        S.box(AX-.31,AX-.3,y+.05,y+.25,1.43,1.46,"BlackPlastic")
+    if connects_up:
+        # 1.32 m flights and a 2.84 m landing allow the player capsule to turn.
+        for k in range(steps):
+            S.box(.08,1.4,STAIR_FOOT+k*go,STAIR_FOOT+(k+1)*go,max(-.04,rise*(k+1)-.2),rise*(k+1),"Concrete")
+            ya,yb=top-(k+1)*go,top-k*go
+            z=H+rise*(k+1)
+            S.box(1.6,AX-.08,ya,yb,z-.2,z,"Concrete")
+            for x in (1.43,1.57):
+                y=STAIR_FOOT+(k+.5)*go
+                level=rise*(k+1) if x<1.5 else ST-rise*k
+                S.box(x-.015,x+.015,y-.015,y+.015,level,level+.88,"Metal")
+        S.box(.08,AX-.08,top,y1,H-.22,H,"Concrete")
+        S.box(0,AX,6,STAIR_FOOT,ST-.22,ST,"Concrete")
+        # Sloping rails follow the steps instead of a floating horizontal bar.
+        for x,reverse in ((1.43,False),(1.57,True)):
+            for k in range(steps-1):
+                y=STAIR_FOOT+(k+.5)*go
+                z=(ST-rise*k if reverse else rise*(k+1))+.88
+                z2=z+(-rise if reverse else rise)
+                verts=[(x-.025,y,z-.025),(x+.025,y,z-.025),(x+.025,y,z+.025),(x-.025,y,z+.025),
+                       (x-.025,y+go,z2-.025),(x+.025,y+go,z2-.025),(x+.025,y+go,z2+.025),(x-.025,y+go,z2+.025)]
+                fu.surface(fu.Place(S,0,0),verts,[(0,1,2,3),(4,7,6,5),(0,4,5,1),(1,5,6,2),(2,6,7,3),(3,7,4,0)],"Wood")
     else:
-        box(-4.8, -4.4, y0 + 0.9, y0 + 1.3, 0.0, 0.05, "Furniture")                      # fallen chair
-    radiator(box, -5.2, -3.8, y0 + 0.05)
-    box(-5.4, -4.9, y0 + 2.75, y0 + 3.15, 0.0, 0.6, "Furniture")                          # TV stand, corner by the wall unit
-    box(-5.35, -4.95, y0 + 2.75, y0 + 3.2, 0.6, 1.1, "BlackPlastic")                     # tube TV
-    box(-5.3, -5.0, y0 + 2.72, y0 + 2.75, 0.68, 1.02, "Screen")
-    for k in range(3):  # photos on the wall towards the back zone
-        box(-5.3 + k * 0.45, -5.0 + k * 0.45, front - 0.1, front - 0.09, 1.5 + (k % 2) * 0.2, 1.85 + (k % 2) * 0.2, "Paper")
-    # --- kitchen: electric stove, ZIL-style fridge, sink cabinet, table, calendar, radiator
-    box(-0.65, -0.1, y0 + 2.6, y0 + 3.2, 0.0, 0.85, "Enamel")                            # Elektroherd
-    for bx, by in ((-0.55, 2.7), (-0.3, 2.7), (-0.55, 2.95), (-0.3, 2.95)):
-        box(bx, bx + 0.16, y0 + by, y0 + by + 0.16, 0.85, 0.87, "BlackPlastic")          # hot plates
-    box(-1.3, -0.7, y0 + 2.6, y0 + 3.2, 0.0, 1.55, "Enamel")                             # Kühlschrank
-    box(-2.9, -1.4, y0 + 2.7, y0 + 3.25, 0.0, 0.85, "Furniture")                         # sink cabinet
-    box(-2.5, -2.0, y0 + 2.75, y0 + 3.15, 0.85, 0.87, "Metal")                           # steel sink
-    box(-2.2, -1.4, y0 + 0.9, y0 + 1.6, 0.72, 0.76, "Furniture")                         # kitchen table
-    radiator(box, -2.2, -0.8, y0 + 0.05)
-    box(-0.11, -0.1, y0 + 1.2, y0 + 1.6, 1.4, 1.95, "Paper")                             # wall calendar (stair-side wall)
-    # --- hall: dial telephone on a shelf, coat rack
-    box(-0.5, -0.1, front + 0.4, front + 0.7, 0.9, 0.93, "Furniture")
-    box(-0.4, -0.2, front + 0.45, front + 0.65, 0.93, 1.02, "BlackPlastic")              # Wählscheibentelefon
-    box(-3.6, -2.6, y1 - 0.08, y1 - 0.05, 1.6, 1.65, "Furniture")                        # coat rail
-    # --- bathroom: enamel bathtub, sink
-    box(-5.9, -4.4, front + 0.1, front + 0.8, 0.0, 0.55, "Enamel")                       # Emaille-Wanne (rim)
-    box(-5.8, -4.5, front + 0.2, front + 0.7, 0.2, 0.56, "Metal")                        # inside, darker
-    box(-4.7, -4.35, y1 - 0.5, y1 - 0.1, 0.75, 0.9, "Enamel")                            # washbasin
-    # --- decay: debris; the widow's flat was left in a hurry, more fallen ceiling
-    xa, xb = sorted((X(-2 * AX + 0.2), X(-0.2)))
-    S.debris(xa, xb, y0 + 0.2, y1 - 0.2, 40 if life == "family" else 90)
+        # No stair beyond this floor: full-height closed partition with weathered horizontal planks.
+        S.box(.08,1.48,6.35,6.5,0,S.ceil,"WoodGrey")
+        S.box(1.45,1.55,6.35,9.12,0,1.15,"WoodGrey")
+        for k in range(8):
+            S.box(.12,1.44,6.29,6.34,.15+k*.29,.32+k*.29,"Wood")
+        for x in (.35,1.25): S.box(x,x+.05,6.25,6.29,0,S.ceil,"Metal")
+    fu.ceiling_lamp(S,1.5,2.5,ST-.22)
+
+
+def flat_shell(S, AX, y0, y1, mirror, wp_living, wp_bed, floor_living="FloorBoards", floor_bed="FloorBoards"):
+    """Floors, walls and doors of one flat (plan in the module doc); returns the FlatView to furnish it with."""
+    F = FlatView(S, AX, mirror)
+    xa = -2 * AX
+    F.box(xa + 0.08, -0.08, y0, FRONT, 0.0, 0.012, floor_living)
+    F.box(-4.0, -0.08, FRONT, BACK, 0.0, 0.012, "Linoleum")                   # hall
+    F.box(xa + 0.08, -4.0, FRONT, BACK, 0.0, 0.012, "Linoleum")               # bath and WC
+    F.box(xa + 0.08, -AX, BACK, y1, 0.0, 0.012, floor_bed)
+    F.box(-AX, -0.08, BACK, y1, 0.0, 0.012, "Linoleum")                       # kitchen
+    F.wall_x(xa, y0, y1, "Lime", "Lime")                                       # party wall to the next section
+    hall = ("Paint_OilBlue", "Wallpaper_Green")
+    F.wall_y(FRONT, xa, 0.0, wp_living, wp_living, doors=[DOOR_LIVING], other=hall)
+    F.wall_x(-4.0, FRONT, BACK, "Paint_OilBlue", "Lime", doors=[DOOR_BATH, DOOR_WC], other=hall)
+    F.wall_y(BATH_SPLIT, xa, -4.0, "Paint_OilBlue", "Lime")
+    F.wall_y(BACK, xa, 0.0, "Paint_OilBlue", "Wallpaper_Green", doors=[DOOR_BED, DOOR_KITCHEN], other=(wp_bed, wp_bed))
+    F.wall_x(-AX, BACK, y1, wp_bed, wp_bed, other=("Paint_Mint", "Lime"))
+    F.y0, F.y1, F.AX = y0, y1, AX
+    for x, y in ((-3.0, 2.3), (-2.0, 5.9), (-4.5, 9.5), (-1.5, 9.5)):
+        fu.ceiling_lamp(F, x, y, F.ceil)
+    return F
+
+
+def furnish_generic(F, life):
+    """A lived-in flat left behind: 'family' kept its furniture, 'widow' was looted (doors off, drawers out)."""
+    y0, y1 = F.y0, F.y1
+    looted = life != "family"
+    # living room: wall unit on the party wall, sofa under the wall carpet, table, TV in the corner, rug, curtains
+    wall_unit(F.box, -6.0 + 0.08, y0 + 0.5, y0 + 3.3)
+    fu.sofa(F.place(-2.4, FRONT - 0.08, 2), 2.0, slumped=looted)         # back on the hall wall, clear of the door
+    F.box(-4.4, -2.4, FRONT - 0.1, FRONT - 0.09, 0.9, 2.2, "Carpet")                 # carpet on the wall above it
+    if not looted:
+        fu.table(F.place(-3.6, 1.6), 1.1, 0.8)
+        fu.tv(F.place(-0.2, 0.9, 1))
+    else:
+        F.chunk(-3.0, 1.9, 0.0, 1.0, 0.7, 0.12, "Furniture", tilt=0.6)               # table top kicked over
+        F.box(-0.9, -0.3, 1.0, 1.5, 0.0, 0.05, "Glass")                               # smashed screen glass
+    fu.rug(F, -4.2, -1.6, 1.0, 3.6)
+    for wx in (-5.2, -2.2):
+        radiator(F.box, wx, wx + 1.4, y0 + 0.05)
+        fu.curtains(F, wx, wx + 1.4, y0, 1, drawn=0.25 if not looted else 0.12)
+    # bedroom: bed with its head on the party wall, wardrobe by the door, nightstand
+    fu.bed(F.place(-6.0 + 0.08, 10.8, 3), 1.4, 2.0, made=not looted)
+    fu.nightstand(F.place(-6.0 + 0.08, 11.5, 3), drawer_out=looted)
+    fu.wardrobe(F.place(-6.0 + 0.1, BACK + 0.08, 0), 1.2, open_leaf=looted)
+    radiator(F.box, -5.2, -3.8, y1 - 0.17)
+    # kitchen: units along the stairwell wall, stove, fridge, table at the window
+    fu.fridge(F.place(-0.08, BACK + 0.15, 1), open_door=looted)
+    fu.stove(F.place(-0.08, BACK + 0.85, 1), kettle=not looted)
+    fu.kitchen_run(F.place(-0.08, BACK + 1.4, 1), 1.8, sink_at=1.2)
+    fu.table(F.place(-2.6, 10.2), 0.9, 0.7)
+    radiator(F.box, -2.2, -0.8, y1 - 0.17)
+    # hall: coat rack between the bedroom and kitchen doors, shoe shelf, telephone
+    F.box(-2.9, -1.8, BACK - 0.12, BACK - 0.08, 1.65, 1.7, "Wood")
+    F.box(-2.8, -1.9, BACK - 0.4, BACK - 0.08, 0.0, 0.35, "Furniture")
+    # bath and WC
+    fu.bathtub(F.place(-6.0 + 0.08, BATH_SPLIT - 0.1, 3), 1.4)
+    fu.washbasin(F.place(-4.6, BATH_SPLIT - 0.08, 2))
+    fu.toilet(F.place(-6.0 + 0.08, 6.5, 3))
+    F.debris(-5.8, -0.2, y0 + 0.2, y1 - 0.2, 40 if not looted else 90)
 
 
 def radiator(box, x0, x1, y):
